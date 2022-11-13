@@ -5,6 +5,7 @@
 #ifndef TUT1_GAME_H
 #define TUT1_GAME_H
 #include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
 
 class Game {

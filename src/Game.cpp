@@ -5,6 +5,9 @@
 #include "Game.h"
 #include <iostream>
 
+SDL_Texture* playerTex;
+SDL_Rect srcR, destR;
+
 Game::Game() {
 
 }
@@ -36,6 +39,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
         isRunning = true;
     }
+
+    SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
+    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+    SDL_FreeSurface(tmpSurface);
+
 }
 
 void Game::handleEvents() {
@@ -53,12 +61,19 @@ void Game::handleEvents() {
 
 void Game::update() {
     cnt++;
-    std::cout << cnt << std::endl;
+    destR.h = 64;
+    destR.w = 64;
+
+    destR.x = cnt;
+//    std::cout << cnt << std::endl;
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
-    //add stuff to render
+    //add stuff to render, back to front.
+    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+//    std::cout << playerTex << std::endl;
+
     SDL_RenderPresent(renderer);
 }
 
