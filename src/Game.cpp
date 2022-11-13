@@ -3,10 +3,11 @@
 //
 
 #include "Game.h"
+#include "TextureManager.h"
 #include <iostream>
+#include "GameObject.h"
 
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
+GameObject* rogue;
 
 Game::Game() {
 
@@ -40,9 +41,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
 
-    SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
-    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-    SDL_FreeSurface(tmpSurface);
+    rogue = new GameObject("assets/rogue.png", renderer, 0, 0);
 
 }
 
@@ -61,19 +60,13 @@ void Game::handleEvents() {
 
 void Game::update() {
     cnt++;
-    destR.h = 64;
-    destR.w = 64;
-
-    destR.x = cnt;
+    rogue->update();
 //    std::cout << cnt << std::endl;
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
-    //add stuff to render, back to front.
-    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
-//    std::cout << playerTex << std::endl;
-
+    rogue->render();
     SDL_RenderPresent(renderer);
 }
 
