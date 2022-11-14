@@ -2,26 +2,22 @@
 // Created by Sawyer Tang on 11/13/22.
 //
 
+#include <iostream>
 #include "Game.h"
 #include "TextureManager.h"
-#include <iostream>
-#include "GameObject.h"
 #include "Map.h"
-
-GameObject* rogue;
-GameObject* orc;
+#include "ECS/Components.h"
 
 Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
 
-Game::Game() {
+auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 
-}
+Game::Game() {}
 
-Game::~Game() {
-
-}
+Game::~Game() {}
 
 void Game::init(const char* title, int width, int height, bool fullscreen) {
 
@@ -47,9 +43,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
 
-    rogue = new GameObject("assets/rogue.png", 0, 0);
-    orc = new GameObject("assets/orc.png", 50, 50);
     map = new Map();
+
+    //ecs implementation
+    player.addComponent<PositionComponent>(0,0);
+    player.addComponent<SpriteComponent>("assets/rogue.png");
 
 }
 
@@ -68,17 +66,19 @@ void Game::handleEvents() {
 
 void Game::update() {
     cnt++;
-    rogue->update();
-    orc->update();
-//    map->loadMap();
-//    std::cout << cnt << std::endl;
+    manager.refresh();
+    manager.update(); //TODO: learn: -> vs . ???
+
+    if(player.getComponent<PositionComponent>().x() > 100) {
+        player.getComponent<SpriteComponent>().setTexture("assets/orc.png");
+    }
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
     map->drawMap();
-    rogue->render();
-    orc->render();
+
+    manager.draw();
     SDL_RenderPresent(renderer);
 }
 
