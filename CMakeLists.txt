@@ -9,7 +9,7 @@ Message( STATUS "CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER} )
 Message( STATUS "CMAKE_PROJECT_NAME: " ${CMAKE_PROJECT_NAME} )
 Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 
-project(SDL2_Basic_Setup)
+project(ColeEngine)
 
 # ------- Set Vars ------- #
 
@@ -26,7 +26,7 @@ Message("")
 
 # ------- Executable ----- #
 
-ADD_EXECUTABLE(SDL2_Basic_Setup ${SOURCE_FILES})
+ADD_EXECUTABLE(ColeEngine ${SOURCE_FILES})
 
 # ------- End Executable - #
 

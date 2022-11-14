@@ -16,7 +16,6 @@ SDL_Renderer* Game::renderer = nullptr;
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 
 Game::Game() {}
-
 Game::~Game() {}
 
 void Game::init(const char* title, int width, int height, bool fullscreen) {
@@ -27,7 +26,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     }
 
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
-//        std::cout << "Subsystems Initialised!..." << std::endl;
+        std::cout << "Subsystems Initialised!..." << std::endl;
 
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
         if(window){
