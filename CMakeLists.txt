@@ -9,14 +9,14 @@ Message( STATUS "CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER} )
 Message( STATUS "CMAKE_PROJECT_NAME: " ${CMAKE_PROJECT_NAME} )
 Message( STATUS "CMAKE_FINDCMAKE: " ${CMAKE_SOURCE_DIR}/CMAKE )
 
-project(SDL2_Basic_Setup)
+project(ColeEngine)
 
 # ------- Set Vars ------- #
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
-set(SOURCE_FILES    src/main.cpp src/main.h src/Game.cpp src/Game.h)
+set(SOURCE_FILES    src/main.cpp src/Game.cpp src/Game.h src/TextureManager.cpp src/TextureManager.h src/GameObject.cpp src/GameObject.h src/Map.cpp src/Map.h src/ECS/ECS.h src/ECS/Components.h src/ECS/SpriteComponent.h src/ECS/PositionComponent.h)
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -26,7 +26,7 @@ Message("")
 
 # ------- Executable ----- #
 
-ADD_EXECUTABLE(SDL2_Basic_Setup ${SOURCE_FILES})
+ADD_EXECUTABLE(ColeEngine ${SOURCE_FILES})
 
 # ------- End Executable - #
 
@@ -74,7 +74,7 @@ Message( STATUS "SDL2Mixer_FOUND: " ${SDL2Mixer_FOUND} )
 
 Message("")
 
-file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 # ------- End Finds ------ #
 

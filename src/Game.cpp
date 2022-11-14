@@ -2,16 +2,21 @@
 // Created by Sawyer Tang on 11/13/22.
 //
 
-#include "Game.h"
 #include <iostream>
+#include "Game.h"
+#include "TextureManager.h"
+#include "Map.h"
+#include "ECS/Components.h"
 
-Game::Game() {
+Map* map;
+Manager manager;
 
-}
+SDL_Renderer* Game::renderer = nullptr;
 
-Game::~Game() {
+auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 
-}
+Game::Game() {}
+Game::~Game() {}
 
 void Game::init(const char* title, int width, int height, bool fullscreen) {
 
@@ -21,7 +26,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     }
 
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
-//        std::cout << "Subsystems Initialised!..." << std::endl;
+        std::cout << "Subsystems Initialised!..." << std::endl;
 
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
         if(window){
@@ -36,6 +41,13 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
         isRunning = true;
     }
+
+    map = new Map();
+
+    //ecs implementation
+    player.addComponent<PositionComponent>(0,0);
+    player.addComponent<SpriteComponent>("assets/rogue.png");
+
 }
 
 void Game::handleEvents() {
@@ -53,12 +65,19 @@ void Game::handleEvents() {
 
 void Game::update() {
     cnt++;
-    std::cout << cnt << std::endl;
+    manager.refresh();
+    manager.update(); //TODO: learn: -> vs . ???
+
+    if(player.getComponent<PositionComponent>().x() > 100) {
+        player.getComponent<SpriteComponent>().setTexture("assets/orc.png");
+    }
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
-    //add stuff to render
+    map->drawMap();
+
+    manager.draw();
     SDL_RenderPresent(renderer);
 }
 
