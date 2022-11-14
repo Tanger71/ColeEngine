@@ -2,7 +2,6 @@
 // Created by Sawyer Tang on 11/12/22.
 //
 
-#include "main.h"
 #include "SDL.h"
 #include "Game.h"
 
@@ -17,7 +16,7 @@ int main(int argc, char *argv[]) {
     int frameTime;
 
     game = new Game();
-    game->init("ColeEngine", 800, 600, false);
+    game->init("ColeEngine", 800, 640, false);
 
     while(game->running()){
         frameStart = SDL_GetTicks();

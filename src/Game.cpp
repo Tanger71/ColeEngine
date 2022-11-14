@@ -6,8 +6,14 @@
 #include "TextureManager.h"
 #include <iostream>
 #include "GameObject.h"
+#include "Map.h"
 
 GameObject* rogue;
+GameObject* orc;
+
+Map* map;
+
+SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game() {
 
@@ -41,7 +47,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
 
-    rogue = new GameObject("assets/rogue.png", renderer, 0, 0);
+    rogue = new GameObject("assets/rogue.png", 0, 0);
+    orc = new GameObject("assets/orc.png", 50, 50);
+    map = new Map();
 
 }
 
@@ -61,12 +69,16 @@ void Game::handleEvents() {
 void Game::update() {
     cnt++;
     rogue->update();
+    orc->update();
+//    map->loadMap();
 //    std::cout << cnt << std::endl;
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
+    map->drawMap();
     rogue->render();
+    orc->render();
     SDL_RenderPresent(renderer);
 }
 
