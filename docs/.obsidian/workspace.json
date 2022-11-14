@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "14ae0bcc8d155b8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "WinSetup - Visual Studio.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "MacSetup.md",
+                "file": "WinSetup - Visual Studio.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "MacSetup.md",
+                "file": "WinSetup - Visual Studio.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "MacSetup.md"
+                "file": "WinSetup - Visual Studio.md"
               }
             }
           }
@@ -149,8 +161,9 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "83035c29d689429c",
+  "active": "14ae0bcc8d155b8e",
   "lastOpenFiles": [
+    "MacSetup.md",
     "ColeEngine.md"
   ]
 }
