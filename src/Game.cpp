@@ -61,7 +61,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     //ecs implementation
     player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("assets/rogue.png", 10, 180);
+    player.addComponent<SpriteComponent>("assets/rogue.png", true);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
