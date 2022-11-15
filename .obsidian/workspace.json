@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "docs/ColeEngine_TODO.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,13 +85,13 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "docs/ColeEngine_TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
               }
             }
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "docs/ColeEngine_TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "docs/ColeEngine_TODO.md"
               }
             }
           }
@@ -138,9 +138,9 @@
   },
   "active": "1e6270b698d2d918",
   "lastOpenFiles": [
-    "docs/setup/WinSetup-VisualStudio.md",
-    "docs/setup/MacSetup-CLion.md",
     "README.md",
-    "docs/ColeEngine_TODO.md"
+    "docs/ColeEngine_TODO.md",
+    "docs/setup/WinSetup-VisualStudio.md",
+    "docs/setup/MacSetup-CLion.md"
   ]
 }

@@ -8,13 +8,16 @@
 #include "Map.h"
 #include "ECS/Components.h"
 #include "Vector2D.h"
+#include "Collision.h"
 
 Map* map;
 Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
+auto& wall(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -46,13 +49,19 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     map = new Map();
 
     //ecs implementation
-    player.addComponent<TransformComponent>(0,0);
+    player.addComponent<TransformComponent>(2);
     player.addComponent<SpriteComponent>("assets/rogue.png");
+    player.addComponent<KeyboardController>();
+    player.addComponent<ColliderComponent>("player");
+
+    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+    wall.addComponent<SpriteComponent>("assets/dirt.png");
+    wall.addComponent<ColliderComponent>("wall");
 
 }
 
 void Game::handleEvents() {
-    SDL_Event event;
+    
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:
@@ -69,11 +78,12 @@ void Game::update() {
     manager.refresh();
     manager.update();
 
-    player.getComponent<TransformComponent>().position.Add(Vector2D(5,0));
-
-    if(player.getComponent<TransformComponent>().position.x > 100) {
-        player.getComponent<SpriteComponent>().setTexture("assets/orc.png");
+    if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
+        wall.getComponent<ColliderComponent>().collider)) {
+        player.getComponent<TransformComponent>().scale = 1;
+        std::cout << "Wall Hit!" << std::endl;
     }
+
 }
 
 void Game::render() {

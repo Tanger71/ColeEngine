@@ -5,6 +5,7 @@
 #pragma once
 #include "Components.h"
 #include "SDL.h"
+#include "../TextureManager.h"
 
 class SpriteComponent : public Component {
 private:
@@ -17,6 +18,9 @@ public:
     SpriteComponent(const char* path){
         setTexture(path);
     }
+    ~SpriteComponent() {
+        SDL_DestroyTexture(texture);
+    }
 
     void setTexture(const char* path){
         texture = TextureManager::LoadTexture(path);
@@ -26,14 +30,17 @@ public:
         transform = &entity->getComponent<TransformComponent>();
 
         srcRect.x = srcRect.y = 0;
-        srcRect.w = srcRect.h = 32;
-        destRect.w = destRect.h = 64;
+        srcRect.w = transform->width;
+        srcRect.h = transform->height;
+        
 
     }
 
     void update() override {
-        destRect.x = transform->position.x; //TODO: learn: -> or .
-        destRect.y = transform->position.y;
+        destRect.x = static_cast<int>(transform->position.x); //TODO: learn: -> or .
+        destRect.y = static_cast<int>(transform->position.y);
+        destRect.w = transform->width * transform->scale;
+        destRect.h = transform->height * transform->scale;
     }
 
     void draw() override {
