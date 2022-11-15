@@ -11,12 +11,8 @@
             "id": "fbc5245c02003abc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README - v2.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README - v2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README - v2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "README - v2.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -138,10 +130,11 @@
   },
   "active": "fbc5245c02003abc",
   "lastOpenFiles": [
-    "setup/WinSetup-VisualStudio.md",
+    "setup/MacSetup-CLion.md",
     "README - v2.md",
     "ColeEngine.md",
-    "setup/MacSetup-CLion.md",
+    "docs/setup/MacSetup-CLion.md",
+    "setup/WinSetup-VisualStudio.md",
     "My Link.md"
   ]
 }
