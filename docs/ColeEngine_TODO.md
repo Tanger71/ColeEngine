@@ -2,5 +2,5 @@
 
 - [x] Get enviroment running on MacOS
 - [x] Get enviroment running on Windows10
-- [ ] Write Readme.md
+- [x] init Readme.md
 - [ ] Follow `TODO: learn`  threads 
