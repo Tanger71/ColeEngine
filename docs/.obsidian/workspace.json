@@ -4,47 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "148f0ac197479797",
+        "id": "b7a7f65300de0864",
         "type": "tabs",
         "children": [
           {
-            "id": "4847d48d739c8292",
+            "id": "fbc5245c02003abc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ColeEngine.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "83035c29d689429c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "MacSetup.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "14ae0bcc8d155b8e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "WinSetup - Visual Studio.md",
+                "file": "README - v2.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "WinSetup - Visual Studio.md",
+                "file": "README - v2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "WinSetup - Visual Studio.md",
+                "file": "README - v2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "WinSetup - Visual Studio.md"
+                "file": "README - v2.md"
               }
             }
           }
@@ -161,9 +136,12 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "14ae0bcc8d155b8e",
+  "active": "fbc5245c02003abc",
   "lastOpenFiles": [
-    "MacSetup.md",
-    "ColeEngine.md"
+    "setup/WinSetup-VisualStudio.md",
+    "README - v2.md",
+    "ColeEngine.md",
+    "setup/MacSetup-CLion.md",
+    "My Link.md"
   ]
 }
