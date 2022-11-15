@@ -16,7 +16,7 @@ project(ColeEngine)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMAKE")
-set(SOURCE_FILES    src/main.cpp src/Game.cpp src/Game.h src/TextureManager.cpp src/TextureManager.h src/GameObject.cpp src/GameObject.h src/Map.cpp src/Map.h src/ECS/ECS.h src/ECS/Components.h src/ECS/SpriteComponent.h src/ECS/TransformComponent.h src/Vector2D.h src/Vector2D.cpp)
+set(SOURCE_FILES    src/main.cpp src/Game.cpp src/Game.h src/TextureManager.cpp src/TextureManager.h src/GameObject.cpp src/GameObject.h src/Map.cpp src/Map.h src/ECS/ECS.h src/ECS/Components.h src/ECS/SpriteComponent.h src/ECS/TransformComponent.h src/Vector2D.h src/Vector2D.cpp src/ECS/KeyboardController.h "src/ECS/ColliderComponent.h" "src/Collision.h" "src/Collision.cpp" "src/ECS/TileComponent.h" "src/ECS/ECS.cpp")
 
 Message("")
 Message( STATUS "SOURCE entry point : " ${SOURCE_FILES} )
@@ -84,6 +84,3 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR} ${SDL2TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCL
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2Mixer_LIBRARY} )
 
 # ------- End ----------- #
-
-
-
