@@ -20,13 +20,11 @@ public:
 
 
     TransformComponent(){
-        position.x = 0.0f; //make zero vector for this
-        position.y = 0.0f;
+        position.Zero();
     }
 
     TransformComponent(int sc) {
-        position.x = 0.0f;
-        position.y = 0.0f;
+        position.Zero();
         scale = sc;
     }
 

@@ -129,17 +129,18 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
     "width": 300,
     "collapsed": true
   },
-  "active": "1e6270b698d2d918",
+  "active": "2c48f668aa68e7f6",
   "lastOpenFiles": [
-    "README.md",
     "docs/ColeEngine_TODO.md",
+    "README.md",
     "docs/setup/WinSetup-VisualStudio.md",
     "docs/setup/MacSetup-CLion.md"
   ]

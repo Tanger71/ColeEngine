@@ -16,6 +16,8 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+std::vector<ColliderComponent*> Game::colliders;
+
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& wall(manager.addEntity());
 
@@ -48,6 +50,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map = new Map();
 
+
     //ecs implementation
     player.addComponent<TransformComponent>(2);
     player.addComponent<SpriteComponent>("assets/rogue.png");
@@ -57,6 +60,8 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
     wall.addComponent<SpriteComponent>("assets/dirt.png");
     wall.addComponent<ColliderComponent>("wall");
+
+    Map::LoadMap("assets/p16x16.gmap", 16, 16);
 
 }
 
@@ -78,18 +83,16 @@ void Game::update() {
     manager.refresh();
     manager.update();
 
-    if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
-        wall.getComponent<ColliderComponent>().collider)) {
-        player.getComponent<TransformComponent>().scale = 1;
-        std::cout << "Wall Hit!" << std::endl;
+    for (auto cc : colliders) {
+        Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
+
     }
+    
 
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
-    map->drawMap();
-
     manager.draw();
     SDL_RenderPresent(renderer);
 }
@@ -100,4 +103,9 @@ void Game::clean() {
     SDL_Quit();
     std::cout << "Game Cleaned!" << std::endl;
 
+}
+
+void Game::AddTile(int id, int x, int y) {
+    auto& tile(manager.addEntity());
+    tile.addComponent<TileComponent>(x, y, 32, 32, id);
 }
