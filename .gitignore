@@ -55,3 +55,6 @@ dkms.conf
 out
 /cmake-build-debug/
 .DS_STORE
+.vs/
+CMakeSettings.json
+SDL2_bin.rar

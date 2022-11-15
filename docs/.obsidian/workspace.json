@@ -1,0 +1,147 @@
+{
+  "main": {
+    "id": "f759eebc1355cfa0",
+    "type": "split",
+    "children": [
+      {
+        "id": "b7a7f65300de0864",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fbc5245c02003abc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README - v2.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c37289b44680b293",
+    "type": "split",
+    "children": [
+      {
+        "id": "17ef29f7a339f10c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5824b932328b3097",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "abc843df3113ac62",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "d6f13cae87928b58",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "fb8005f7e0eaf8e7",
+    "type": "split",
+    "children": [
+      {
+        "id": "5bae00be43d7728b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e5b2b633ca38c400",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README - v2.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8ab64763e73ca009",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README - v2.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c44ffcc29accacde",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d6a4637d227458e9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README - v2.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "fbc5245c02003abc",
+  "lastOpenFiles": [
+    "setup/WinSetup-VisualStudio.md",
+    "README - v2.md",
+    "ColeEngine.md",
+    "setup/MacSetup-CLion.md",
+    "My Link.md"
+  ]
+}
