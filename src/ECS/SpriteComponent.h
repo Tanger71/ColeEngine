@@ -12,11 +12,20 @@ private:
     TransformComponent *transform;
     SDL_Texture *texture;
     SDL_Rect srcRect, destRect;
+    bool animated = false;
+    int frames = 0;
+    int speed = 100; // the millisecond delay between frames
 
 public:
     SpriteComponent() = default;
     SpriteComponent(const char* path){
         setTexture(path);
+    }
+    SpriteComponent(const char* path, int nFrames, int mSpeed) {
+        animated = true;
+        setTexture(path);
+        frames = nFrames;
+        speed = mSpeed;
     }
     ~SpriteComponent() {
         SDL_DestroyTexture(texture);
@@ -37,6 +46,10 @@ public:
     }
 
     void update() override {
+        if (animated) {
+            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
+        }
+
         destRect.x = static_cast<int>(transform->position.x); //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y);
         destRect.w = transform->width * transform->scale;

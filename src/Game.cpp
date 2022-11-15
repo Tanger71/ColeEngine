@@ -21,6 +21,13 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& wall(manager.addEntity());
 
+enum groupLabels : std::size_t {
+    groupMap,
+    groupPlayers,
+    groupEnemys,
+    groupColliders
+};
+
 Game::Game() {}
 Game::~Game() {}
 
@@ -50,18 +57,19 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map = new Map();
 
+    Map::LoadMap("assets/p16x16.gmap", 16, 16);
 
     //ecs implementation
     player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("assets/rogue.png");
+    player.addComponent<SpriteComponent>("assets/rogue.png", 10, 180);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
+    player.addGroup(groupPlayers);
 
     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
     wall.addComponent<SpriteComponent>("assets/dirt.png");
     wall.addComponent<ColliderComponent>("wall");
-
-    Map::LoadMap("assets/p16x16.gmap", 16, 16);
+    wall.addGroup(groupMap);
 
 }
 
@@ -85,15 +93,25 @@ void Game::update() {
 
     for (auto cc : colliders) {
         Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-
     }
-    
 
 }
 
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemys));
+
 void Game::render() {
     SDL_RenderClear(renderer);
-    manager.draw();
+    for (auto& t : tiles) {
+        t->draw();
+    }
+    for (auto& p : players) {
+        p->draw();
+    }
+    for (auto& e : enemies) {
+        e->draw();
+    }
     SDL_RenderPresent(renderer);
 }
 
@@ -102,10 +120,11 @@ void Game::clean() {
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     std::cout << "Game Cleaned!" << std::endl;
-
 }
 
 void Game::AddTile(int id, int x, int y) {
     auto& tile(manager.addEntity());
     tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addGroup(groupMap);
+
 }
