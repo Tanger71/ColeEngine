@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <vector>
 
+class AssetManager; // TODO: Why tho... https://stackoverflow.com/questions/23283080/compiler-error-c4430-missing-type-specifier-int-assumed
 class ColliderComponent;
 
 class Game {
@@ -23,21 +24,21 @@ public:
     bool running() { return isRunning; }
     void render();
     void clean();
-
     
     static SDL_Renderer *renderer;
     static SDL_Event event;
     static bool isRunning;
     static SDL_Rect camera;
+    static AssetManager* assets;
 
     enum groupLabels : std::size_t {
         groupMap,
         groupPlayers,
-        groupColliders
+        groupColliders,
+        groupProjectiles
     };
 
 private:
     int cnt = 0;
-    
     SDL_Window *window;
 };

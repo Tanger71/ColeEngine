@@ -24,7 +24,6 @@ public:
 		collider.y = ypos;
 		collider.w = size;
 		collider.h = size;
-		std::cout << size << std::endl;
 	}
 
 	void init() override {
