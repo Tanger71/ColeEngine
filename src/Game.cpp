@@ -21,6 +21,8 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& wall(manager.addEntity());
 
+const char* mapfile = "assets/terrain_ss.png";
+
 enum groupLabels : std::size_t {
     groupMap,
     groupPlayers,
@@ -57,7 +59,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map = new Map();
 
-    Map::LoadMap("assets/p16x16.gmap", 16, 16);
+    Map::LoadMap("assets/map.gmap", 25, 20);
 
     //ecs implementation
     player.addComponent<TransformComponent>(2);
@@ -122,9 +124,8 @@ void Game::clean() {
     std::cout << "Game Cleaned!" << std::endl;
 }
 
-void Game::AddTile(int id, int x, int y) {
+void Game::AddTile(int srcX, int srcY, int x, int y) {
     auto& tile(manager.addEntity());
-    tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addComponent<TileComponent>(srcX, srcY, x, y, mapfile);
     tile.addGroup(groupMap);
-
 }

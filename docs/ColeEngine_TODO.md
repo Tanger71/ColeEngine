@@ -11,6 +11,7 @@
 - [ ] fix self-collision
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
+	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 - [ ] Follow `TODO: learn`  threads 
 - [ ] Refactor Code
 	- [ ] variable naming
