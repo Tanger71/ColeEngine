@@ -9,6 +9,7 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
@@ -18,25 +19,12 @@ SDL_Event Game::event;
 
 SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
-std::vector<ColliderComponent*> Game::colliders;
+AssetManager* Game::assets = new AssetManager(&manager);
 
 bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
-auto& wall(manager.addEntity());
 
-const char* mapfile = "assets/terrain_ss.png";
-
-enum groupLabels : std::size_t {
-    groupMap,
-    groupPlayers,
-    groupEnemys,
-    groupColliders
-};
-
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemys));
 
 Game::Game() {}
 Game::~Game() {}
@@ -65,18 +53,32 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
 
-    map = new Map();
+    assets->addTexture("terrain", "assets/terrain_ss.png");
+    assets->addTexture("player", "assets/rogue.png");
+    assets->addTexture("projectile", "assets/proj.png");
 
-    Map::LoadMap("assets/map.gmap", 25, 20);
+    map = new Map("terrain", 3, 32);
+
+    map->LoadMap("assets/map.gmap", 25, 20);
 
     //ecs implementation
-    player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("assets/rogue.png", true);
+    player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2);
+    player.addComponent<SpriteComponent>("player", true);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+
 }
+
+auto& tiles(manager.getGroup(Game::groupMap));
+auto& players(manager.getGroup(Game::groupPlayers));
+auto& colliders(manager.getGroup(Game::groupColliders));
+auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::handleEvents() {
     
@@ -92,8 +94,26 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+
+    SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
+    Vector2D playerPos = player.getComponent<TransformComponent>().position;
+
     manager.refresh();
     manager.update();
+
+    for (auto& c : colliders) {
+        SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
+        if (Collision::AABB(cCol, playerCol)) {
+            player.getComponent<TransformComponent>().position = playerPos;
+        }
+    }
+
+    for (auto& p : projectiles) {
+        if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider)) {
+            std::cout << "hit player" << std::endl;
+            p->destroy();
+        }
+    }
 
     camera.x = player.getComponent<TransformComponent>().position.x - 400;
     camera.y = player.getComponent<TransformComponent>().position.y - 320;
@@ -110,12 +130,16 @@ void Game::render() {
     for (auto& t : tiles) {
         t->draw();
     }
+    for (auto& c : colliders) {
+        c->draw();
+    }
     for (auto& p : players) {
         p->draw();
     }
-    for (auto& e : enemies) {
-        e->draw();
+    for (auto& p : projectiles) {
+        p->draw();
     }
+
     SDL_RenderPresent(renderer);
 }
 
@@ -124,10 +148,4 @@ void Game::clean() {
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     std::cout << "Game Cleaned!" << std::endl;
-}
-
-void Game::AddTile(int srcX, int srcY, int x, int y) {
-    auto& tile(manager.addEntity());
-    tile.addComponent<TileComponent>(srcX, srcY, x, y, mapfile);
-    tile.addGroup(groupMap);
 }

@@ -8,9 +8,15 @@
 
 class Map {
 public:
-    Map();
+    Map(std::string tid, int ms, int ts);
     ~Map();
 
-    static void LoadMap(std::string path, int sizeX, int sizeY);
+    void LoadMap(std::string path, int sizeX, int sizeY);
+    void AddTile(int srcX, int srcY, int x, int y);
 
+private:
+    std::string texid;
+    int mapScale;
+    int tileSize;
+    int scaledSize;
 };
