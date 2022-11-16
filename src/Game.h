@@ -2,8 +2,7 @@
 // Created by Sawyer Tang on 11/13/22.
 //
 
-#ifndef TUT1_GAME_H
-#define TUT1_GAME_H
+#pragma once
 #include "SDL.h"
 #include "SDL_image.h"
 #include <stdio.h>
@@ -25,17 +24,15 @@ public:
     void render();
     void clean();
 
-    static void AddTile(int id, int x, int y);
+    static void AddTile(int srcX, int srcY, int x, int y);
     static SDL_Renderer *renderer;
     static SDL_Event event;
     static std::vector<ColliderComponent*> colliders;
-
+    static bool isRunning;
+    static SDL_Rect camera;
 
 private:
     int cnt = 0;
-    bool isRunning = false;
+    
     SDL_Window *window;
 };
-
-
-#endif //TUT1_GAME_H

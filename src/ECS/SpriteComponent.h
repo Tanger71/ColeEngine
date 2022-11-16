@@ -19,7 +19,6 @@ private:
     int speed = 100; // the millisecond delay between frames
 
 public:
-
     int animIndex = 0;
 
     std::map<const char*, Animation> animations;
@@ -46,18 +45,16 @@ public:
         SDL_DestroyTexture(texture);
     }
 
-    void setTexture(const char* path){
-        texture = TextureManager::LoadTexture(path);
-    }
-
     void init() override {
         transform = &entity->getComponent<TransformComponent>();
 
         srcRect.x = srcRect.y = 0;
         srcRect.w = transform->width;
         srcRect.h = transform->height;
-        
+    }
 
+    void setTexture(const char* path) {
+        texture = TextureManager::LoadTexture(path);
     }
 
     void update() override {
@@ -67,20 +64,18 @@ public:
 
         srcRect.y = animIndex * transform->height;
 
-        destRect.x = static_cast<int>(transform->position.x); //TODO: learn: -> or .
-        destRect.y = static_cast<int>(transform->position.y);
+        destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
+        destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = transform->width * transform->scale;
         destRect.h = transform->height * transform->scale;
     }
-
     void draw() override {
         TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
     }
-
     void Play(const char* animName) {
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
     }
-
 };
+

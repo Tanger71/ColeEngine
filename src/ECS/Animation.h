@@ -5,7 +5,7 @@ struct Animation {
 	int frames;
 	int speed;
 
-	Animation() {}
+	Animation() = default;
 	Animation(int i, int f, int s) {
 		index = i;
 		frames = f;

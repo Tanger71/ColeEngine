@@ -16,10 +16,16 @@ Manager manager;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+SDL_Rect Game::camera = { 0, 0, 800, 640 };
+
 std::vector<ColliderComponent*> Game::colliders;
+
+bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& wall(manager.addEntity());
+
+const char* mapfile = "assets/terrain_ss.png";
 
 enum groupLabels : std::size_t {
     groupMap,
@@ -27,6 +33,10 @@ enum groupLabels : std::size_t {
     groupEnemys,
     groupColliders
 };
+
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemys));
 
 Game::Game() {}
 Game::~Game() {}
@@ -57,7 +67,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map = new Map();
 
-    Map::LoadMap("assets/p16x16.gmap", 16, 16);
+    Map::LoadMap("assets/map.gmap", 25, 20);
 
     //ecs implementation
     player.addComponent<TransformComponent>(2);
@@ -65,11 +75,6 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-
-    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-    wall.addComponent<SpriteComponent>("assets/dirt.png");
-    wall.addComponent<ColliderComponent>("wall");
-    wall.addGroup(groupMap);
 
 }
 
@@ -87,19 +92,18 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-    cnt++;
     manager.refresh();
     manager.update();
 
-    for (auto cc : colliders) {
-        Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-    }
+    camera.x = player.getComponent<TransformComponent>().position.x - 400;
+    camera.y = player.getComponent<TransformComponent>().position.y - 320;
+
+    if (camera.x < 0) camera.x = 0;
+    if (camera.y < 0) camera.y = 0;
+    if (camera.x > camera.w) camera.x = camera.w;
+    if (camera.y > camera.h) camera.y = camera.h;
 
 }
-
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemys));
 
 void Game::render() {
     SDL_RenderClear(renderer);
@@ -122,9 +126,8 @@ void Game::clean() {
     std::cout << "Game Cleaned!" << std::endl;
 }
 
-void Game::AddTile(int id, int x, int y) {
+void Game::AddTile(int srcX, int srcY, int x, int y) {
     auto& tile(manager.addEntity());
-    tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addComponent<TileComponent>(srcX, srcY, x, y, mapfile);
     tile.addGroup(groupMap);
-
 }

@@ -3,11 +3,15 @@
 - [x] Get enviroment running on MacOS
 - [x] Get enviroment running on Windows10
 - [x] init Readme.md
+- [ ] make env more robust
+	- [ ] add .ddl injection for SDL2 bins
 - [ ] fix keyboard input and ripple effects:
 	- [ ] animation misfires
 	- [ ] movement direction misfires
+- [ ] fix self-collision
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
+	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 - [ ] Follow `TODO: learn`  threads 
 - [ ] Refactor Code
 	- [ ] variable naming
