@@ -33,6 +33,8 @@ public:
 				transform->velocity.x = 1;
 				sprite->Play("Walk");
 				break;
+			case SDLK_ESCAPE:
+				Game::isRunning = false;
 			default:
 				break;
 			}
