@@ -42,5 +42,7 @@ public:
         velocity.y = 0.0f;
     }
     void update() override {
+        position.x += velocity.x * (float)speed;
+        position.y += velocity.y * (float)speed;
     }
 };
