@@ -2,8 +2,7 @@
 // Created by Sawyer Tang on 11/13/22.
 //
 
-#ifndef TUT1_GAME_H
-#define TUT1_GAME_H
+#pragma once
 #include "SDL.h"
 #include "SDL_image.h"
 #include <stdio.h>
@@ -36,6 +35,3 @@ private:
     bool isRunning = false;
     SDL_Window *window;
 };
-
-
-#endif //TUT1_GAME_H

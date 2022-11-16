@@ -2,25 +2,25 @@
 // Created by Sawyer Tang on 11/13/22.
 //
 
-#pragma once
-#include "Game.h"
+/// DEPRECIATED
 
-class GameObject {
-
-public:
-    GameObject(const char* textureSheet, int x, int y);
-    ~GameObject();
-
-    void update();
-    void render();
-
-private:
-    int xpos;
-    int ypos;
-
-    SDL_Texture* objTexture;
-    SDL_Rect srcRect, destRect;
-
-};
-
-
+//#pragma once
+//#include "Game.h"
+//
+//class GameObject {
+//
+//public:
+//    GameObject(const char* textureSheet, int x, int y);
+//    ~GameObject();
+//
+//    void update();
+//    void render();
+//
+//private:
+//    int xpos;
+//    int ypos;
+//
+//    SDL_Texture* objTexture;
+//    SDL_Rect srcRect, destRect;
+//
+//};

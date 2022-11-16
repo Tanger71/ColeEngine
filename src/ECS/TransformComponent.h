@@ -8,7 +8,6 @@
 
 class TransformComponent : public Component{ //all public so could b struct
 public:
-
     Vector2D position;
     Vector2D velocity;
 
@@ -18,21 +17,17 @@ public:
 
     int speed = 3;
 
-
     TransformComponent(){
         position.Zero();
     }
-
     TransformComponent(int sc) {
         position.Zero();
         scale = sc;
     }
-
     TransformComponent(float x, float y){
         position.x = x;
         position.y = y;
     }
-
     TransformComponent(float x, float y, int h, int w, int sc) {
         position.x = x;
         position.y = y;
@@ -48,9 +43,5 @@ public:
     void update() override {
         position.x += velocity.x * speed;
         position.y += velocity.y * speed;
-
     }
-
-
-
 };

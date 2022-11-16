@@ -1,5 +1,12 @@
 Meethod found [here](https://medium.com/@navidsarhady/how-to-create-your-first-sdl2-project-using-clion-ide-in-macos-9155764d5765).
 
+```ssh
+brew install sdl2
+brew install sdl2_image
+brew install sdl2_mixer
+brew install sdl2_ttf
+```
+
 Fork from [Boilerplate](https://github.com/JodyAndrews/SDL2_Basic_Setup.git).
 
 `CMakeLists.txt`

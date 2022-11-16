@@ -1,5 +1,4 @@
 #pragma once
-
 #include "ECS.h"
 #include "TransformComponent.h"
 #include "SDL.h"
@@ -13,9 +12,7 @@ public:
 	int tileID;
 	char* path;
 	
-
 	TileComponent() = default;
-
 	TileComponent(int x, int y, int w, int h, int id) {
 		tileRect.x = x;
 		tileRect.y = y;
@@ -36,7 +33,6 @@ public:
 		default:
 			break;
 		}
-
 	}
 
 	void init() override {
@@ -45,7 +41,6 @@ public:
 
 		entity->addComponent<SpriteComponent>(path);
 		sprite = &entity->getComponent<SpriteComponent>();
-
 	}
 
 };

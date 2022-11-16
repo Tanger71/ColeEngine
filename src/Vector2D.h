@@ -5,10 +5,6 @@
 #pragma once
 #include "iostream"
 
-// v1.add(vec)
-// v1 + v2
-// v1 =+ v2
-
 class Vector2D{
 public:
     float x;

@@ -4,7 +4,6 @@
 //
 
 #pragma once
-
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -46,7 +45,6 @@ public:
     virtual void draw(){}
 
     virtual ~Component(){}
-
 };
 
 class Entity{
@@ -96,8 +94,6 @@ public:
         return *static_cast<T*>(ptr);
     }
 
-    //like this->>>  GameObject.getComponent<PositionComponent>().setXpos(25)
-
 private:
     Manager& manager;
     bool active = true;
@@ -106,7 +102,6 @@ private:
     ComponentArray componentArray;
     ComponentBitSet componentBitSet;
     GroupBitSet groupBitSet;
-
 };
 
 class Manager{
@@ -121,7 +116,6 @@ public:
     void draw(){
         for (auto& e : entities) e->draw();
     }
-
     void refresh(){ //TODO: learn UnaryPredicate
         for (auto i(0u); i < maxGroups; i++) {
             auto& v(groupedEntities[i]);
@@ -130,13 +124,15 @@ public:
                     [i](Entity* mEntity) {
                         return !mEntity->isActive() || !mEntity->hasGroup(i);
                     }),
-                std::end(v));
+                std::end(v)
+            );
         }
 
         entities.erase(std::remove_if(std::begin(entities), std::end(entities),
             [](const std::unique_ptr<Entity> &mEntity){
                 return !mEntity->isActive();
-            }), std::end(entities));
+            }), std::end(entities)
+        );
     }
 
     void AddToGroup(Entity* mEntity, Group mGroup) {

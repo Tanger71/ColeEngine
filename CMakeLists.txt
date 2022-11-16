@@ -75,6 +75,8 @@ Message( STATUS "SDL2Mixer_FOUND: " ${SDL2Mixer_FOUND} )
 Message("")
 
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(GLOB MY_PUBLIC_HEADERS "sdl2bins/*.dll")
+file(COPY ${MY_PUBLIC_HEADERS} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 # ------- End Finds ------ #
 

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../Game.h"
 #include "ECS.h"
 #include "Components.h"
@@ -37,7 +36,6 @@ public:
 			default:
 				break;
 			}
-
 		}
 
 		if (Game::event.type == SDL_KEYUP) {
@@ -63,7 +61,5 @@ public:
 				break;
 			}
 		}
-
 	}
-
 };
