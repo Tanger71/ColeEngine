@@ -18,6 +18,8 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent*> Game::colliders;
 
+bool Game::isRunning = false;
+
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& wall(manager.addEntity());
 
@@ -29,6 +31,10 @@ enum groupLabels : std::size_t {
     groupEnemys,
     groupColliders
 };
+
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemys));
 
 Game::Game() {}
 Game::~Game() {}
@@ -68,11 +74,6 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
-    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-    wall.addComponent<SpriteComponent>("assets/dirt.png");
-    wall.addComponent<ColliderComponent>("wall");
-    wall.addGroup(groupMap);
-
 }
 
 void Game::handleEvents() {
@@ -93,15 +94,15 @@ void Game::update() {
     manager.refresh();
     manager.update();
 
-    for (auto cc : colliders) {
-        Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
+    Vector2D pVel = player.getComponent<TransformComponent>().velocity;
+    int pSpeed = player.getComponent<TransformComponent>().speed;
+
+    for (auto t : tiles) {
+        t->getComponent<TileComponent>().destRect.x += -(pVel.x * pSpeed);
+        t->getComponent<TileComponent>().destRect.y += -(pVel.y * pSpeed);
     }
 
 }
-
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemys));
 
 void Game::render() {
     SDL_RenderClear(renderer);
