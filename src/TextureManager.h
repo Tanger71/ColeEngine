@@ -2,7 +2,7 @@
 #include "Game.h"
 
 /**
- * @brief Manager to access and organize textures.
+ * @brief Management class to access and organize textures.
  *
  * @author sawyercoletang
  *

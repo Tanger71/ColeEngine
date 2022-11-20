@@ -7,7 +7,7 @@
 #include "SDL_ttf.h"
 
 /**
- * @brief Manager to access and organize assets.
+ * @brief Management class to access and organize assets.
  *
  * @author sawyercoletang
  *
