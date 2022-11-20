@@ -3,17 +3,20 @@
 - [x] Get enviroment running on MacOS
 - [x] Get enviroment running on Windows10
 - [x] init Readme.md
+- [ ] comment code for readability (Doxygen)
 - [ ] make env more robust
 	- [ ] add .ddl injection for SDL2 bins
 - [ ] fix keyboard input and ripple effects:
 	- [ ] animation misfires
 	- [ ] movement direction misfires
-- [ ] fix self-collision
+- [ ] fix collison
+	- [ ] self-collision checks
+	- [ ] stuck on wall
 - [ ] UI containers... hold diff types of UI elements.
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
 	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
-- [ ] Follow `TODO: learn`  threads 
+- [ ] Follow `TODO: learn`  points 
 - [ ] Refactor Code
 	- [ ] variable naming
 	- [ ] method/function nameing
@@ -25,6 +28,9 @@
 - ECS component manager
 - AABB Collision (no rotation)
 
+### Issues
+- [ ] Camera Bounds are wrong
+
 ### possible issues with current implementation:
 1. I was doing a bit of fiddling around and it turns out that the stringstream used for the UI is eating up memory and removing it stops it from using up excess memory, so maybe in future you could find a way to display text onscreen without using excess memory! Nice videos as usual!
    
@@ -33,3 +39,9 @@
    hello, it's the ui label component expecting something and not receiving it.
 
 2. I was looking at the vector class operator overloads. It seems the basic vector to vector operations were altering the first vector, not just returning the result. That might be good for something like v1.Add(v2); but if you do v3 = v1 + v2; then v1 is modified also.
+
+### cool links
+- https://opengameart.org/
+- https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
+- https://jothepro.github.io/doxygen-awesome-css/
+- 

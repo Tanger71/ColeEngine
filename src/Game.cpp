@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "Game.h"
-#include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
 #include "Vector2D.h"
@@ -38,17 +37,17 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     }
 
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
-        std::cout << "Subsystems Initialised!..." << std::endl;
+        std::cout << "Game: Subsystems Initialised!..." << std::endl;
 
         window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
         if(window){
-            std::cout << "Window created!" << std::endl;
+            std::cout << "Game: Window created!" << std::endl;
         }
 
         renderer = SDL_CreateRenderer(window, -1 , 0 );
         if(renderer){
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            std::cout << "Renderer created!" << std::endl;
+            std::cout << "Game: Renderer created!" << std::endl;
         }
 
         isRunning = true;
@@ -83,8 +82,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
     assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
 
-
-
+    std::cout << "Game: Ready!" << std::endl;
 }
 
 auto& tiles(manager.getGroup(Game::groupMap));

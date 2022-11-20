@@ -31,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "docs/ColeEngine_TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "docs/ColeEngine_TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +137,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "docs/ColeEngine_TODO.md"
               }
             }
           }
@@ -150,10 +149,10 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "45aa156e7aa4d19d",
+  "active": "1e6270b698d2d918",
   "lastOpenFiles": [
-    "docs/ColeEngine_TODO.md",
     "README.md",
+    "docs/ColeEngine_TODO.md",
     "docs/Tilemapping.md",
     "docs/doc_assets/Pasted image 20221119200831.png",
     "docs/setup/WinSetup-VisualStudio.md",
