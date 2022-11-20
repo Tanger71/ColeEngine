@@ -10,6 +10,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 #include "AssetManager.h"
+#include <sstream>
 
 Map* map;
 Manager manager;
@@ -24,7 +25,7 @@ AssetManager* Game::assets = new AssetManager(&manager);
 bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
-
+auto& label(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
@@ -53,9 +54,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
 
+    if(TTF_Init() == -1){
+        std::cout << "Error: SDL_TTF" << std::endl;
+    }
+
     assets->addTexture("terrain", "assets/terrain_ss.png");
     assets->addTexture("player", "assets/rogue.png");
     assets->addTexture("projectile", "assets/proj.png");
+
+    assets->addFont("arial", "assets/Arial.ttf", 24);
 
     map = new Map("terrain", 3, 32);
 
@@ -68,10 +75,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
+    SDL_Color white = {255, 255, 255, 255};
+    label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
+
     assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
     assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
     assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
     assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+
+
 
 }
 
@@ -97,6 +109,11 @@ void Game::update() {
 
     SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
+
+    std::stringstream ss;
+
+    ss << "Player position: " << playerPos;
+    label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
 
     manager.refresh();
     manager.update();
@@ -139,6 +156,7 @@ void Game::render() {
     for (auto& p : projectiles) {
         p->draw();
     }
+    label.draw();
 
     SDL_RenderPresent(renderer);
 }

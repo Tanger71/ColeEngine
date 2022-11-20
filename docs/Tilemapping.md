@@ -1,1 +1,1 @@
-// currently only works with tilesheets of width 10
+// only works with tilesheets of width 10 due to current parsing method

@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/Tilemapping.md"
+                "file": "README.md"
               }
             }
           }
@@ -153,8 +153,10 @@
   "active": "45aa156e7aa4d19d",
   "lastOpenFiles": [
     "docs/ColeEngine_TODO.md",
+    "README.md",
+    "docs/Tilemapping.md",
+    "docs/doc_assets/Pasted image 20221119200831.png",
     "docs/setup/WinSetup-VisualStudio.md",
-    "docs/setup/MacSetup-CLion.md",
-    "README.md"
+    "docs/setup/MacSetup-CLion.md"
   ]
 }
