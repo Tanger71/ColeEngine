@@ -1,7 +1,3 @@
-//
-// Created by Sawyer Tang on 11/13/22.
-//
-
 #pragma once
 #include "SDL.h"
 #include "SDL_image.h"
@@ -12,10 +8,11 @@ class AssetManager; // TODO: Why tho... https://stackoverflow.com/questions/2328
 class ColliderComponent;
 
 /**
- * @brief Game Instance
+ * @brief Game Instance.
  *
  * @author sawyercoletang
  *
+ * @note currently being used as a sandbox for development of engine
  */
 class Game {
 
@@ -23,12 +20,39 @@ public:
     Game();
     ~Game();
 
+    /**
+     * @brief to initialize the Game instance.
+     * @param title of the game window
+     * @param width of the game window
+     * @param height of the game window
+     * @param fullscreen or not
+     */
     void init(const char* title, int width, int height, bool fullscreen);
 
+    /**
+     * @brief handle game-events
+     */
     void handleEvents();
+
+    /**
+     * @brief update game-objects
+     */
     void update();
+
+    /**
+     * @brief returns true if game is running
+     * @returns true when game is running
+     */
     bool running() { return isRunning; }
+
+    /**
+     * @brief render game-objects
+     */
     void render();
+
+    /**
+     * @brief clean game instance
+     */
     void clean();
     
     static SDL_Renderer *renderer;
