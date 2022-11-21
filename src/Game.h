@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <vector>
+#include <string>
 #include "SDL.h"
 #include "SDL_image.h"
 
