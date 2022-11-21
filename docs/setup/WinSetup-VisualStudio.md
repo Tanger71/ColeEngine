@@ -1,3 +1,5 @@
+# Windows Setup w/ Visual Studio
+
 NOTE: going to make this more robust later, this is just the temporary setup.
 
 Method found [here](https://blog.ahmadz.ai/sdl2-for-clion-and-cmake/).

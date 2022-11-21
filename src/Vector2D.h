@@ -1,16 +1,19 @@
-//
-// Created by Sawyer Tang on 11/14/22.
-//
-
 #pragma once
-#include "iostream"
+#include <iostream>
 
+/**
+ * @brief 2-Dimensional Vector class with operators.
+ *
+ * @author sawyercoletang
+ *
+ */
 class Vector2D{
 public:
     float x;
     float y;
 
     Vector2D();
+
     Vector2D(float x, float y);
 
     Vector2D& Add(const Vector2D& vec);
