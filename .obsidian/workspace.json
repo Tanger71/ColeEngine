@@ -20,6 +20,30 @@
             }
           },
           {
+            "id": "4f5ca9356c87a3ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/HowToUseDoxygen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "01d3246874e7a70f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "45aa156e7aa4d19d",
             "type": "leaf",
             "state": {
@@ -31,7 +55,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -149,17 +174,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "1e6270b698d2d918",
+  "active": "01d3246874e7a70f",
   "lastOpenFiles": [
+    "docs/HowToUseDoxygen.md",
+    "README.md",
+    "docs/How To Doxygen 1.md",
     "assets/terrain_ss.png",
     "assets/rogue.png",
     "assets/proj.png",
     "assets/orc.png",
     "assets/ColTex.png",
     "docs/setup/MacSetup-CLion.md",
-    "docs/dox/html/bc_sd.png",
-    "docs/dox/html/bc_s.png",
-    "docs/setup/WinSetup-VisualStudio.md",
-    "README.md"
+    "docs/dox/html/bc_sd.png"
   ]
 }
