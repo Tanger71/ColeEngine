@@ -1,12 +1,13 @@
 # Backlog
+
 [Boilerplate](https://github.com/JodyAndrews/SDL2_Basic_Setup.git)
 
 - [x] Get enviroment running on MacOS
 - [x] Get enviroment running on Windows10
 - [x] init Readme.md
-- [ ] comment code for readability (Doxygen)
+- [x] comment code for readability (Doxygen)
 - [ ] make env more robust
-	- [ ] add .ddl injection for SDL2 bins
+	- [x] add .ddl injection for SDL2 bins
 - [ ] fix keyboard input and ripple effects:
 	- [ ] animation misfires
 	- [ ] movement direction misfires
@@ -23,7 +24,7 @@
 	- [ ] method/function nameing
 	- [ ] efficiency
 - [ ] Up robustness
-	- [ ] improve memoey cleanup
+	- [ ] improve memory cleanup
 
 ### current features:
 - ECS component manager

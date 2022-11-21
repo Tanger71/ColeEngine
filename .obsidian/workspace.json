@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "docs/HowToUseDoxygen.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "docs/HowToUseDoxygen.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "docs/HowToUseDoxygen.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "docs/HowToUseDoxygen.md"
               }
             }
           }
@@ -176,6 +176,7 @@
   },
   "active": "01d3246874e7a70f",
   "lastOpenFiles": [
+    "docs/Backlog.md",
     "docs/HowToUseDoxygen.md",
     "README.md",
     "docs/How To Doxygen 1.md",
@@ -184,7 +185,6 @@
     "assets/proj.png",
     "assets/orc.png",
     "assets/ColTex.png",
-    "docs/setup/MacSetup-CLion.md",
-    "docs/dox/html/bc_sd.png"
+    "docs/setup/MacSetup-CLion.md"
   ]
 }
