@@ -59,3 +59,5 @@ out
 CMakeSettings.json
 SDL2_bin.rar
 sdl2bins/
+html/
+latex/

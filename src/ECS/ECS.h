@@ -1,8 +1,3 @@
-//
-// Created by Sawyer Tang on 11/13/22.
-// riddled with weird shit
-//
-
 #pragma once
 #include <iostream>
 #include <vector>
@@ -10,6 +5,8 @@
 #include <algorithm>
 #include <bitset>
 #include <array>
+
+//TODO: deepen understanding of this file
 
 class Component;
 class Entity;
@@ -36,6 +33,12 @@ using ComponentBitSet = std::bitset<maxComponents>;
 using GroupBitSet = std::bitset<maxGroups>;
 using ComponentArray = std::array<Component*, maxComponents>;
 
+/**
+ * @brief Class *interface* for Entity Component
+ *
+ * @author sawyercoletang
+ *
+ */
 class Component{
 public:
     Entity* entity;
@@ -47,34 +50,89 @@ public:
     virtual ~Component(){}
 };
 
+/**
+ * @brief Class for Game Entity
+ *
+ * @author sawyercoletang
+ *
+ */
 class Entity{
 public:
-    Entity(Manager& mManager) : manager(mManager) {
 
-    }
+    /**
+     *
+     * @param mManager game instance manager
+     */
+    Entity(Manager& mManager) : manager(mManager) {}
+
+    /**
+     * @brief update all components in Entity
+     */
     void update(){
         for(auto& c : components) c->update();
     }
+
+    /**
+     * @brief draw all components in Entity
+     */
     void draw(){
         for(auto& c : components) c->draw();
     }
+
+    /**
+     * @todo look more
+     *
+     * @return true if Entity is active
+     */
     bool isActive() const { return active; }
+
+    /**
+     * @brief to destroy Entity (set active to false)
+     */
     void destroy(){ active = false; }
 
+    /**
+     *
+     * @param mGroup group to check inclusion
+     * @return true if this Entity belongs to mGroup
+     */
     bool hasGroup(Group mGroup) {
         return groupBitSet[mGroup];
     }
 
-    void addGroup(Group mGroup); //POSERR
+    /**
+     *
+     * @param mGroup group to add this Entity to
+     */
+    void addGroup(Group mGroup);
+
+    /**
+     *
+     * @param mGroup group to remove this Entity from
+     */
     void delGroup(Group mGroup) {
         groupBitSet[mGroup] = false;
     }
 
+    /**
+     * @todo
+     *
+     * @tparam T
+     * @return
+     */
     template <typename T>
     bool hasComponent() const {
         return componentBitSet[getComponentTypeID<T>()]; //TODO: learn
     }
 
+    /**
+     * @todo
+     *
+     * @tparam T
+     * @tparam TArgs
+     * @param mArgs
+     * @return
+     */
     template <typename T, typename... TArgs>
     T& addComponent(TArgs&&... mArgs){ //TODO: learn
         T* c(new T(std::forward<TArgs>(mArgs)...));
@@ -89,6 +147,12 @@ public:
         return *c;
     }
 
+    /**
+     * @todo
+     *
+     * @tparam T
+     * @return
+     */
     template<typename T> T& getComponent() const{ //TODO: learn
         auto ptr(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(ptr);
@@ -104,18 +168,34 @@ private:
     GroupBitSet groupBitSet;
 };
 
+/**
+ * @brief Class for Game Manager
+ *
+ * @author sawyercoletang
+ *
+ */
 class Manager{
-private:
-    std::vector< std::unique_ptr<Entity> > entities; //TODO: learn... smart pointer
-    std::array<std::vector<Entity*>, maxGroups> groupedEntities;
-        
 public:
+
+    /**
+     * @brief update all Entities in Game
+     */
     void update(){
         for (auto& e : entities) e->update();
     }
+
+    /**
+     * @brief draw all Entities in Game
+     */
     void draw(){
         for (auto& e : entities) e->draw();
     }
+
+    /**
+     * @todo
+     *
+     * @brief remove all inactive Entities
+     */
     void refresh(){ //TODO: learn UnaryPredicate
         for (auto i(0u); i < maxGroups; i++) {
             auto& v(groupedEntities[i]);
@@ -135,6 +215,12 @@ public:
         );
     }
 
+    /**
+     * @brief add Entity to Group
+     *
+     * @param mEntity Entity to be added
+     * @param mGroup Group to be added to
+     */
     void AddToGroup(Entity* mEntity, Group mGroup) {
         groupedEntities[mGroup].emplace_back(mEntity);
     }
@@ -143,11 +229,20 @@ public:
         return groupedEntities[mGroup];
     }
 
+    /**
+     * @todo
+     *
+     * @return
+     */
     Entity& addEntity(){
         Entity* e = new Entity(*this);
         std::unique_ptr<Entity> uPtr {e};
         entities.emplace_back(std::move(uPtr));
         return *e;
     }
+
+private:
+    std::vector< std::unique_ptr<Entity> > entities; //TODO: learn... smart pointer
+    std::array<std::vector<Entity*>, maxGroups> groupedEntities;
 
 };

@@ -13,7 +13,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/ColeEngine_TODO.md",
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4f5ca9356c87a3ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/HowToUseDoxygen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "01d3246874e7a70f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,14 +49,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/Tilemapping.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/Tilemapping.md"
+                "file": "README.md"
               }
             }
           }
@@ -150,11 +174,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "45aa156e7aa4d19d",
+  "active": "01d3246874e7a70f",
   "lastOpenFiles": [
-    "docs/ColeEngine_TODO.md",
-    "docs/setup/WinSetup-VisualStudio.md",
+    "docs/HowToUseDoxygen.md",
+    "README.md",
+    "docs/How To Doxygen 1.md",
+    "assets/terrain_ss.png",
+    "assets/rogue.png",
+    "assets/proj.png",
+    "assets/orc.png",
+    "assets/ColTex.png",
     "docs/setup/MacSetup-CLion.md",
-    "README.md"
+    "docs/dox/html/bc_sd.png"
   ]
 }
