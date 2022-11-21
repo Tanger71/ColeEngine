@@ -32,20 +32,17 @@ public:
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
 				transform->velocity.y = -1;
-				sprite->Play("Walk");
 				break;
 			case SDLK_a:
 				transform->velocity.x = -1;
-				sprite->Play("Walk");
 				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
 				break;
 			case SDLK_s:
 				transform->velocity.y = 1;
-				sprite->Play("Walk");
 				break;
 			case SDLK_d:
 				transform->velocity.x = 1;
-				sprite->Play("Walk");
+				sprite->spriteFlip = SDL_FLIP_NONE;
 				break;
 			case SDLK_ESCAPE:
 				Game::isRunning = false;
@@ -57,25 +54,35 @@ public:
 		if (Game::event.type == SDL_KEYUP) {
 			switch (Game::event.key.keysym.sym) {
 			case SDLK_w:
-				transform->velocity.y = 0;
-				sprite->Play("Idle");
+				if (transform->velocity.y < 0) {
+					transform->velocity.y = 0;
+				}
 				break;
 			case SDLK_a:
-				transform->velocity.x = 0;
-				sprite->Play("Idle");
-				sprite->spriteFlip = SDL_FLIP_NONE;
+				if (transform->velocity.x < 0) {
+					transform->velocity.x = 0;
+				}
 				break;
 			case SDLK_s:
-				transform->velocity.y = 0;
-				sprite->Play("Idle");
+				if (transform->velocity.y > 0) {
+					transform->velocity.y = 0;
+				}
 				break;
 			case SDLK_d:
-				transform->velocity.x = 0;
-				sprite->Play("Idle");
+				if (transform->velocity.x > 0) {
+					transform->velocity.x = 0;
+				}
 				break;
 			default:
 				break;
 			}
 		}
+
+		if (transform->velocity.x == 0 && transform->velocity.y == 0) {
+			sprite->Play("Idle");
+		} else {
+			sprite->Play("Walk");
+		}
+
 	}
 };

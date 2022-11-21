@@ -7,7 +7,7 @@ See enviroment setup:
 
 Project backlog here: [TODO](docs/Backlog.md)
 
-Generate docs: [Doxygen how-to](docs/HowToUseDoxygen.md)
+Generate docs: [Doxygen how-to](docs/How-to-use-doxygen.md)
 
 Dope YT playlist I got started from:
 https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx

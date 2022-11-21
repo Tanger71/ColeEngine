@@ -130,13 +130,15 @@ void Game::update() {
         }
     }
 
+    // update camera to player
     camera.x = player.getComponent<TransformComponent>().position.x - 400;
     camera.y = player.getComponent<TransformComponent>().position.y - 320;
 
-    if (camera.x < 0) camera.x = 0;
-    if (camera.y < 0) camera.y = 0;
-    if (camera.x > camera.w) camera.x = camera.w;
-    if (camera.y > camera.h) camera.y = camera.h;
+    //for camera bounds
+    //if (camera.x < 0) camera.x = 0;
+    //if (camera.y < 0) camera.y = 0;
+    //if (camera.x > camera.w) camera.x = camera.w;
+    //if (camera.y > camera.h) camera.y = camera.h;
 
 }
 
