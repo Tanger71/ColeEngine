@@ -7,6 +7,7 @@
  * @brief Component for handling keyboard input.
  *
  * @todo normalize movement vector for top-down movement.
+ *		 implement the sum method for direction determination.
  *
  * @author sawyercoletang
  *
@@ -20,6 +21,9 @@ public:
      * @brief initialize the component: link to TransformComponent and SpriteComponent.
      */
 	void init() override {
+		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
+		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
+		
 		transform = &entity->getComponent<TransformComponent>();
 		sprite = &entity->getComponent<SpriteComponent>();
 	}

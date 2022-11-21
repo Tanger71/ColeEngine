@@ -29,6 +29,10 @@ auto& label(manager.addEntity());
 Game::Game() {}
 Game::~Game() {}
 
+void Game::throwErr(std::string e) {
+    std::cout << "Error: " << e << std::endl;
+}
+
 void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     int flags = 0;
@@ -54,7 +58,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     }
 
     if(TTF_Init() == -1){
-        std::cout << "Error: SDL_TTF" << std::endl;
+        Game::throwErr("SDL_TTF");
     }
 
     assets->addTexture("terrain", "assets/terrain_ss.png");

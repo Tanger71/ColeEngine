@@ -21,6 +21,13 @@ public:
     ~Game();
 
     /**
+     * @brief throw error to console.
+     *
+     * @param e error string
+     */
+    static void throwErr(std::string e);
+
+    /**
      * @brief to initialize the Game instance.
      * @param title of the game window
      * @param width of the game window

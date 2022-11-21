@@ -1,4 +1,4 @@
-# Backlog
+# TODO & Backlog
 
 [Boilerplate](https://github.com/JodyAndrews/SDL2_Basic_Setup.git)
 
@@ -9,16 +9,14 @@
 - [ ] make env more robust
 	- [x] add .ddl injection for SDL2 bins
 - [ ] fix keyboard input and ripple effects:
-	- [ ] animation misfires
-	- [ ] movement direction misfires
+	- [x] animation misfires
+	- [x] movement direction misfires
+	- [ ] fix when release one opposite side, it maintains key press
 - [ ] fix collison
 	- [ ] self-collision checks
 	- [ ] stuck on wall
 - [ ] UI containers... hold diff types of UI elements.
 - [ ] dont render stuff outside screen
-- [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
-	- [ ] or Tiled preferribly acc
-	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 - [ ] Follow `TODO: learn`  points 
 - [ ] Refactor Code
 	- [ ] variable naming
@@ -26,6 +24,9 @@
 	- [ ] efficiency
 - [ ] Up robustness
 	- [ ] improve memory cleanup
+- [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
+	- [ ] or Tiled preferribly acc
+	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 
 ### current features:
 - ECS component manager

@@ -2,7 +2,6 @@
 
 ### notes
 - `SDL_GetKeyState`
-- 
 
 ### Old implementation
 will be good when implementing scrolling lists with keyboard... because SDL pumps out multiple key events when holding down keys... but we dont want this for player controls.
