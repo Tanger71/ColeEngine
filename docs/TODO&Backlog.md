@@ -45,7 +45,7 @@
 2. I was looking at the vector class operator overloads. It seems the basic vector to vector operations were altering the first vector, not just returning the result. That might be good for something like v1.Add(v2); but if you do v3 = v1 + v2; then v1 is modified also.
 
 ### cool links
-- https://opengameart.org/
+- https://opengameart.org/users/calciumtrice
 - https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 - https://jothepro.github.io/doxygen-awesome-css/
 - 
