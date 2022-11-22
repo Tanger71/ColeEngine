@@ -10,6 +10,7 @@
 #include "Collision.h"
 #include "AssetManager.h"
 #include "ECS/Animation.h"
+#include "FSM/FSMs.h"
 #include <sstream>
 
 Map* map;
@@ -80,11 +81,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-    player.getComponent<SpriteComponent>().addAnimation("Walk", 2, 10, 100);
+    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 100));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", "Idle", Animation(1, 1, 100));
+    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 100));
     worm.addComponent<ColliderComponent>("worm0");
+    worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 100));
+    worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 100));
+    worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 100));
+    worm.addComponent<WormFSM>();
     worm.addGroup(groupEnemies);
 
     SDL_Color white = {255, 255, 255, 255};

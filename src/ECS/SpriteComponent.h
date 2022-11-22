@@ -20,6 +20,7 @@ public:
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
     SpriteComponent() = default;
+    ~SpriteComponent() {}
 
     /**
      * @note mby not necessary anymore?
@@ -43,8 +44,6 @@ public:
         animations.emplace(initId, initAnim);
         Play(initId);
     }
-    ~SpriteComponent() {
-    }
 
     /**
      * @note reasses this method
@@ -54,8 +53,7 @@ public:
      * @param f
      * @param s
      */
-    void addAnimation(const char* id, int i, int f, int s){
-        Animation anim = Animation(i, f, s);
+    void addAnimation(const char* id, Animation anim){
         animations.emplace(id, anim);
     }
 
