@@ -25,9 +25,14 @@ bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& label(manager.addEntity());
+auto& worm(manager.addEntity());
 
 Game::Game() {}
 Game::~Game() {}
+
+void Game::throwErr(std::string e) {
+    std::cout << "Error: " << e << std::endl;
+}
 
 void Game::init(const char* title, int width, int height, bool fullscreen) {
 
@@ -54,12 +59,13 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     }
 
     if(TTF_Init() == -1){
-        std::cout << "Error: SDL_TTF" << std::endl;
+        Game::throwErr("SDL_TTF");
     }
 
     assets->addTexture("terrain", "assets/terrain_ss.png");
     assets->addTexture("player", "assets/rogue.png");
     assets->addTexture("projectile", "assets/proj.png");
+    assets->addTexture("worm", "assets/worm.png");
 
     assets->addFont("arial", "assets/Arial.ttf", 24);
 
@@ -68,11 +74,16 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     map->LoadMap("assets/map.gmap", 25, 20);
 
     //ecs implementation
-    player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2);
+    player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
     player.addComponent<SpriteComponent>("player", true);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
+
+    worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
+    worm.addComponent<SpriteComponent>("worm", true);
+    worm.addComponent<ColliderComponent>("worm0");
+    worm.addGroup(groupEnemies);
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
@@ -87,6 +98,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
+auto& enemies(manager.getGroup(Game::groupEnemies));
 auto& colliders(manager.getGroup(Game::groupColliders));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
@@ -130,13 +142,15 @@ void Game::update() {
         }
     }
 
+    // update camera to player
     camera.x = player.getComponent<TransformComponent>().position.x - 400;
     camera.y = player.getComponent<TransformComponent>().position.y - 320;
 
-    if (camera.x < 0) camera.x = 0;
-    if (camera.y < 0) camera.y = 0;
-    if (camera.x > camera.w) camera.x = camera.w;
-    if (camera.y > camera.h) camera.y = camera.h;
+    //for camera bounds
+    //if (camera.x < 0) camera.x = 0;
+    //if (camera.y < 0) camera.y = 0;
+   //if (camera.x > camera.w) camera.x = camera.w;
+    //if (camera.y > camera.h) camera.y = camera.h;
 
 }
 
@@ -150,6 +164,9 @@ void Game::render() {
     }
     for (auto& p : players) {
         p->draw();
+    }
+    for (auto& e : enemies) {
+        e->draw();
     }
     for (auto& p : projectiles) {
         p->draw();

@@ -50,7 +50,7 @@ public:
     /**
      * @brief initialize the component: link to TransformComponent.
      */
-	void init() override {
+	void init() override { //TODO: learn when do use &entity vs entity
 		if (!entity->hasComponent<TransformComponent>()) {
 			entity->addComponent<TransformComponent>();
 		}
