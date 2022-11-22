@@ -10,7 +10,7 @@ AssetManager::~AssetManager() {
 void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid) {
 	auto& projectile(manager->addEntity());
 	projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1);
-	projectile.addComponent<SpriteComponent>(texid, false);
+	projectile.addComponent<SpriteComponent>(texid);
 	projectile.addComponent<ProjectileComponent>(range, speed, vel);
 	projectile.addComponent<ColliderComponent>("projectile");
 	projectile.addGroup(Game::groupProjectiles);
