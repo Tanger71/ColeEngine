@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <string>
 #include "Components.h"
 #include "SDL.h"
 #include "Animation.h"
@@ -15,7 +16,7 @@
 class SpriteComponent : public Component {
 public:
     int animIndex = 0;
-    std::map<const char*, Animation> animations;
+    std::map<std::string, Animation> animations;
 
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
@@ -37,11 +38,11 @@ public:
      * @param initId id of the animation to initialize the sprite with
      * @param initAnim Animation to initialize the sprite with
      */
-    SpriteComponent(std::string id, const char* initId, Animation initAnim) {
+    SpriteComponent(std::string id, std::string initId, Animation anim) {
         animated = true;
         setTexture(id);
 
-        animations.emplace(initId, initAnim);
+        animations.emplace(initId, anim);
         Play(initId);
     }
 
@@ -53,7 +54,7 @@ public:
      * @param f
      * @param s
      */
-    void addAnimation(const char* id, Animation anim){
+    void addAnimation(std::string id, Animation anim){
         animations.emplace(id, anim);
     }
 
@@ -104,7 +105,12 @@ public:
      *
      * @param animName animation to set to currently playing
      */
-    void Play(const char* animName) {
+    void Play(std::string animName) {
+        std::cout << animName << std::endl;
+        std::cout << animations.count(animName) << std::endl;
+        std::cout << animations[animName].frames << std::endl;
+        std::cout << animations[animName].index << std::endl;
+        std::cout << animations[animName].speed << std::endl;
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
