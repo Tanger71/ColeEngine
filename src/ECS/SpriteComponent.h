@@ -32,24 +32,31 @@ public:
 
     /**
      *
-     * @todo figure out more general implementation
-     *
      * @param id asset texture ID to assign to sprite
-     * @param isAnimated true if sprite is animated
+     * @param initId id of the animation to initialize the sprite with
+     * @param initAnim Animation to initialize the sprite with
      */
-    SpriteComponent(std::string id, bool isAnimated) {
-        animated = isAnimated;
-
-        Animation idle = Animation(0, 10, 100);
-        Animation walk = Animation(2, 10, 100);
-        
-        animations.emplace("Idle", idle);
-        animations.emplace("Walk", walk);
-        Play("Idle");
-            
+    SpriteComponent(std::string id, const char* initId, Animation initAnim) {
+        animated = true;
         setTexture(id);
+
+        animations.emplace(initId, initAnim);
+        Play(initId);
     }
     ~SpriteComponent() {
+    }
+
+    /**
+     * @note reasses this method
+     *
+     * @param id
+     * @param i
+     * @param f
+     * @param s
+     */
+    void addAnimation(const char* id, int i, int f, int s){
+        Animation anim = Animation(i, f, s);
+        animations.emplace(id, anim);
     }
 
     /**

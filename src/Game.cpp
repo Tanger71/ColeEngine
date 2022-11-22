@@ -9,6 +9,7 @@
 #include "Vector2D.h"
 #include "Collision.h"
 #include "AssetManager.h"
+#include "ECS/Animation.h"
 #include <sstream>
 
 Map* map;
@@ -75,13 +76,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     //ecs implementation
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-    player.addComponent<SpriteComponent>("player", true);
+    player.addComponent<SpriteComponent>("player", "Idle", Animation(0, 10, 100));
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
+    player.getComponent<SpriteComponent>().addAnimation("Walk", 2, 10, 100);
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", true);
+    worm.addComponent<SpriteComponent>("worm", "Idle", Animation(1, 1, 100));
     worm.addComponent<ColliderComponent>("worm0");
     worm.addGroup(groupEnemies);
 
@@ -116,7 +118,6 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-
     SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 

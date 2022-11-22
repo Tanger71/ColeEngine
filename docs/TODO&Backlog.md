@@ -27,6 +27,11 @@
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
 	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
+- [ ] imporove sprites and animation
+	- [ ] add damage indicator
+	- [ ] overhall animation (timing and shit)
+- [ ] Entity State System
+- [ ] add multiple colldiers in entity
 
 ### current features:
 - ECS component manager
@@ -48,4 +53,4 @@
 - https://opengameart.org/users/calciumtrice
 - https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 - https://jothepro.github.io/doxygen-awesome-css/
-- 
+- https://gameprogrammingpatterns.com/contents.html
