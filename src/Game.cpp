@@ -84,11 +84,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 100));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 100));
+    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 200));
     worm.addComponent<ColliderComponent>("worm0");
-    worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 100));
-    worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 100));
-    worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 100));
+    worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 200));
+    worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 200));
+    worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 200));
     worm.addComponent<WormFSM>();
     worm.addGroup(groupEnemies);
 

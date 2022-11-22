@@ -79,6 +79,8 @@ public:
     }
 
     /**
+     * @todo make way to make abs fram number and shit
+     * 
      * @brief update the component: handle animation
      */
     void update() override {
@@ -91,7 +93,7 @@ public:
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = transform->width * transform->scale;
-        destRect.h = transform->height * transform->scale;
+        destRect.h = transform->height * transform->scale; 
     }
 
     /**
@@ -106,11 +108,6 @@ public:
      * @param animName animation to set to currently playing
      */
     void Play(std::string animName) {
-        std::cout << animName << std::endl;
-        std::cout << animations.count(animName) << std::endl;
-        std::cout << animations[animName].frames << std::endl;
-        std::cout << animations[animName].index << std::endl;
-        std::cout << animations[animName].speed << std::endl;
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;

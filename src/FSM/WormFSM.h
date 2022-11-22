@@ -12,8 +12,8 @@ private:
     enum WormState : std::size_t {
         WORM_OUT,
         WORM_IN,
-        WORM_HIDING,
-        WORM_EMERGING
+        WORM_HIDING_T,
+        WORM_EMERGING_T
     };
 
     int animCount = 0;
@@ -53,7 +53,7 @@ public:
                 if(stimulus){
                     std::cout << "Hiding" << std::endl;
                     sprite->Play("Hiding");
-                    curState = WORM_HIDING;
+                    curState = WORM_HIDING_T;
                     animCount = 0;
                 }
                 break;
@@ -61,20 +61,20 @@ public:
                 if(!stimulus){
                     std::cout << "Emerging" << std::endl;
                     sprite->Play("Emerging");
-                    curState = WORM_EMERGING;
+                    curState = WORM_EMERGING_T;
                     animCount = 0;
                 }
                 break;
-            case WORM_HIDING:
-                if(animCount > 46){
+            case WORM_HIDING_T:
+                if(animCount > 50){
                     std::cout << "In" << std::endl;
                     sprite->Play("In");
                     curState = WORM_IN;
                     animCount = 0;
                 }
                 break;
-            case WORM_EMERGING:
-                if(animCount > 46){
+            case WORM_EMERGING_T:
+                if(animCount > 50){
                     std::cout << "Out" << std::endl;
                     sprite->Play("Out");
                     curState = WORM_OUT;
