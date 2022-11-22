@@ -1,8 +1,17 @@
-//
-// Created by Sawyer Tang on 11/22/22.
-//
+#pragma once
+#include "Components.h"
 
-#ifndef COLEENGINE_FSMCOMPONENT_H
-#define COLEENGINE_FSMCOMPONENT_H
+class FSMComponent : public Component {
 
-#endif //COLEENGINE_FSMCOMPONENT_H
+protected:
+    enum State : std::size_t;
+    State curState;
+public:
+    FSMComponent(){}
+    ~FSMComponent(){}
+
+    void init() override{}
+
+    void update() override{}
+
+};
