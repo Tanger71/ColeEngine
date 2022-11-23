@@ -11,7 +11,9 @@
 - [ ] fix keyboard input and ripple effects:
 	- [x] animation misfires
 	- [x] movement direction misfires
-	- [ ] fix when release one opposite side, it maintains key press
+	- [x] fix when release one opposite side, it maintains key press
+	- [ ] align animations
+	- [ ] add playonce feature (param for next anim)
 - [ ] fix collison
 	- [ ] self-collision checks
 	- [ ] stuck on wall
