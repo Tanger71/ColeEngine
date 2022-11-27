@@ -54,3 +54,10 @@
 - https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 - https://jothepro.github.io/doxygen-awesome-css/
 - https://gameprogrammingpatterns.com/contents.html
+
+
+
+
+
+
+collision.... when entity collides with other, sends signal thorugh to collider component ... a list of colliders currently colliding with entity.

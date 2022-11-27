@@ -164,15 +164,15 @@
   },
   "active": "e5cc85437ae46c52",
   "lastOpenFiles": [
+    "docs/setup/WinSetup-VisualStudio.md",
+    "docs/TODO&Backlog.md",
     "docs/Research/Entity-Component-System.md",
     "docs/Research/Animations.md",
     "docs/AI/Enviromental.md",
     "docs/AI/Enemies.md",
     "README.md",
-    "docs/TODO&Backlog.md",
     "docs/How-to-use-doxygen.md",
     "docs/Research/Enemy AI.md",
-    "docs/Research/Keyboard-input.md",
-    "docs/Research/Tilemapping.md"
+    "docs/Research/Keyboard-input.md"
   ]
 }
