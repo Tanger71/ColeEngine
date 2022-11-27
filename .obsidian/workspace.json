@@ -27,8 +27,12 @@
             "id": "e5cc85437ae46c52",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "docs/setup/WinSetup-VisualStudio.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ],
@@ -98,6 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "docs/setup/WinSetup-VisualStudio.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,6 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "docs/setup/WinSetup-VisualStudio.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +141,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "docs/setup/WinSetup-VisualStudio.md"
+              }
             }
           }
         ],
@@ -148,6 +156,10 @@
   },
   "active": "e5cc85437ae46c52",
   "lastOpenFiles": [
-
+    "docs/How-to-use-doxygen.md",
+    "docs/TODO&Backlog.md",
+    "doxygen-awesome-css/logo.drawio.svg",
+    "docs/setup/MacSetup-CLion.md",
+    "docs/setup/WinSetup-VisualStudio.md"
   ]
 }
