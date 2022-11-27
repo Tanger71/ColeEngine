@@ -22,9 +22,9 @@ if(SDL2Mixer_FIND_QUIETLY)
 endif()
 
 find_package(SDL2 ${_FIND_SDL2_ARG})
-find_path(SDL2Mixer_INCLUDE_DIR SDL_mixer.h PATH_SUFFIXES SDL2 HINTS ENV SDL2DIR)
+find_path(SDL2Mixer_INCLUDE_DIR SDL_mixer.h PATH_SUFFIXES SDL2 include HINTS $ENV{SDL2_MIXER} ENV SDL2DIR)
 mark_as_advanced(SDL2Mixer_INCLUDE_DIR)
-find_library(SDL2Mixer_LIBRARY SDL2_mixer HINTS ENV SDL2DIR)
+find_library(SDL2Mixer_LIBRARY SDL2_mixer PATH_SUFFIXES lib/x64 HINTS $ENV{SDL2_MIXER} ENV SDL2DIR)
 mark_as_advanced(SDL2Mixer_LIBRARY)
 
 include(FindPackageHandleStandardArgs)

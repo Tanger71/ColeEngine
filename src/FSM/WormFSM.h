@@ -47,12 +47,14 @@ public:
             stimulus = false;
         }
 
+        //std::cout << stimulus << std::endl;
+
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
                 if(stimulus){
                     std::cout << "Hiding" << std::endl;
-                    sprite->Play("Hiding");
+                    sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;
                     animCount = 0;
                 }
@@ -60,23 +62,23 @@ public:
             case WORM_IN:
                 if(!stimulus){
                     std::cout << "Emerging" << std::endl;
-                    sprite->Play("Emerging");
+                    sprite->PlayStart("Emerging");
                     curState = WORM_EMERGING_T;
                     animCount = 0;
                 }
                 break;
             case WORM_HIDING_T:
-                if(animCount > 50){
+                if(animCount > 39){
                     std::cout << "In" << std::endl;
-                    sprite->Play("In");
+                    sprite->PlayStart("In");
                     curState = WORM_IN;
                     animCount = 0;
                 }
                 break;
             case WORM_EMERGING_T:
-                if(animCount > 50){
+                if(animCount > 39){
                     std::cout << "Out" << std::endl;
-                    sprite->Play("Out");
+                    sprite->PlayStart("Out");
                     curState = WORM_OUT;
                 }
                 break;

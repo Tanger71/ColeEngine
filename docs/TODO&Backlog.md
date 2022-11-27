@@ -11,7 +11,9 @@
 - [ ] fix keyboard input and ripple effects:
 	- [x] animation misfires
 	- [x] movement direction misfires
-	- [ ] fix when release one opposite side, it maintains key press
+	- [x] fix when release one opposite side, it maintains key press
+	- [ ] align animations
+	- [ ] add playonce feature (param for next anim)
 - [ ] fix collison
 	- [ ] self-collision checks
 	- [ ] stuck on wall
@@ -54,3 +56,10 @@
 - https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx
 - https://jothepro.github.io/doxygen-awesome-css/
 - https://gameprogrammingpatterns.com/contents.html
+
+
+
+
+
+
+collision.... when entity collides with other, sends signal thorugh to collider component ... a list of colliders currently colliding with entity.
