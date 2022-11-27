@@ -11,36 +11,24 @@
             "id": "eac4051f1a3c9b4d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/Research/Entity-Component-System.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
             "id": "439715aea8a8789d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/AI/Enviromental.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
             "id": "e5cc85437ae46c52",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/TODO&Backlog.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ],
@@ -110,7 +98,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/TODO&Backlog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +114,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/TODO&Backlog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,9 +135,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "docs/TODO&Backlog.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -164,15 +148,6 @@
   },
   "active": "e5cc85437ae46c52",
   "lastOpenFiles": [
-    "docs/setup/WinSetup-VisualStudio.md",
-    "docs/TODO&Backlog.md",
-    "docs/Research/Entity-Component-System.md",
-    "docs/Research/Animations.md",
-    "docs/AI/Enviromental.md",
-    "docs/AI/Enemies.md",
-    "README.md",
-    "docs/How-to-use-doxygen.md",
-    "docs/Research/Enemy AI.md",
-    "docs/Research/Keyboard-input.md"
+
   ]
 }
