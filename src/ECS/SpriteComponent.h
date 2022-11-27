@@ -115,7 +115,13 @@ public:
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
-        //curFrame = 0;
+    }
+
+    void PlayStart(std::string animName) {
+        frames = animations[animName].frames;
+        animIndex = animations[animName].index;
+        speed = animations[animName].speed;
+        curFrame = 0;
     }
 
 private:
@@ -125,7 +131,6 @@ private:
     bool animated = false;
     int frames = 0;
     int speed = 100; // the millisecond delay between frames
-
 
     int curFrame = 0;
 };

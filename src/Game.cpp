@@ -49,7 +49,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0){
         std::cout << "Game: Subsystems Initialised!..." << std::endl;
 
-        window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
+        window = SDL_CreateWindow(title, /*SDL_WINDOWPOS_CENTERED*/0, /*SDL_WINDOWPOS_CENTERED*/20, width, height, flags);
         if(window){
             std::cout << "Game: Window created!" << std::endl;
         }
@@ -80,11 +80,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     //ecs implementation
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-//    player.addComponent<SpriteComponent>("player", "Idle", Animation(0, 10, 10));
-//    player.addComponent<KeyboardController>();
+    player.addComponent<SpriteComponent>("player", "Idle", Animation(0, 10, 10));
+    player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-//    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 10));
+    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 10));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
     worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 10));
