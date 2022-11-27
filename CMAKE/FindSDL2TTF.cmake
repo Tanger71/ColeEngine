@@ -87,7 +87,7 @@ FIND_LIBRARY(SDL2TTF_LIBRARY_TEMP
         NAMES SDL2_ttf
         HINTS
         $ENV{SDL2TTFDIR}
-        PATH_SUFFIXES lib64 lib
+        PATH_SUFFIXES lib64 lib lib/x64
         PATHS ${SDL2TTF_SEARCH_PATHS}
         )
 

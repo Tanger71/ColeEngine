@@ -4,52 +4,32 @@
     "type": "split",
     "children": [
       {
-        "id": "600ddd60561fe92f",
+        "id": "18774de68b0aa8d3",
         "type": "tabs",
         "children": [
           {
-            "id": "1e6270b698d2d918",
+            "id": "eac4051f1a3c9b4d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
-            "id": "4f5ca9356c87a3ef",
+            "id": "439715aea8a8789d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/HowToUseDoxygen.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
-            "id": "01d3246874e7a70f",
+            "id": "e5cc85437ae46c52",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "45aa156e7aa4d19d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
+                "file": "docs/setup/WinSetup-VisualStudio.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "docs/setup/WinSetup-VisualStudio.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "docs/setup/WinSetup-VisualStudio.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "docs/setup/WinSetup-VisualStudio.md"
               }
             }
           }
@@ -174,17 +154,12 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "01d3246874e7a70f",
+  "active": "e5cc85437ae46c52",
   "lastOpenFiles": [
-    "docs/HowToUseDoxygen.md",
-    "README.md",
-    "docs/How To Doxygen 1.md",
-    "assets/terrain_ss.png",
-    "assets/rogue.png",
-    "assets/proj.png",
-    "assets/orc.png",
-    "assets/ColTex.png",
+    "docs/How-to-use-doxygen.md",
+    "docs/TODO&Backlog.md",
+    "doxygen-awesome-css/logo.drawio.svg",
     "docs/setup/MacSetup-CLion.md",
-    "docs/dox/html/bc_sd.png"
+    "docs/setup/WinSetup-VisualStudio.md"
   ]
 }

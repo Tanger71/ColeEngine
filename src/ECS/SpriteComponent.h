@@ -1,8 +1,9 @@
 #pragma once
 #include <map>
+#include <string>
 #include "Components.h"
 #include "SDL.h"
-#include "Animation.h"
+#include "../Animation.h"
 #include "../TextureManager.h"
 #include "../AssetManager.h"
 
@@ -15,11 +16,12 @@
 class SpriteComponent : public Component {
 public:
     int animIndex = 0;
-    std::map<const char*, Animation> animations;
+    std::map<std::string, Animation> animations;
 
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
     SpriteComponent() = default;
+    ~SpriteComponent() {}
 
     /**
      * @note mby not necessary anymore?
@@ -32,24 +34,28 @@ public:
 
     /**
      *
-     * @todo figure out more general implementation
-     *
      * @param id asset texture ID to assign to sprite
-     * @param isAnimated true if sprite is animated
+     * @param initId id of the animation to initialize the sprite with
+     * @param initAnim Animation to initialize the sprite with
      */
-    SpriteComponent(std::string id, bool isAnimated) {
-        animated = isAnimated;
-
-        Animation idle = Animation(0, 10, 100);
-        Animation walk = Animation(2, 10, 100);
-        
-        animations.emplace("Idle", idle);
-        animations.emplace("Walk", walk);
-        Play("Idle");
-            
+    SpriteComponent(std::string id, std::string initId, Animation anim) {
+        animated = true;
         setTexture(id);
+
+        animations.emplace(initId, anim);
+        Play(initId);
     }
-    ~SpriteComponent() {
+
+    /**
+     * @note reasses this method
+     *
+     * @param id
+     * @param i
+     * @param f
+     * @param s
+     */
+    void addAnimation(std::string id, Animation anim){
+        animations.emplace(id, anim);
     }
 
     /**
@@ -73,14 +79,20 @@ public:
     }
 
     /**
+     * @todo make way to make abs fram number and shit
+     * 
      * @brief update the component: handle animation
      */
     void update() override {
-        if (animated) {
-            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
+//        if (animated) {
+//            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
+//        }
+        if(animated && (Game::frameCnt % speed) == 0){
+            std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
+            srcRect.x = srcRect.w * curFrame++;
+            srcRect.y = animIndex * transform->height;
+            if(curFrame >= frames) curFrame = 0;///
         }
-
-        srcRect.y = animIndex * transform->height;
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
@@ -99,10 +111,17 @@ public:
      *
      * @param animName animation to set to currently playing
      */
-    void Play(const char* animName) {
+    void Play(std::string animName) {
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
+    }
+
+    void PlayStart(std::string animName) {
+        frames = animations[animName].frames;
+        animIndex = animations[animName].index;
+        speed = animations[animName].speed;
+        curFrame = 0;
     }
 
 private:
@@ -112,5 +131,7 @@ private:
     bool animated = false;
     int frames = 0;
     int speed = 100; // the millisecond delay between frames
+
+    int curFrame = 0;
 };
 

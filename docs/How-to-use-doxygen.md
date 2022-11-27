@@ -7,6 +7,7 @@ Install doxygen
 Navigate to project directory
 
 ```ssh
+git submodule update --init --recursive
 doxygen Doxyfile
 python3 -m http.server 8000 --directory docs/dox/html/
 ```

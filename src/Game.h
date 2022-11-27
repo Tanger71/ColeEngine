@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <vector>
+#include <string>
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -19,6 +20,13 @@ class Game {
 public:
     Game();
     ~Game();
+
+    /**
+     * @brief throw error to console.
+     *
+     * @param e error string
+     */
+    static void throwErr(std::string e);
 
     /**
      * @brief to initialize the Game instance.
@@ -54,7 +62,8 @@ public:
      * @brief clean game instance
      */
     void clean();
-    
+
+    static int frameCnt;
     static SDL_Renderer *renderer;
     static SDL_Event event;
     static bool isRunning;
@@ -64,6 +73,7 @@ public:
     enum groupLabels : std::size_t {
         groupMap,
         groupPlayers,
+        groupEnemies,
         groupColliders,
         groupProjectiles
     };
