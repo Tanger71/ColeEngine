@@ -3,7 +3,7 @@
 #include <string>
 #include "Components.h"
 #include "SDL.h"
-#include "Animation.h"
+#include "../Animation.h"
 #include "../TextureManager.h"
 #include "../AssetManager.h"
 
@@ -84,16 +84,20 @@ public:
      * @brief update the component: handle animation
      */
     void update() override {
-        if (animated) {
-            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
+//        if (animated) {
+//            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
+//        }
+        if(animated && (Game::frameCnt % speed) == 0){
+            std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
+            srcRect.x = srcRect.w * curFrame++;
+            srcRect.y = animIndex * transform->height;
+            if(curFrame >= frames) curFrame = 0;///
         }
-
-        srcRect.y = animIndex * transform->height;
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = transform->width * transform->scale;
-        destRect.h = transform->height * transform->scale; 
+        destRect.h = transform->height * transform->scale;
     }
 
     /**
@@ -111,6 +115,7 @@ public:
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
+        //curFrame = 0;
     }
 
 private:
@@ -120,5 +125,8 @@ private:
     bool animated = false;
     int frames = 0;
     int speed = 100; // the millisecond delay between frames
+
+
+    int curFrame = 0;
 };
 

@@ -62,7 +62,8 @@ public:
      * @brief clean game instance
      */
     void clean();
-    
+
+    static int frameCnt;
     static SDL_Renderer *renderer;
     static SDL_Event event;
     static bool isRunning;

@@ -66,7 +66,7 @@ public:
                 }
                 break;
             case WORM_HIDING_T:
-                if(animCount > 50){
+                if(animCount > 34){
                     std::cout << "In" << std::endl;
                     sprite->Play("In");
                     curState = WORM_IN;
@@ -74,7 +74,7 @@ public:
                 }
                 break;
             case WORM_EMERGING_T:
-                if(animCount > 50){
+                if(animCount > 34){
                     std::cout << "Out" << std::endl;
                     sprite->Play("Out");
                     curState = WORM_OUT;
