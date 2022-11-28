@@ -1,7 +1,3 @@
-//
-// Created by Sawyer Tang on 11/14/22.
-//
-
 #pragma once
 #include "ECS.h"
 #include "TransformComponent.h"
@@ -11,4 +7,4 @@
 #include "TileComponent.h"
 #include "ProjectileComponent.h"
 #include "UILabel.h"
-#include "../FSM/FSMs.h"
+#include "../ECS/FSM/FSMs.h"

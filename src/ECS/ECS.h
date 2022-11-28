@@ -47,7 +47,7 @@ public:
     virtual void update(){}
     virtual void draw(){}
 
-    virtual ~Component(){}
+    virtual ~Component() = default;
 };
 
 /**

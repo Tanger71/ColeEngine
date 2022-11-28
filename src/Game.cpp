@@ -1,7 +1,3 @@
-//
-// Created by Sawyer Tang on 11/13/22.
-//
-
 #include <iostream>
 #include "Game.h"
 #include "Map.h"
@@ -10,11 +6,11 @@
 #include "Collision.h"
 #include "AssetManager.h"
 #include "Animation.h"
-#include "FSM/FSMs.h"
+#include "ECS/FSM/FSMs.h"
 #include <sstream>
 
 int Game::frameCnt = 0;
-int lastFrame = 0;
+Uint32 lastFrame = 0;
 
 Map* map;
 Manager manager;
@@ -32,10 +28,10 @@ auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax
 auto& label(manager.addEntity());
 auto& worm(manager.addEntity());
 
-Game::Game() {}
-Game::~Game() {}
+Game::Game() = default;
+Game::~Game() = default;
 
-void Game::throwErr(std::string e) {
+void Game::throwErr(const std::string& e) {
     std::cout << "Error: " << e << std::endl;
 }
 
@@ -98,10 +94,10 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
 
-//    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
-//    assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
-//    assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
-//    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
+    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
 
     std::cout << "Game: Ready!" << std::endl;
 }
@@ -148,15 +144,15 @@ void Game::update() {
     }
 
     for (auto& p : projectiles) {
-        if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider)) {
+        if (Collision::AABB(player.getComponent<ColliderComponent>(), p->getComponent<ColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             p->destroy();
         }
     }
 
     // update camera to player
-    camera.x = player.getComponent<TransformComponent>().position.x - 400;
-    camera.y = player.getComponent<TransformComponent>().position.y - 320;
+    camera.x = player.getComponent<TransformComponent>().position.x - 400.0f;
+    camera.y = player.getComponent<TransformComponent>().position.y - 320.0f;
 
     //for camera bounds
     //if (camera.x < 0) camera.x = 0;

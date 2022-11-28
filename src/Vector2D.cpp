@@ -1,7 +1,3 @@
-//
-// Created by Sawyer Tang on 11/14/22.
-//
-
 #include "Vector2D.h"
 
 //TODO: learn: why are some not added to Vector2D:: , why are some this-> and some ... TLDR: learn operator definitions
@@ -77,8 +73,8 @@ Vector2D& Vector2D::operator/=(const Vector2D& vec){
 }
 
 Vector2D& Vector2D::operator*(const int& i) {
-    this->x *= i;
-    this->y *= i;
+    this->x *= static_cast<float>(i);
+    this->y *= static_cast<float>(i);
     return *this;
 }
 

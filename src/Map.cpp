@@ -1,23 +1,19 @@
-//
-// Created by Sawyer Tang on 11/13/22.
-//
-
 #include "Map.h"
 #include "Game.h"
 #include <fstream>
 #include <iostream>
+#include <utility>
 #include "ECS/ECS.h"
 #include "ECS/Components.h"
 
 extern Manager manager;
 
-Map::Map(std::string tid, int ms, int ts) : texid(tid), mapScale(ms), tileSize(ts){
+Map::Map(std::string tid, int ms, int ts) : texid(std::move(tid)), mapScale(ms), tileSize(ts){
 
     scaledSize = ms * ts;
 }
 
-Map::~Map() {
-}
+Map::~Map() = default;
 
 void Map::LoadMap(std::string path, int sizeX, int sizeY) {
     char c;
