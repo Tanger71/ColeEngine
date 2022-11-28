@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Note-dump.md",
+                "file": "docs/Research/Entity-Component-System.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/Note-dump.md",
+                "file": "docs/Research/Entity-Component-System.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/Note-dump.md",
+                "file": "docs/Research/Entity-Component-System.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/Note-dump.md"
+                "file": "docs/Research/Entity-Component-System.md"
               }
             }
           }
@@ -152,11 +152,15 @@
   },
   "active": "8a29476de8fde51c",
   "lastOpenFiles": [
-    "docs/TODO&Backlog.md",
+    "docs/Research/Keyboard-input.md",
+    "docs/Research/Tilemapping.md",
+    "docs/Research/Entity-Component-System.md",
+    "docs/Research/Enemy AI.md",
+    "docs/Research/Animations.md",
     "docs/Note-dump.md",
+    "docs/TODO&Backlog.md",
     "docs/setup/MacSetup-CLion.md",
     "docs/setup/WinSetup-VisualStudio.md",
-    "docs/How-to-use-doxygen.md",
-    "doxygen-awesome-css/logo.drawio.svg"
+    "docs/How-to-use-doxygen.md"
   ]
 }

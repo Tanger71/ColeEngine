@@ -1,8 +1,8 @@
 #pragma once
-#include "FSMs.h"
-#include "../../Collision.h"
-
 #include <iostream>
+#include "../Components.h"
+
+class ColliderComponent;
 
 /**
  * @todo figure out OOP in C++ LOL
@@ -18,6 +18,7 @@ private:
 
     int animCount = 0;
     WormState curState;
+
     ColliderComponent *collider;
     SpriteComponent *sprite;
 
@@ -30,23 +31,33 @@ public:
     ~WormFSM(){}
 
     void init() override {
-        collider = &entity->getComponent<ColliderComponent>();
-        sprite = &entity->getComponent<SpriteComponent>();
+        if (!entity->hasComponent<ColliderComponent>()) Game::throwErr("missing ColliderComponent!");
+        if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
+
+        collider = &(entity->getComponent<ColliderComponent>());
+        sprite = &(entity->getComponent<SpriteComponent>());
     }
 
     void update() override {
         animCount++;
 
-        if(Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_p){
-            stimulus = true;
-        }else if (Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_o){
-            stimulus = false;
-        }
+        //if(Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_p){
+        //    stimulus = true;
+        //}else if (Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_o){
+        //    stimulus = false;
+        //}
+
+        //stimulus = false;
+        //std::cout << collider << std::endl;
+//stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
+        //sprite->addAnimation("test", Animation(1, 1, 40));
+
+        collider->addCollision(Game::groupEnemies);
 
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
-                if(stimulus){
+                if(stimulus) {
                     std::cout << "Hiding" << std::endl;
                     sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;

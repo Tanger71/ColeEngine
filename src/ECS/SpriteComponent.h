@@ -85,7 +85,7 @@ public:
      */
     void update() override {
         if(animated && (Game::frameCnt % speed) == 0){
-            std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
+            //std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
             srcRect.x = srcRect.w * curFrame++;
             srcRect.y = animIndex * transform->height;
             if(curFrame >= frames) curFrame = 0;///

@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
+#include <set>
 #include "SDL.h"
+#include "ECS.h"
 #include "Components.h"
 #include "../TextureManager.h"
 
@@ -22,6 +24,10 @@ public:
 
 	TransformComponent* transform;
 
+	std::set<Game::groupLabels> colliding; // TODO: mby make this bitmap or smth 
+
+	ColliderComponent() = default;
+	~ColliderComponent() = default;
 
     /**
      *
@@ -73,16 +79,32 @@ public:
 			collider.w = transform->width * transform->scale;
 			collider.h = transform->height * transform->scale;
 		}
+
+		if (tag == "worm" && colliding.count(Game::groupPlayers)) std::cout << "pog" << std::endl;
+
+
 		
 		destR.x = collider.x - Game::camera.x;
 		destR.y = collider.y - Game::camera.y;
 	}
 
     /**
-     * @brief draw the component.
+     * @brief draw the component and clear vector of currently colliding components.
      */
 	void draw() override {
+		colliding.clear();
+
 		TextureManager::Draw(tex, srcR, destR, SDL_FLIP_NONE);
 	}
+
+	void addCollision(Game::groupLabels g) { // const i think
+		colliding.insert(g);
+	}
+
+	bool isColliding(Game::groupLabels g) { // const i think
+		return colliding.count(g) > 0;
+	}
+
+	
 
 };

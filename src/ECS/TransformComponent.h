@@ -25,7 +25,7 @@ public:
 
     /**
      *
-     * @param sc  scale of Entity
+     * @param sc scale of Entity
      */
     TransformComponent(int sc) {
         position.x = 400;
