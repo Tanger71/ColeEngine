@@ -76,11 +76,11 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     //ecs implementation
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-    player.addComponent<SpriteComponent>("player", "Idle", Animation(0, 10, 10));
+    player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 10));
+    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
     worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 10));
@@ -124,7 +124,6 @@ void Game::handleEvents() {
 void Game::update() {
     Game::frameCnt++;
 
-//    std::cout << Gamne::frameCnt << std::endl;
     SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
@@ -132,9 +131,6 @@ void Game::update() {
 
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
     label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
-
-    manager.refresh();
-    manager.update();
 
     for (auto& c : colliders) {
         SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
@@ -149,6 +145,10 @@ void Game::update() {
             p->destroy();
         }
     }
+
+    // update entities
+    manager.refresh();
+    manager.update();
 
     // update camera to player
     camera.x = player.getComponent<TransformComponent>().position.x - 400.0f;

@@ -62,4 +62,3 @@
 
 
 
-collision.... when entity collides with other, sends signal thorugh to collider component ... a list of colliders currently colliding with entity.

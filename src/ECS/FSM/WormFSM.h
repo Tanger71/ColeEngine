@@ -36,18 +36,12 @@ public:
 
     void update() override {
         animCount++;
-//        std::cout << animCount << std::endl;
-//        bool stimulus = false;
-        //temp for testing
+
         if(Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_p){
-//            std::cout << true << std::endl;
             stimulus = true;
         }else if (Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_o){
-//            std::cout << false << std::endl;
             stimulus = false;
         }
-
-        //std::cout << stimulus << std::endl;
 
         //hardcoded timing values
         switch(curState){
