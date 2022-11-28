@@ -4,8 +4,7 @@
 AssetManager::AssetManager(Manager* man) : manager(man) {
 }
 
-AssetManager::~AssetManager() {
-}
+AssetManager::~AssetManager() = default;
 
 void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid) {
 	auto& projectile(manager->addEntity());

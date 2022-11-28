@@ -26,7 +26,7 @@ public:
      *
      * @param e error string
      */
-    static void throwErr(std::string e);
+    static void throwErr(const std::string& e);
 
     /**
      * @brief to initialize the Game instance.
