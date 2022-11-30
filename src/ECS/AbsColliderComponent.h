@@ -6,14 +6,11 @@
 #include "TransformComponent.h"
 
 class AbsColliderComponent : public Component{
-
 public:
-    std::string tag;
-    std::set<Game::groupLabels> colliding; // TODO: mby make this bitmap or smth
-
     TransformComponent* transform;
 
-    //SDL_Texture* tex;
+    std::string tag;
+    std::set<Game::groupLabels> colliding; // TODO: mby make this bitmap or smth
     SDL_Rect localR, destR;
 
     /**
@@ -47,7 +44,6 @@ public:
      */
     void draw() override {
         colliding.clear();
-
     }
 
     void addCollision(Game::groupLabels g) { // const i think

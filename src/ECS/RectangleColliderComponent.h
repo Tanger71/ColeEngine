@@ -2,7 +2,6 @@
 #include <SDL.h>
 #include "AbsColliderComponent.h"
 
-//cleanup and add notes... add more robuestness to rects and stuff.
 class RectangleColliderComponent : public AbsColliderComponent {
 
 public:
@@ -37,7 +36,7 @@ public:
 
     void init() override {
         AbsColliderComponent::init();
-        
+
         collider.x = localR.x + static_cast<int>(transform->position.x);
         collider.y = localR.y + static_cast<int>(transform->position.y);
         collider.w = localR.w;
@@ -62,16 +61,6 @@ public:
         destR.y = collider.y - Game::camera.y;
     }
 
-    //fix later
-    SDL_Rect getColliderRect(){
-        SDL_Rect rect;
-        rect.x = collider.x;
-        rect.y = collider.y;
-        rect.w = collider.w;
-        rect.h = collider.h;
-        return rect;
-    }
-
     /**
      * @brief draw the component and clear vector of currently colliding components.
      *
@@ -79,15 +68,9 @@ public:
      */
     void draw() override {
         AbsColliderComponent::draw();
-//        TextureManager::Draw(tex, AbsColliderComponent::srcR, AbsColliderComponent::destR, SDL_FLIP_NONE);
 
-        if (tag == "terrain")
-            std::cout <<  destR.x << std::endl;
         SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
         SDL_RenderDrawRect(Game::renderer, &(destR));
-//        }
-
-
     }
 
 };

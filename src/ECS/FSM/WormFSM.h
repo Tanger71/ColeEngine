@@ -22,9 +22,6 @@ private:
     RectangleColliderComponent *collider;
     SpriteComponent *sprite;
 
-    //tempvar
-    bool stimulus = false;
-
 public:
 
     WormFSM() : curState(WORM_OUT) {}
@@ -41,12 +38,10 @@ public:
     void update() override {
         animCount++;
 
-        //stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
-        stimulus = collider->isColliding(Game::groupPlayers);
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
-                if(stimulus) {
+                if(collider->isColliding(Game::groupPlayers)) {
                     std::cout << "Hiding" << std::endl;
                     sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;
@@ -54,7 +49,7 @@ public:
                 }
                 break;
             case WORM_IN:
-                if(!stimulus){
+                if(!collider->isColliding(Game::groupPlayers)){
                     std::cout << "Emerging" << std::endl;
                     sprite->PlayStart("Emerging");
                     curState = WORM_EMERGING_T;
