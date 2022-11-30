@@ -13,10 +13,10 @@ public:
      * @param t tag name of collider for debugging
      */
     RectangleColliderComponent(std::string t) : AbsColliderComponent(t) {
-        collider.x = 0;
-        collider.y = 0;
-        collider.w = 0;
-        collider.h = 0;
+        localR.x = 0;
+        localR.y = 0;
+        localR.w = 10;
+        localR.h = 10;
     }
 
     /**
@@ -28,19 +28,23 @@ public:
      * @param ypos y position of collider
      * @param size size of collider square
      */
-    RectangleColliderComponent(std::string t, int xpos, int ypos, int size) : AbsColliderComponent(t) {
-        collider.x = xpos;
-        collider.y = ypos;
-        collider.w = size;
-        collider.h = size;
+    RectangleColliderComponent(std::string t, int xpos, int ypos, int w, int h) : AbsColliderComponent(t) {
+        localR.x = xpos;
+        localR.y = ypos;
+        localR.w = w;
+        localR.h = h;
     }
 
     void init() override {
         AbsColliderComponent::init();
+        
+        collider.x = localR.x + static_cast<int>(transform->position.x);
+        collider.y = localR.y + static_cast<int>(transform->position.y);
+        collider.w = localR.w;
+        collider.h = localR.h;
 
-        tex = TextureManager::LoadTexture("assets/ColTex.png");
-        AbsColliderComponent::srcR = { 0, 0, 32, 32 };
-        AbsColliderComponent::destR = {collider.x, collider.y, collider.w, collider.h};
+        destR.w = localR.w;
+        destR.h = localR.h;
     }
 
     /**
@@ -49,17 +53,13 @@ public:
     void update() override {
         AbsColliderComponent::update();
 
-        if (tag != "terrain" ) {
-            collider.x = static_cast<int>(transform->position.x);
-            collider.y = static_cast<int>(transform->position.y);
-            collider.w = transform->width * transform->scale;
-            collider.h = transform->height * transform->scale;
-        }
+        collider.x = localR.x + static_cast<int>(transform->position.x);
+        collider.y = localR.y + static_cast<int>(transform->position.y);
+        collider.w = localR.w;
+        collider.h = localR.h;
 
-            AbsColliderComponent::destR.x = collider.x - Game::camera.x;
-            AbsColliderComponent::destR.y = collider.y - Game::camera.y;
-
-
+        destR.x = collider.x - Game::camera.x;
+        destR.y = collider.y - Game::camera.y;
     }
 
     //fix later
@@ -80,10 +80,11 @@ public:
     void draw() override {
         AbsColliderComponent::draw();
 //        TextureManager::Draw(tex, AbsColliderComponent::srcR, AbsColliderComponent::destR, SDL_FLIP_NONE);
-//        if (tag == "player") {
-            SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-            //std::cout <<  destR.x << std::endl;
-            SDL_RenderDrawRect(Game::renderer, &(AbsColliderComponent::destR));
+
+        if (tag == "terrain")
+            std::cout <<  destR.x << std::endl;
+        SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+        SDL_RenderDrawRect(Game::renderer, &(destR));
 //        }
 
 

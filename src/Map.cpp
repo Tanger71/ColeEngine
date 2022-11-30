@@ -42,7 +42,8 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
             mapFile.get(c);
             if (c == '1') {
                 auto& tcol(manager.addEntity());
-                tcol.addComponent<RectangleColliderComponent>("terrain", x * scaledSize, y * scaledSize, scaledSize);
+                tcol.addComponent<TransformComponent>(x * scaledSize, y * scaledSize, tileSize, mapScale, 0);
+                tcol.addComponent<RectangleColliderComponent>("terrain", 0, 0, scaledSize, scaledSize);
                 tcol.addGroup(Game::groupWall);
             }
             mapFile.ignore();

@@ -78,7 +78,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
     player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     player.addComponent<KeyboardController>();
-    player.addComponent<RectangleColliderComponent>("player", 800, 640, 64);
+    player.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
     player.addGroup(groupPlayers);
     player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 

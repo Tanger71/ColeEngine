@@ -13,8 +13,8 @@ public:
 
     TransformComponent* transform;
 
-    SDL_Texture* tex;
-    SDL_Rect srcR, destR;
+    //SDL_Texture* tex;
+    SDL_Rect localR, destR;
 
     /**
      *
@@ -30,6 +30,8 @@ public:
     void init() override { //TODO: learn when do use &entity vs entity
         if (!entity->hasComponent<TransformComponent>()) {
             entity->addComponent<TransformComponent>();
+            if (tag == "terrain")
+                std::cout <<  destR.x << std::endl;
         }
 
         transform = &entity->getComponent<TransformComponent>();
