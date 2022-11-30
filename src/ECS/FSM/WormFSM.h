@@ -19,7 +19,7 @@ private:
     int animCount = 0;
     WormState curState;
 
-    ColliderComponent *collider;
+    RectangleColliderComponent *collider;
     SpriteComponent *sprite;
 
     //tempvar
@@ -31,10 +31,10 @@ public:
     ~WormFSM(){}
 
     void init() override {
-        if (!entity->hasComponent<ColliderComponent>()) Game::throwErr("missing ColliderComponent!");
+        if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
         if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
 
-        collider = &(entity->getComponent<ColliderComponent>());
+        collider = &(entity->getComponent<RectangleColliderComponent>());
         sprite = &(entity->getComponent<SpriteComponent>());
     }
 

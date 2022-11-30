@@ -1,5 +1,4 @@
 #include "Collision.h"
-#include "ECS/ColliderComponent.h"
 
 bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
 	if (
@@ -13,11 +12,19 @@ bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
 	return false;
 }
 
-bool Collision::AABB(const ColliderComponent& colA, const ColliderComponent& colB) {
+bool Collision::AABB(const RectangleColliderComponent& colA, const RectangleColliderComponent& colB) {
 	if (AABB(colA.collider, colB.collider)) {
 		return true;
 	}
 	else {
 		return false;
 	}
+}
+
+bool Collision::CircleRectangle(const Circle& cir, const SDL_Rect& rect){
+    return 0;
+}
+
+bool Collision::CircleCircle(const Circle& cirA, const Circle& cirB){
+    return 0;
 }

@@ -6,7 +6,7 @@
 #include "SDL_image.h"
 
 class AssetManager; // TODO: Why tho... https://stackoverflow.com/questions/23283080/compiler-error-c4430-missing-type-specifier-int-assumed
-class ColliderComponent;
+//class ColliderComponent;
 
 /**
  * @brief Game Instance.
