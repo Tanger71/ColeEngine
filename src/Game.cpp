@@ -78,13 +78,13 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
     player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     player.addComponent<KeyboardController>();
-    player.addComponent<ColliderComponent>("player");
+    player.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
     player.addGroup(groupPlayers);
     player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
     worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 10));
-    worm.addComponent<ColliderComponent>("worm");
+    worm.addComponent<RectangleColliderComponent>("worm", -100, -100, 264, 264);
     worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
     worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
     worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
@@ -125,8 +125,8 @@ void Game::handleEvents() {
 void Game::update() {
     Game::frameCnt++;
 
-    ColliderComponent* playerCol = &player.getComponent<ColliderComponent>();
-    ColliderComponent* wormCol = &worm.getComponent<ColliderComponent>();
+    RectangleColliderComponent* playerCol = &player.getComponent<RectangleColliderComponent>();
+    RectangleColliderComponent* wormCol = &worm.getComponent<RectangleColliderComponent>();
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -136,7 +136,7 @@ void Game::update() {
 
 
     if (Collision::AABB(*wormCol, *playerCol)) {
-        worm.getComponent<ColliderComponent>().addCollision(Game::groupPlayers);
+        worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
     }
 
     // update entities
@@ -146,13 +146,13 @@ void Game::update() {
    
     // resolve collisions
     for (auto& c : walls) {
-        ColliderComponent cCol = c->getComponent<ColliderComponent>();
+        RectangleColliderComponent cCol = c->getComponent<RectangleColliderComponent>();
         if (Collision::AABB(cCol, *playerCol)) {
             player.getComponent<TransformComponent>().position = playerPos;
         }
     }
     for (auto& p : projectiles) {
-        if (Collision::AABB(player.getComponent<ColliderComponent>(), p->getComponent<ColliderComponent>())) {
+        if (Collision::AABB(player.getComponent<RectangleColliderComponent>(), p->getComponent<RectangleColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             p->destroy();
         }

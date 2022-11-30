@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "ECS/Components.h"
+#include "Circle.h"
 
 //class ColliderComponent; //removed this fixed bug
 
@@ -31,6 +32,10 @@ public:
      * @param colB
      * @return true if A and B are overlapping
      */
-	static bool AABB(const ColliderComponent& colA, const ColliderComponent& colB);
+	static bool AABB(const RectangleColliderComponent& colA, const RectangleColliderComponent& colB);
+
+    static bool CircleRectangle(const Circle& cir, const SDL_Rect& rect);
+
+    static bool CircleCircle(const Circle& cirA, const Circle& cirB);
 
 };

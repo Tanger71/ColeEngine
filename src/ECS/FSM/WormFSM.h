@@ -19,11 +19,8 @@ private:
     int animCount = 0;
     WormState curState;
 
-    ColliderComponent *collider;
+    RectangleColliderComponent *collider;
     SpriteComponent *sprite;
-
-    //tempvar
-    bool stimulus = false;
 
 public:
 
@@ -31,22 +28,20 @@ public:
     ~WormFSM(){}
 
     void init() override {
-        if (!entity->hasComponent<ColliderComponent>()) Game::throwErr("missing ColliderComponent!");
+        if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
         if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
 
-        collider = &(entity->getComponent<ColliderComponent>());
+        collider = &(entity->getComponent<RectangleColliderComponent>());
         sprite = &(entity->getComponent<SpriteComponent>());
     }
 
     void update() override {
         animCount++;
 
-        //stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
-        stimulus = collider->isColliding(Game::groupPlayers);
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
-                if(stimulus) {
+                if(collider->isColliding(Game::groupPlayers)) {
                     std::cout << "Hiding" << std::endl;
                     sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;
@@ -54,7 +49,7 @@ public:
                 }
                 break;
             case WORM_IN:
-                if(!stimulus){
+                if(!collider->isColliding(Game::groupPlayers)){
                     std::cout << "Emerging" << std::endl;
                     sprite->PlayStart("Emerging");
                     curState = WORM_EMERGING_T;
