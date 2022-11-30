@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include "ECS/Components.h"
 
-//class ColliderComponent; removed this fixed bug
+//class ColliderComponent; //removed this fixed bug
 
 /**
  * @brief A library of collision algs.

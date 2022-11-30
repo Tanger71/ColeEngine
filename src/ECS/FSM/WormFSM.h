@@ -41,19 +41,8 @@ public:
     void update() override {
         animCount++;
 
-        //if(Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_p){
-        //    stimulus = true;
-        //}else if (Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_o){
-        //    stimulus = false;
-        //}
-
-        //stimulus = false;
-        //std::cout << collider << std::endl;
-        stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
-        //sprite->addAnimation("test", Animation(1, 1, 40));
-        std::cout << stimulus << std::endl;
-//        collider->addCollision(Game::groupEnemies);
-
+        //stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
+        stimulus = collider->isColliding(Game::groupPlayers);
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
