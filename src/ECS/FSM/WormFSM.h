@@ -1,8 +1,8 @@
 #pragma once
-#include "FSMs.h"
-#include "../../Collision.h"
-
 #include <iostream>
+#include "../Components.h"
+
+//class ColliderComponent;
 
 /**
  * @todo figure out OOP in C++ LOL
@@ -18,6 +18,7 @@ private:
 
     int animCount = 0;
     WormState curState;
+
     ColliderComponent *collider;
     SpriteComponent *sprite;
 
@@ -30,29 +31,22 @@ public:
     ~WormFSM(){}
 
     void init() override {
-        collider = &entity->getComponent<ColliderComponent>();
-        sprite = &entity->getComponent<SpriteComponent>();
+        if (!entity->hasComponent<ColliderComponent>()) Game::throwErr("missing ColliderComponent!");
+        if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
+
+        collider = &(entity->getComponent<ColliderComponent>());
+        sprite = &(entity->getComponent<SpriteComponent>());
     }
 
     void update() override {
         animCount++;
-//        std::cout << animCount << std::endl;
-//        bool stimulus = false;
-        //temp for testing
-        if(Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_p){
-//            std::cout << true << std::endl;
-            stimulus = true;
-        }else if (Game::event.type == SDL_KEYDOWN && Game::event.key.keysym.sym == SDLK_o){
-//            std::cout << false << std::endl;
-            stimulus = false;
-        }
 
-        //std::cout << stimulus << std::endl;
-
+        //stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
+        stimulus = collider->isColliding(Game::groupPlayers);
         //hardcoded timing values
         switch(curState){
             case WORM_OUT:
-                if(stimulus){
+                if(stimulus) {
                     std::cout << "Hiding" << std::endl;
                     sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;

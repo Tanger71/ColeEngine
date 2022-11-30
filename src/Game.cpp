@@ -76,20 +76,21 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     //ecs implementation
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-    player.addComponent<SpriteComponent>("player", "Idle", Animation(0, 10, 10));
+    player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
-    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(2, 10, 10));
+    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
     worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 10));
-    worm.addComponent<ColliderComponent>("worm0");
+    worm.addComponent<ColliderComponent>("worm");
     worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
     worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
     worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
-    worm.addComponent<WormFSM>();
     worm.addGroup(groupEnemies);
+    worm.addComponent<WormFSM>();
+    
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
@@ -105,7 +106,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
 auto& enemies(manager.getGroup(Game::groupEnemies));
-auto& colliders(manager.getGroup(Game::groupColliders));
+auto& walls(manager.getGroup(Game::groupWall));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::handleEvents() {
@@ -124,8 +125,8 @@ void Game::handleEvents() {
 void Game::update() {
     Game::frameCnt++;
 
-//    std::cout << Gamne::frameCnt << std::endl;
-    SDL_Rect playerCol = player.getComponent<ColliderComponent>().collider;
+    ColliderComponent* playerCol = &player.getComponent<ColliderComponent>();
+    ColliderComponent* wormCol = &worm.getComponent<ColliderComponent>();
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -133,16 +134,23 @@ void Game::update() {
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
     label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
 
+
+    if (Collision::AABB(*wormCol, *playerCol)) {
+        worm.getComponent<ColliderComponent>().addCollision(Game::groupPlayers);
+    }
+
+    // update entities
     manager.refresh();
     manager.update();
 
-    for (auto& c : colliders) {
-        SDL_Rect cCol = c->getComponent<ColliderComponent>().collider;
-        if (Collision::AABB(cCol, playerCol)) {
+   
+    // resolve collisions
+    for (auto& c : walls) {
+        ColliderComponent cCol = c->getComponent<ColliderComponent>();
+        if (Collision::AABB(cCol, *playerCol)) {
             player.getComponent<TransformComponent>().position = playerPos;
         }
     }
-
     for (auto& p : projectiles) {
         if (Collision::AABB(player.getComponent<ColliderComponent>(), p->getComponent<ColliderComponent>())) {
             std::cout << "hit player" << std::endl;
@@ -157,7 +165,7 @@ void Game::update() {
     //for camera bounds
     //if (camera.x < 0) camera.x = 0;
     //if (camera.y < 0) camera.y = 0;
-   //if (camera.x > camera.w) camera.x = camera.w;
+    //if (camera.x > camera.w) camera.x = camera.w;
     //if (camera.y > camera.h) camera.y = camera.h;
 
     lastFrame = SDL_GetTicks();
@@ -168,7 +176,7 @@ void Game::render() {
     for (auto& t : tiles) {
         t->draw();
     }
-    for (auto& c : colliders) {
+    for (auto& c : walls) {
         c->draw();
     }
     for (auto& p : players) {

@@ -1,7 +1,8 @@
 #pragma once
 #include "SDL.h"
+#include "ECS/Components.h"
 
-class ColliderComponent;
+//class ColliderComponent; //removed this fixed bug
 
 /**
  * @brief A library of collision algs.
