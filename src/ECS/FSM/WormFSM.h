@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../Components.h"
 
-class ColliderComponent;
+//class ColliderComponent;
 
 /**
  * @todo figure out OOP in C++ LOL
@@ -49,10 +49,10 @@ public:
 
         //stimulus = false;
         //std::cout << collider << std::endl;
-//stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
+        stimulus = (&entity->getComponent<ColliderComponent>())->isColliding(Game::groupPlayers);
         //sprite->addAnimation("test", Animation(1, 1, 40));
-
-        collider->addCollision(Game::groupEnemies);
+        std::cout << stimulus << std::endl;
+//        collider->addCollision(Game::groupEnemies);
 
         //hardcoded timing values
         switch(curState){
