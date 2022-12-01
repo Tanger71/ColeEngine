@@ -17,7 +17,7 @@ struct Animation {
      *
      * @param i index of animation on tile-sheet
      * @param f frames in animation
-     * @param s speed of animation (time in milliseconds delay between frames)
+     * @param s speed of animation (amount of game frames between animation frames)
      */
 	Animation(int i, int f, int s) {
 		index = i;
