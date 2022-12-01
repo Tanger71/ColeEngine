@@ -37,6 +37,7 @@
 - [ ] add multiple colldiers in entity
 - [ ] figure out that 'forward declaration bug'
 - [ ] Make EntityFactory
+- [ ] robustisize UILabel Component
 
 ### current features:
 - ECS component manager

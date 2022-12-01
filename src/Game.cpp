@@ -6,7 +6,7 @@
 #include "Collision.h"
 #include "AssetManager.h"
 #include "Animation.h"
-#include "ECS/FSM/FSMs.h"
+#include "ECS/EntityControllers/FSMs.h"
 #include <sstream>
 
 int Game::frameCnt = 0;
@@ -77,10 +77,10 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     //ecs implementation
     player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
     player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
-    player.addComponent<KeyboardController>();
     player.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
     player.addGroup(groupPlayers);
     player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
+    player.addComponent<PlayerController>();
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
     worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
@@ -195,6 +195,7 @@ void Game::render() {
     }
     label.draw();
 
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderPresent(renderer);
 }
 

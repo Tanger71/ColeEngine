@@ -33,7 +33,6 @@ public:
     void update() override {
         animCount++;
 
-        //hardcoded timing values
         switch(curState){
             case WORM_OUT:
                 if(collider->isColliding(Game::groupPlayers)) {

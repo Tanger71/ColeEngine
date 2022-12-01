@@ -1,7 +1,7 @@
 #pragma once
-#include "ECS.h"
-#include "Components.h"
-#include "../Game.h"
+#include "../ECS.h"
+#include "../Components.h"
+#include "../../Game.h"
 
 /**
  * @brief Component for handling keyboard input.
@@ -12,7 +12,7 @@
  * @author sawyercoletang
  *
  */
-class KeyboardController : public Component {
+class PlayerController : public Component {
 public:
 	TransformComponent *transform;
 	SpriteComponent* sprite;
@@ -50,6 +50,9 @@ public:
 				break;
 			case SDLK_ESCAPE:
 				Game::isRunning = false;
+            case SDLK_p:
+                sprite->Flash(2, 10, 3);
+                break;
 			default:
 				break;
 			}
