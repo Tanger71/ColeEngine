@@ -23,12 +23,8 @@
             "id": "8a29476de8fde51c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/TODO&Backlog.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ],
@@ -98,7 +94,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/TODO&Backlog.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +110,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/TODO&Backlog.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,9 +131,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "docs/TODO&Backlog.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -151,16 +143,5 @@
     "collapsed": true
   },
   "active": "8a29476de8fde51c",
-  "lastOpenFiles": [
-    "docs/Note-dump.md",
-    "docs/TODO&Backlog.md",
-    "docs/Research/Entity-Component-System.md",
-    "docs/Research/Keyboard-input.md",
-    "docs/Research/Tilemapping.md",
-    "docs/Research/Enemy AI.md",
-    "docs/Research/Animations.md",
-    "docs/setup/MacSetup-CLion.md",
-    "docs/setup/WinSetup-VisualStudio.md",
-    "docs/How-to-use-doxygen.md"
-  ]
+  "lastOpenFiles": []
 }
