@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     const int frameDelay = 1000/FPS;
 
     Uint32 frameStart;
-    int frameTime;
+    Uint32 frameTime;
 
     game = new Game();
     game->init("ColeEngine", 800, 640, false);

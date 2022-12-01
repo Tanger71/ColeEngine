@@ -24,6 +24,8 @@ public:
 
     /**
      *
+     * @note move to future EntityFactory
+     *
      * @param pos starting position
      * @param vel for direction
      * @param range distance till destroyed
@@ -52,7 +54,6 @@ public:
     TTF_Font* getFont(std::string id);
 
 private:
-
 	Manager* manager;
 	std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;

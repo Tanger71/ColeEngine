@@ -4,15 +4,14 @@
 AssetManager::AssetManager(Manager* man) : manager(man) {
 }
 
-AssetManager::~AssetManager() {
-}
+AssetManager::~AssetManager() = default;
 
 void AssetManager::CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid) {
 	auto& projectile(manager->addEntity());
 	projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1);
 	projectile.addComponent<SpriteComponent>(texid);
 	projectile.addComponent<ProjectileComponent>(range, speed, vel);
-	projectile.addComponent<ColliderComponent>("projectile");
+	projectile.addComponent<RectangleColliderComponent>("projectile");
 	projectile.addGroup(Game::groupProjectiles);
 }
 

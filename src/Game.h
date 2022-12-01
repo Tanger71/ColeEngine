@@ -6,7 +6,6 @@
 #include "SDL_image.h"
 
 class AssetManager; // TODO: Why tho... https://stackoverflow.com/questions/23283080/compiler-error-c4430-missing-type-specifier-int-assumed
-class ColliderComponent;
 
 /**
  * @brief Game Instance.
@@ -26,7 +25,7 @@ public:
      *
      * @param e error string
      */
-    static void throwErr(std::string e);
+    static void throwErr(const std::string& e);
 
     /**
      * @brief to initialize the Game instance.
@@ -74,7 +73,7 @@ public:
         groupMap,
         groupPlayers,
         groupEnemies,
-        groupColliders,
+        groupWall,
         groupProjectiles
     };
 

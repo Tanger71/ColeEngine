@@ -21,7 +21,7 @@ public:
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
 
     SpriteComponent() = default;
-    ~SpriteComponent() {}
+    ~SpriteComponent() = default;
 
     /**
      * @note mby not necessary anymore?
@@ -75,7 +75,7 @@ public:
      * @param id
      */
     void setTexture(std::string id) {
-        texture = Game::assets->getTexture(id);
+        texture = Game::assets->getTexture(std::move(id));
     }
 
     /**
@@ -84,14 +84,10 @@ public:
      * @brief update the component: handle animation
      */
     void update() override {
-//        if (animated) {
-//            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); //TODO: understand
-//        }
         if(animated && (Game::frameCnt % speed) == 0){
-            std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
             srcRect.x = srcRect.w * curFrame++;
             srcRect.y = animIndex * transform->height;
-            if(curFrame >= frames) curFrame = 0;///
+            if(curFrame >= frames) curFrame = 0;
         }
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
@@ -108,6 +104,7 @@ public:
     }
 
     /**
+     * @brief set animation and maintain current frame.
      *
      * @param animName animation to set to currently playing
      */
@@ -117,10 +114,13 @@ public:
         speed = animations[animName].speed;
     }
 
+    /**
+     * @brief set animation from beginning. curFrame = 0
+     *
+     * @param animName animation to set to currently playing
+     */
     void PlayStart(std::string animName) {
-        frames = animations[animName].frames;
-        animIndex = animations[animName].index;
-        speed = animations[animName].speed;
+        Play(animName);
         curFrame = 0;
     }
 
@@ -130,8 +130,7 @@ private:
     SDL_Rect srcRect, destRect;
     bool animated = false;
     int frames = 0;
-    int speed = 100; // the millisecond delay between frames
-
+    int speed = 10; // game frames per animation frame
     int curFrame = 0;
 };
 
