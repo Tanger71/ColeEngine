@@ -24,4 +24,8 @@ struct Animation {
 		frames = f;
 		speed = s;
 	}
+
+    int getDuration(){
+        return speed * frames;
+    }
 };
