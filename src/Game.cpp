@@ -128,6 +128,7 @@ void Game::update() {
 
     RectangleColliderComponent* playerCol = &player.getComponent<RectangleColliderComponent>();
     RectangleColliderComponent* wormCol = &worm.getComponent<RectangleColliderComponent>();
+    CircleColliderComponent* wormCirCol = &worm.getComponent<CircleColliderComponent>();
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -137,7 +138,11 @@ void Game::update() {
 
 
     if (Collision::AABB(*wormCol, *playerCol)) {
+        //worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+    }
+    if (Collision::CircleRectangle(*wormCirCol, *playerCol)) {
         worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        worm.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
 
     // update entities

@@ -12,7 +12,7 @@ public:
      * @param t tag name of collider for debugging
      */
     CircleColliderComponent(std::string t) : AbsColliderComponent(t) {
-        localC = Circle(18, 1, 1);
+        localC = Circle(1, 1, 1);
     }
 
     CircleColliderComponent(std::string t, int xpos, int ypos, int r) : AbsColliderComponent(t){
@@ -47,10 +47,17 @@ public:
     * @brief draw the component and clear vector of currently colliding components.
     */
     void draw() override {
+        if(isColliding(Game::groupPlayers)){
+            SDL_SetRenderDrawColor(Game::renderer, 255, 0, 255, 255);
+        }else{
+            SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+        }
         AbsColliderComponent::draw();
 
-        SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
         Circle::drawCircle(&destC);
+
+        SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
+        SDL_RenderDrawPoint(Game::renderer, destC.x, destC.y);
     }
 
 };

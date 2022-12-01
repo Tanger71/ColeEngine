@@ -8,6 +8,8 @@
 /**
  * @brief A library of collision algs.
  *
+ * @note currently supports axis-aligned rectangles
+ *
  * @author sawyercoletang
  *
  */
@@ -35,6 +37,9 @@ public:
 	static bool AABB(const RectangleColliderComponent& colA, const RectangleColliderComponent& colB);
 
     static bool CircleRectangle(const Circle& cir, const SDL_Rect& rect);
+
+    static bool CircleRectangle(const CircleColliderComponent& cir, const RectangleColliderComponent& rect);
+
 
     static bool CircleCircle(const Circle& cirA, const Circle& cirB);
 

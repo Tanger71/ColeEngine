@@ -69,6 +69,10 @@ public:
 
         SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
         SDL_RenderDrawRect(Game::renderer, &(destR));
+        SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
+        SDL_RenderDrawPoint(Game::renderer, destR.x, destR.y);
+        SDL_SetRenderDrawColor(Game::renderer, 255, 255, 0, 255);
+        SDL_RenderDrawPoint(Game::renderer, destR.x + destR.w/2, destR.y + destR.h/2);
     }
 
 };
