@@ -2,6 +2,12 @@
 #include <SDL.h>
 #include "AbsColliderComponent.h"
 
+/**
+ * @brief Component for handling the Rectangle Collider of an Entity.
+ *
+ * @author sawyercoletang
+ *
+ */
 class RectangleColliderComponent : public AbsColliderComponent {
 
 public:
@@ -20,12 +26,11 @@ public:
 
     /**
      *
-     * @todo add for non-square colliders.
-     *
-     * @param t tag name of collider for debugging
-     * @param xpos x positon of collider
-     * @param ypos y position of collider
-     * @param size size of collider square
+     * @param t tag name of collider
+     * @param xpos x positon of collider rectangle top left corner
+     * @param ypos y position of collider rectangle top left corner
+     * @param w width of collider rectangle
+     * @param h height of collider rectangle
      */
     RectangleColliderComponent(std::string t, int xpos, int ypos, int w, int h) : AbsColliderComponent(t) {
         localR.x = xpos;
@@ -34,6 +39,9 @@ public:
         localR.h = h;
     }
 
+    /**
+     * @brief initialize the component: link to TransformComponent.
+     */
     void init() override {
         AbsColliderComponent::init();
 

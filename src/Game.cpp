@@ -83,15 +83,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 
     worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 2, 10));
+    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
     worm.addComponent<RectangleColliderComponent>("worm", 0, 0, 64, 64);
-    worm.addComponent<CircleColliderComponent>("worm", 32, 32, 100);
+    worm.addComponent<CircleColliderComponent>("worm", 32, 32, 200);
     worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
     worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
     worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
     worm.addGroup(groupEnemies);
     worm.addComponent<WormFSM>();
-    
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);

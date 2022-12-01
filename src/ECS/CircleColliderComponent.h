@@ -3,6 +3,12 @@
 #include "AbsColliderComponent.h"
 #include "../Circle.h"
 
+/**
+ * @brief Component for handling the Circle Collider of an Entity.
+ *
+ * @author sawyercoletang
+ *
+ */
 class CircleColliderComponent : public AbsColliderComponent {
 public:
     Circle collider, localC, destC;
@@ -15,10 +21,20 @@ public:
         localC = Circle(1, 1, 1);
     }
 
+    /**
+     *
+     * @param t tag name of collider
+     * @param xpos x positon of collider Circle centre
+     * @param ypos y positon of collider Circle centre
+     * @param r radius of collider Circle
+     */
     CircleColliderComponent(std::string t, int xpos, int ypos, int r) : AbsColliderComponent(t){
         localC = Circle(xpos, ypos, r);
     }
 
+    /**
+     * @brief initialize the component: link to TransformComponent.
+     */
     void init() override {
         AbsColliderComponent::init();
 

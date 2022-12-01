@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * @brief Struct to handle Circles
+ *
+ * @author sawyercoletang
+ *
+ */
 struct Circle {
     int x;
     int y;
@@ -7,13 +13,20 @@ struct Circle {
 
     Circle() = default;
 
+    /**
+     *
+     * @param x x position
+     * @param y y position
+     * @param r radius
+     */
     Circle(int x, int y, int r) : x(x), y(y), r(r){}
 
     /**
+     * @brief static function to draw circle
      *
      * @note https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
      *
-     * @param c
+     * @param c Circle struct pointer
      */
     static void drawCircle(Circle* c){
         const int diameter = (c->r * 2);

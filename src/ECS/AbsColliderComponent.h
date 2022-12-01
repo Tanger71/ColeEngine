@@ -5,6 +5,12 @@
 #include "../Game.h"
 #include "TransformComponent.h"
 
+/**
+ * @brief Component for handling Collider Components of an Entity.
+ *
+ * @author sawyercoletang
+ *
+ */
 class AbsColliderComponent : public Component{
 public:
     TransformComponent* transform;
@@ -43,10 +49,20 @@ public:
         colliding.clear();
     }
 
+    /**
+     * @brief add collision label to internal set of intersecting collisions each frame
+     *
+     * @param g label to be added to set
+     */
     void addCollision(Game::groupLabels g) { // const i think
         colliding.insert(g);
     }
 
+    /**
+     *
+     * @param g label to be check for collision
+     * @return true if label is colliding with this collider this frame
+     */
     bool isColliding(Game::groupLabels g) { // const i think
         return colliding.count(g) > 0;
     }
