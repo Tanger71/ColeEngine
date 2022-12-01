@@ -5,7 +5,7 @@
 class RectangleColliderComponent : public AbsColliderComponent {
 
 public:
-    SDL_Rect collider;
+    SDL_Rect collider, localR, destR;
 
     /**
      *
@@ -63,8 +63,6 @@ public:
 
     /**
      * @brief draw the component and clear vector of currently colliding components.
-     *
-     * @todo change to draw Collider **not** destR
      */
     void draw() override {
         AbsColliderComponent::draw();

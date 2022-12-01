@@ -11,7 +11,6 @@ public:
 
     std::string tag;
     std::set<Game::groupLabels> colliding; // TODO: mby make this bitmap or smth
-    SDL_Rect localR, destR;
 
     /**
      *
@@ -27,8 +26,6 @@ public:
     void init() override { //TODO: learn when do use &entity vs entity
         if (!entity->hasComponent<TransformComponent>()) {
             entity->addComponent<TransformComponent>();
-            if (tag == "terrain")
-                std::cout <<  destR.x << std::endl;
         }
 
         transform = &entity->getComponent<TransformComponent>();
