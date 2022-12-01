@@ -148,15 +148,15 @@
   },
   "active": "8a29476de8fde51c",
   "lastOpenFiles": [
-    "docs/TODO&Backlog.md",
     "docs/Note-dump.md",
+    "docs/AI/Enviromental.md",
+    "docs/AI/Enemies.md",
+    "doxygen-awesome-css/docs/tricks.md",
     "docs/Research/Entity-Component-System.md",
-    "docs/Research/Keyboard-input.md",
-    "docs/Research/Tilemapping.md",
     "docs/Research/Enemy AI.md",
     "docs/Research/Animations.md",
-    "docs/setup/MacSetup-CLion.md",
-    "docs/setup/WinSetup-VisualStudio.md",
-    "docs/How-to-use-doxygen.md"
+    "docs/TODO&Backlog.md",
+    "docs/Research/Keyboard-input.md",
+    "docs/Research/Tilemapping.md"
   ]
 }

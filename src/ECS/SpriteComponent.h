@@ -90,6 +90,8 @@ public:
             if(curFrame >= frames) curFrame = 0;
         }
 
+        flashing = (Game::frameCnt % flashInterval) < flashDuration && (Game::frameCnt < flashBegin + (flashInterval*flashReps));
+
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destRect.w = transform->width * transform->scale;
@@ -100,7 +102,12 @@ public:
      * @brief draw the component.
      */
     void draw() override {
-        TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
+        if(flashing){
+            TextureManager::AddFlash(texture, srcRect, destRect, spriteFlip);
+        } else {
+            TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
+
+        }
     }
 
     /**
@@ -124,6 +131,14 @@ public:
         curFrame = 0;
     }
 
+    void Flash(int duration, int interval, int reps){
+        flashDuration = duration;
+        flashInterval = interval;
+        flashReps = reps;
+        flashBegin = Game::frameCnt;
+
+    }
+
 private:
     TransformComponent *transform;
     SDL_Texture *texture;
@@ -132,5 +147,12 @@ private:
     int frames = 0;
     int speed = 10; // game frames per animation frame
     int curFrame = 0;
+
+    int flashDuration = 0;
+    int flashInterval = 10;
+    int flashReps = 1;
+    int flashBegin = 0;
+
+    bool flashing = false;
 };
 
