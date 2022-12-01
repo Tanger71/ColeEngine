@@ -131,7 +131,7 @@ public:
         curFrame = 0;
     }
 
-    void Flash(int duration, int interval, int reps){
+    void Flash(int duration, int interval, int reps){ //line up start times
         flashDuration = duration;
         flashInterval = interval;
         flashReps = reps;

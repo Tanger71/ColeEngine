@@ -75,6 +75,8 @@ public:
     void draw() override {
         AbsColliderComponent::draw();
 
+        if(!entity->hasGroup(Game::groupDebug) && !Game::debugGame) return;
+
         SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
         SDL_RenderDrawRect(Game::renderer, &(destR));
         SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);

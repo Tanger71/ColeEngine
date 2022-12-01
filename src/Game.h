@@ -69,12 +69,15 @@ public:
     static SDL_Rect camera;
     static AssetManager* assets;
 
+    static bool debugGame;
+
     enum groupLabels : std::size_t {
         groupMap,
         groupPlayers,
         groupEnemies,
         groupWall,
-        groupProjectiles
+        groupProjectiles,
+        groupDebug
     };
 
 private:

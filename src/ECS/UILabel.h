@@ -14,6 +14,7 @@
  * @brief Component to handle the UILabel of an Entity.
  *
  * @todo add background to label.
+ *       fix local positioning of label.
  *
  * @author sawyercoletang
  *
@@ -24,19 +25,43 @@ public:
     /**
      *
      * @param xpos x position of label
-     * @param ypos y position of lebel
+     * @param ypos y position of label
      * @param text text shown in label
      * @param font font of label
      * @param color color of label font
      */
     UILabel(int xpos, int ypos, std::string text, std::string font, SDL_Color& color) :
         labelText(text), labelFont(font), textColour(color){
-        position.x = xpos;
-        position.y = ypos;
+        local.x = xpos;
+        local.y = ypos;
 
         setLabelText(labelText, labelFont);
     }
     ~UILabel(){}
+
+    void init() override {
+        if (!entity->hasComponent<TransformComponent>()) {
+            entity->addComponent<TransformComponent>();
+        }
+
+        transform = &entity->getComponent<TransformComponent>();
+
+        dest.x = transform->position.x + local.x;
+        dest.y = transform->position.y + local.y;
+    }
+
+    void update() override {
+        dest.x = transform->position.x + local.x + dest.w/2 - Game::camera.x;
+        dest.y = transform->position.y + local.y + dest.h/2 - Game::camera.y;
+    }
+
+    /**
+     * @brief draw the component.
+     */
+    void draw() override {
+        if(!entity->hasGroup(Game::groupDebug) && !Game::debugGame) return;
+        SDL_RenderCopy(Game::renderer, labelTexture, nullptr, &dest);
+    }
 
     /**
      *
@@ -48,18 +73,14 @@ public:
         labelTexture = SDL_CreateTextureFromSurface(Game::renderer, surf);
         SDL_FreeSurface(surf);
 
-        SDL_QueryTexture(labelTexture, nullptr, nullptr, &position.w, &position.h);
-    }
-
-    /**
-     * @brief draw the component.
-     */
-    void draw() override {
-        SDL_RenderCopy(Game::renderer, labelTexture, nullptr, &position);
+        SDL_QueryTexture(labelTexture, nullptr, nullptr, &dest.w, &dest.h);
     }
 
 private:
-    SDL_Rect position;
+    TransformComponent* transform;
+
+    SDL_Rect local;
+    SDL_Rect dest;
     std::string labelText;
     std::string labelFont;
     SDL_Color textColour;

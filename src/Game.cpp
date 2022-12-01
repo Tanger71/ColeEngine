@@ -5,10 +5,10 @@
 #include "Vector2D.h"
 #include "Collision.h"
 #include "AssetManager.h"
-#include "Animation.h"
-#include "ECS/EntityControllers/FSMs.h"
+#include "EntityFactory.h"
 #include <sstream>
 
+bool Game::debugGame = true;
 int Game::frameCnt = 0;
 Uint32 lastFrame = 0;
 
@@ -26,7 +26,8 @@ bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& label(manager.addEntity());
-auto& worm(manager.addEntity());
+auto& worm0(manager.addEntity());
+auto& worm1(manager.addEntity());
 
 Game::Game() = default;
 Game::~Game() = default;
@@ -69,28 +70,18 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     assets->addTexture("worm", "assets/worm.png");
 
     assets->addFont("arial", "assets/Arial.ttf", 24);
+    assets->addFont("entity-arial", "assets/Arial.ttf", 10);
 
     map = new Map("terrain", 3, 32);
 
     map->LoadMap("assets/map.gmap", 25, 20);
 
-    //ecs implementation
-    player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-    player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
-    player.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
-    player.addGroup(groupPlayers);
-    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
-    player.addComponent<PlayerController>();
-
-    worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
-    worm.addComponent<RectangleColliderComponent>("worm", 0, 0, 64, 64);
-    worm.addComponent<CircleColliderComponent>("worm", 32, 32, 200);
-    worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
-    worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
-    worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
-    worm.addGroup(groupEnemies);
-    worm.addComponent<WormFSM>();
+    EntityFactory::initPlayer(&player, 800.0f, 640.0f, "player");
+//    player.addGroup(groupDebug);
+    EntityFactory::initWorm(&worm0, 1000.f, 640.f, "worm0");
+//    worm0.addGroup(groupDebug);
+    EntityFactory::initWorm(&worm1, 800.f, 800.f, "worm1");
+//    worm1.addGroup(groupDebug);
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
@@ -110,13 +101,11 @@ auto& walls(manager.getGroup(Game::groupWall));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::handleEvents() {
-    
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:
             isRunning = false;
             break;
-
         default:
             break;
     }
@@ -126,8 +115,8 @@ void Game::update() {
     Game::frameCnt++;
 
     RectangleColliderComponent* playerCol = &player.getComponent<RectangleColliderComponent>();
-    RectangleColliderComponent* wormCol = &worm.getComponent<RectangleColliderComponent>();
-    CircleColliderComponent* wormCirCol = &worm.getComponent<CircleColliderComponent>();
+    CircleColliderComponent* worm0CirCol = &worm0.getComponent<CircleColliderComponent>();
+    CircleColliderComponent* worm1CirCol = &worm1.getComponent<CircleColliderComponent>();
     Vector2D playerPos = player.getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -135,20 +124,19 @@ void Game::update() {
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
     label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
 
-
-    if (Collision::AABB(*wormCol, *playerCol)) {
-        //worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+    if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
+        worm0.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        worm0.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
-    if (Collision::CircleRectangle(*wormCirCol, *playerCol)) {
-        worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
-        worm.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+    if (Collision::CircleRectangle(*worm1CirCol, *playerCol)) {
+        worm1.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        worm1.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
 
     // update entities
     manager.refresh();
     manager.update();
 
-   
     // resolve collisions
     for (auto& c : walls) {
         RectangleColliderComponent cCol = c->getComponent<RectangleColliderComponent>();
