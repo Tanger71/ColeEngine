@@ -2,11 +2,6 @@
 #include <iostream>
 #include "../Components.h"
 
-//class ColliderComponent;
-
-/**
- * @todo figure out OOP in C++ LOL
- */
 class WormFSM : public Component {
 private:
     enum WormState : std::size_t {

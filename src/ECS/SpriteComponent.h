@@ -85,10 +85,9 @@ public:
      */
     void update() override {
         if(animated && (Game::frameCnt % speed) == 0){
-            //std::cout << " >> " << SDL_GetTicks() << " >> " << speed << " >> " << curFrame << std::endl;
             srcRect.x = srcRect.w * curFrame++;
             srcRect.y = animIndex * transform->height;
-            if(curFrame >= frames) curFrame = 0;///
+            if(curFrame >= frames) curFrame = 0;
         }
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .

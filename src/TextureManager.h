@@ -8,7 +8,6 @@
  *
  */
 class TextureManager {
-
 public:
 
     /**

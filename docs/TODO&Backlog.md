@@ -6,14 +6,15 @@
 - [x] Get enviroment running on Windows10
 - [x] init Readme.md
 - [x] comment code for readability (Doxygen)
-- [ ] make env more robust
+- [x] make env more robust
 	- [x] add .ddl injection for SDL2 bins
 - [ ] fix keyboard input and ripple effects:
 	- [x] animation misfires
 	- [x] movement direction misfires
 	- [x] fix when release one opposite side, it maintains key press
-	- [ ] align animations
-	- [ ] add playonce feature (param for next anim)
+	- [x] align animations
+	- [x] add playonce feature (param for next anim)
+	- [ ] normalize move vectors
 - [ ] fix collison
 	- [ ] self-collision checks
 	- [ ] stuck on wall
@@ -31,14 +32,19 @@
 	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 - [ ] imporove sprites and animation
 	- [ ] add damage indicator
-	- [ ] overhall animation (timing and shit)
-- [ ] Entity State System
+	- [x] overhall animation (timing and shit)
+- [x] Entity State System
 - [ ] add multiple colldiers in entity
 - [ ] figure out that 'forward declaration bug'
+- [ ] Make EntityFactory
 
 ### current features:
 - ECS component manager
-- AABB Collision (no rotation)
+- Collision
+	- AABB Collision (no rotation)
+	- Circle-Rectangle Collision (axis-alligned rects)
+- Animated Sprites
+- Finite State Machines for simple AI
 
 ### Issues
 - [x] Camera Bounds are wrong

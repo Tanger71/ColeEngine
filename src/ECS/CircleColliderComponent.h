@@ -3,6 +3,12 @@
 #include "AbsColliderComponent.h"
 #include "../Circle.h"
 
+/**
+ * @brief Component for handling the Circle Collider of an Entity.
+ *
+ * @author sawyercoletang
+ *
+ */
 class CircleColliderComponent : public AbsColliderComponent {
 public:
     Circle collider, localC, destC;
@@ -12,13 +18,23 @@ public:
      * @param t tag name of collider for debugging
      */
     CircleColliderComponent(std::string t) : AbsColliderComponent(t) {
-        localC = Circle(18, 1, 1);
+        localC = Circle(1, 1, 1);
     }
 
+    /**
+     *
+     * @param t tag name of collider
+     * @param xpos x positon of collider Circle centre
+     * @param ypos y positon of collider Circle centre
+     * @param r radius of collider Circle
+     */
     CircleColliderComponent(std::string t, int xpos, int ypos, int r) : AbsColliderComponent(t){
         localC = Circle(xpos, ypos, r);
     }
 
+    /**
+     * @brief initialize the component: link to TransformComponent.
+     */
     void init() override {
         AbsColliderComponent::init();
 
@@ -47,10 +63,17 @@ public:
     * @brief draw the component and clear vector of currently colliding components.
     */
     void draw() override {
+        if(isColliding(Game::groupPlayers)){
+            SDL_SetRenderDrawColor(Game::renderer, 255, 0, 255, 255);
+        }else{
+            SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+        }
         AbsColliderComponent::draw();
 
-        SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
         Circle::drawCircle(&destC);
+
+        SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
+        SDL_RenderDrawPoint(Game::renderer, destC.x, destC.y);
     }
 
 };
