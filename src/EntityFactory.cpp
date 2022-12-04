@@ -2,27 +2,31 @@
 #include "ECS/Components.h"
 #include "Game.h"
 
-EntityFactory::EntityFactory(){
+EntityFactory::EntityFactory(Manager* man) : manager(man) {
     white = {255, 255, 255, 255}; // TODO: lift scope
 
 }
 
-void EntityFactory::initPlayer(Entity* e, float xpos, float ypos, std::string label){
-    e->addGroup(Game::groupPlayers);
+Entity* EntityFactory::mintPlayer(float xpos, float ypos, std::string label){
+    auto& e(manager->addEntity()); //TODO: learn this IMP... what is this syntax?
 
-    e->addComponent<TransformComponent>(xpos, ypos, 32, 32, 2.0f);
+    e.addGroup(Game::groupPlayers);
 
-    e->addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
-    e->getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
+    e.addComponent<TransformComponent>(xpos, ypos, 32, 32, 2.0f);
 
-    e->addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
+    e.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
+    e.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
 
-    e->addComponent<PlayerController>();
+    e.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
 
-    e->addComponent<LabelComponent>(0, -20, label, "entity-arial", white);
+    e.addComponent<PlayerController>();
+
+    e.addComponent<LabelComponent>(0, -20, label, "entity-arial", white);
+
+    return &e;
 }
 
-void EntityFactory::initWorm(Entity* e, float xpos, float ypos, std::string label){
+void EntityFactory::mintWorm(Entity* e, float xpos, float ypos, std::string label){
     e->addGroup(Game::groupEnemies);
 
     e->addComponent<TransformComponent>(xpos, ypos, 32, 32, 2.0f);
@@ -38,4 +42,15 @@ void EntityFactory::initWorm(Entity* e, float xpos, float ypos, std::string labe
     e->addComponent<WormFSM>();
 
     e->addComponent<LabelComponent>(0, -20, label, "entity-arial", white);
+}
+
+Entity* EntityFactory::mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid) {
+	auto& projectile(manager->addEntity());
+	projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1);
+	projectile.addComponent<SpriteComponent>(texid);
+	projectile.addComponent<ProjectileComponent>(range, speed, vel);
+	projectile.addComponent<RectangleColliderComponent>("projectile");
+	projectile.addGroup(Game::groupProjectiles);
+
+    return &projectile;
 }

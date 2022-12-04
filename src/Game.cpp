@@ -22,12 +22,12 @@ SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
 AssetManager* Game::assets = new AssetManager(&manager);
 
-EntityFactory* Game::entityFactory = new EntityFactory();
+EntityFactory* Game::entityFactory = new EntityFactory(&manager);
 
 bool Game::isRunning = false;
 
-auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
-auto& label(manager.addEntity());
+Entity* player;
+auto& label(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
 auto& worm0(manager.addEntity());
 auto& worm1(manager.addEntity());
 
@@ -78,21 +78,17 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map->LoadMap("assets/map.gmap", 25, 20);
 
-//    EntityFactory::initPlayer(&player, 800.0f, 640.0f, "player");
-//    EntityFactory::initWorm(&worm0, 1000.f, 640.f, "worm0");
-//    EntityFactory::initWorm(&worm1, 800.f, 800.f, "worm1");
-
-    entityFactory->initPlayer(&player, 800.0f, 640.0f, "player");
-    entityFactory->initWorm(&worm0, 1000.f, 640.f, "worm0");
-    entityFactory->initWorm(&worm1, 800.f, 800.f, "worm1");
+    player = entityFactory->mintPlayer(800.0f, 640.0f, "player");
+    entityFactory->mintWorm(&worm0, 1000.f, 640.f, "worm0");
+    entityFactory->mintWorm(&worm1, 800.f, 800.f, "worm1");
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
-    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
 
     std::cout << "Game: Ready!" << std::endl;
 }
@@ -117,10 +113,10 @@ void Game::handleEvents() {
 void Game::update() {
     Game::frameCnt++;
 
-    RectangleColliderComponent* playerCol = &player.getComponent<RectangleColliderComponent>();
+    RectangleColliderComponent* playerCol = &player->getComponent<RectangleColliderComponent>();
     CircleColliderComponent* worm0CirCol = &worm0.getComponent<CircleColliderComponent>();
     CircleColliderComponent* worm1CirCol = &worm1.getComponent<CircleColliderComponent>();
-    Vector2D playerPos = player.getComponent<TransformComponent>().position;
+    Vector2D playerPos = player->getComponent<TransformComponent>().position;
 
     std::stringstream ss;
 
@@ -144,19 +140,19 @@ void Game::update() {
     for (auto& c : walls) {
         RectangleColliderComponent cCol = c->getComponent<RectangleColliderComponent>();
         if (Collision::AABB(cCol, *playerCol)) {
-            player.getComponent<TransformComponent>().position = playerPos;
+            player->getComponent<TransformComponent>().position = playerPos;
         }
     }
     for (auto& p : projectiles) {
-        if (Collision::AABB(player.getComponent<RectangleColliderComponent>(), p->getComponent<RectangleColliderComponent>())) {
+        if (Collision::AABB(player->getComponent<RectangleColliderComponent>(), p->getComponent<RectangleColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             p->destroy();
         }
     }
 
     // update camera to player
-    camera.x = player.getComponent<TransformComponent>().position.x - 400.0f;
-    camera.y = player.getComponent<TransformComponent>().position.y - 320.0f;
+    camera.x = player->getComponent<TransformComponent>().position.x - 400.0f;
+    camera.y = player->getComponent<TransformComponent>().position.y - 320.0f;
 
     //for camera bounds
     //if (camera.x < 0) camera.x = 0;
