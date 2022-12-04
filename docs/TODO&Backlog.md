@@ -38,7 +38,7 @@
 - [ ] add multiple colldiers in entity (non mutex)
 - [ ] figure out that 'forward declaration bug'
 - [ ] add draw render depth (based on ypos)
-- [ ] robustisize UILabel Component
+- [x] robustisize UILabel Component
 
 ### current features:
 - ECS component manager

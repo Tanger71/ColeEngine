@@ -78,17 +78,17 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map->LoadMap("assets/map.gmap", 25, 20);
 
-    player = entityFactory->mintPlayer(800.0f, 640.0f, "player");
-    entities.emplace("worm0", entityFactory->mintWorm(1000.f, 640.f, "worm0"));
-    entities.emplace("worm1", entityFactory->mintWorm(800.f, 800.f, "worm1"));
+    player = entityFactory->mintPlayer(Vector2D(800.0f, 640.0f), "player");
+    entities.emplace("worm0", entityFactory->mintWorm(Vector2D(1000.f, 640.f), "worm0"));
+    entities.emplace("worm1", entityFactory->mintWorm(Vector2D(800.f, 800.f), "worm1"));
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
-    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
-    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
-    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
-    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile", "proj0");
+    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile", "proj1");
+    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile", "proj2");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile", "proj3");
 
     std::cout << "Game: Ready!" << std::endl;
 }
@@ -120,7 +120,7 @@ void Game::update() {
 
     std::stringstream ss;
 
-    std::cout << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame) << std::endl; //Frames/time = fps
+//    std::cout << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame) << std::endl; //Frames/time = fps
 
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
     label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
@@ -146,7 +146,7 @@ void Game::update() {
         }
     }
     for (auto& p : projectiles) {
-        if (Collision::AABB(player->getComponent<RectangleColliderComponent>(), p->getComponent<RectangleColliderComponent>())) {
+        if (Collision::CircleRectangle(p->getComponent<CircleColliderComponent>(), player->getComponent<RectangleColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             p->destroy();
         }

@@ -6,15 +6,27 @@
 class EntityFactory {
 private:
     Manager* manager;
-    SDL_Color white;
+    SDL_Color white{};
 
 public:
 
     EntityFactory(Manager* man);
 
-    Entity* mintPlayer(float xpos, float ypos, std::string label); //change name
+    /**
+     *
+     * @param pos starting position
+     * @param label entity debugging label
+     * @return ptr to player Entity
+     */
+    Entity* mintPlayer(Vector2D pos, std::string label); //change name
 
-    Entity* mintWorm(float xpos, float ypos, std::string label);
+    /**
+     *
+     * @param pos starting position
+     * @param label entity debugging label
+     * @return ptr to Worm Entity
+     */
+    Entity* mintWorm(Vector2D pos, std::string label);
 
     /**
      *
@@ -23,7 +35,9 @@ public:
      * @param range distance till destroyed
      * @param speed movement speed
      * @param texid ID of texture
+     * @param label entity debugging label
+     * @return ptr to Projectile Entity
      */
-    Entity* mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid);
+    Entity* mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
 
 };
