@@ -3,10 +3,15 @@
 #include "ECS/ECS.h"
 #include "Vector2D.h"
 
+/**
+ * @brief manager class for minting Entities
+ *
+ * @author sawyercoletang
+ */
 class EntityFactory {
 private:
     Manager* manager;
-    SDL_Color white{};
+    SDL_Color white;
 
 public:
 
