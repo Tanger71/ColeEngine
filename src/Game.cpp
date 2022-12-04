@@ -22,6 +22,8 @@ SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
 AssetManager* Game::assets = new AssetManager(&manager);
 
+EntityFactory* Game::entityFactory = new EntityFactory();
+
 bool Game::isRunning = false;
 
 auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
@@ -76,15 +78,16 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
     map->LoadMap("assets/map.gmap", 25, 20);
 
-    EntityFactory::initPlayer(&player, 800.0f, 640.0f, "player");
-//    player.addGroup(groupDebug);
-    EntityFactory::initWorm(&worm0, 1000.f, 640.f, "worm0");
-//    worm0.addGroup(groupDebug);
-    EntityFactory::initWorm(&worm1, 800.f, 800.f, "worm1");
-//    worm1.addGroup(groupDebug);
+//    EntityFactory::initPlayer(&player, 800.0f, 640.0f, "player");
+//    EntityFactory::initWorm(&worm0, 1000.f, 640.f, "worm0");
+//    EntityFactory::initWorm(&worm1, 800.f, 800.f, "worm1");
+
+    entityFactory->initPlayer(&player, 800.0f, 640.0f, "player");
+    entityFactory->initWorm(&worm0, 1000.f, 640.f, "worm0");
+    entityFactory->initWorm(&worm1, 800.f, 800.f, "worm1");
 
     SDL_Color white = {255, 255, 255, 255};
-    label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
+    label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
     assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
     assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
@@ -122,7 +125,7 @@ void Game::update() {
     std::stringstream ss;
 
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
-    label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
+    label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
 
     if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
         worm0.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);

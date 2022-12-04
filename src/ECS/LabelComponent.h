@@ -11,7 +11,7 @@
 #include "../Game.h"
 
 /**
- * @brief Component to handle the UILabel of an Entity.
+ * @brief Component to handle the LabelComponent of an Entity.
  *
  * @todo add background to label.
  *       fix local positioning of label.
@@ -19,7 +19,7 @@
  * @author sawyercoletang
  *
  */
-class UILabel : public Component {
+class LabelComponent : public Component {
 public:
 
     /**
@@ -30,14 +30,14 @@ public:
      * @param font font of label
      * @param color color of label font
      */
-    UILabel(int xpos, int ypos, std::string text, std::string font, SDL_Color& color) :
+    LabelComponent(int xpos, int ypos, std::string text, std::string font, SDL_Color& color) :
         labelText(text), labelFont(font), textColour(color){
         local.x = xpos;
         local.y = ypos;
 
         setLabelText(labelText, labelFont);
     }
-    ~UILabel(){}
+    ~LabelComponent(){}
 
     void init() override {
         if (!entity->hasComponent<TransformComponent>()) {
