@@ -21,6 +21,11 @@ public:
     Vector2D& Multiply(const Vector2D& vec);
     Vector2D& Divide(const Vector2D& vec);
 
+    Vector2D& AddToCopy(const Vector2D& vec);
+    Vector2D& SubtractToCopy(const Vector2D& vec);
+    Vector2D& MultiplyToCopy(const Vector2D& vec);
+    Vector2D& DivideToCopy(const Vector2D& vec);
+
     friend Vector2D& operator+(Vector2D& v1, const Vector2D& v2);
     friend Vector2D& operator-(Vector2D& v1, const Vector2D& v2);
     friend Vector2D& operator*(Vector2D& v1, const Vector2D& v2);
@@ -33,6 +38,7 @@ public:
 
     Vector2D& operator*(const int& i);
     Vector2D& Zero();
+    Vector2D& Unit();
 
     friend std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
 

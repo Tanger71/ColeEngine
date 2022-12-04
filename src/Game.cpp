@@ -85,9 +85,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
-    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile", "proj0");
-    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile", "proj1");
-    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile", "proj2");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(1, 0), 200, 2, "projectile", "proj0");
+    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(1, 0), 200, 1, "projectile", "proj1");
+    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(6, 1), 200, 2, "projectile", "proj2");
     entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile", "proj3");
 
     std::cout << "Game: Ready!" << std::endl;
@@ -146,7 +146,8 @@ void Game::update() {
         }
     }
     for (auto& p : projectiles) {
-        if (Collision::CircleRectangle(p->getComponent<CircleColliderComponent>(), player->getComponent<RectangleColliderComponent>())) {
+        CircleColliderComponent cc = p->getComponent<CircleColliderComponent>();
+        if (cc.tag != "playerBolt" && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             p->destroy();
         }

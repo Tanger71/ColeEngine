@@ -61,6 +61,9 @@ public:
                 case SDLK_SLASH:
                     Game::debugGame = !Game::debugGame;
                     break;
+                case SDLK_UP:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(0, -1), 200, 4, "projectile", "playerBolt");
+                    break;
                 default:
                     break;
             }
@@ -95,6 +98,8 @@ public:
                     break;
             }
         }
+
+        //transform->velocity.Unit();
 
         if (transform->velocity.x == 0 && transform->velocity.y == 0) {
             sprite->Play("Idle");
