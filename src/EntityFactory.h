@@ -14,7 +14,7 @@ public:
 
     Entity* mintPlayer(float xpos, float ypos, std::string label); //change name
 
-    void mintWorm(Entity* e, float xpos, float ypos, std::string label);
+    Entity* mintWorm(float xpos, float ypos, std::string label);
 
     /**
      *

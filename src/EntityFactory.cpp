@@ -26,22 +26,25 @@ Entity* EntityFactory::mintPlayer(float xpos, float ypos, std::string label){
     return &e;
 }
 
-void EntityFactory::mintWorm(Entity* e, float xpos, float ypos, std::string label){
-    e->addGroup(Game::groupEnemies);
+Entity* EntityFactory::mintWorm(float xpos, float ypos, std::string label){
+    auto& e(manager->addEntity());
+    e.addGroup(Game::groupEnemies);
 
-    e->addComponent<TransformComponent>(xpos, ypos, 32, 32, 2.0f);
+    e.addComponent<TransformComponent>(xpos, ypos, 32, 32, 2.0f);
 
-    e->addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
-    e->getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
-    e->getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
-    e->getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
+    e.addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
+    e.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
+    e.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
+    e.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
 
-    e->addComponent<RectangleColliderComponent>("worm", 0, 0, 64, 64);
-    e->addComponent<CircleColliderComponent>("worm", 32, 32, 200);
+    e.addComponent<RectangleColliderComponent>("worm", 0, 0, 64, 64);
+    e.addComponent<CircleColliderComponent>("worm", 32, 32, 200);
 
-    e->addComponent<WormFSM>();
+    e.addComponent<WormFSM>();
 
-    e->addComponent<LabelComponent>(0, -20, label, "entity-arial", white);
+    e.addComponent<LabelComponent>(0, -20, label, "entity-arial", white);
+
+    return &e;
 }
 
 Entity* EntityFactory::mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid) {

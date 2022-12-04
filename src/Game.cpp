@@ -27,9 +27,9 @@ EntityFactory* Game::entityFactory = new EntityFactory(&manager);
 bool Game::isRunning = false;
 
 Entity* player;
-auto& label(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
-auto& worm0(manager.addEntity());
-auto& worm1(manager.addEntity());
+auto& label(manager.addEntity());
+
+std::map<std::string, Entity*> entities; //mby make for all entities ...
 
 Game::Game() = default;
 Game::~Game() = default;
@@ -79,8 +79,8 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     map->LoadMap("assets/map.gmap", 25, 20);
 
     player = entityFactory->mintPlayer(800.0f, 640.0f, "player");
-    entityFactory->mintWorm(&worm0, 1000.f, 640.f, "worm0");
-    entityFactory->mintWorm(&worm1, 800.f, 800.f, "worm1");
+    entities.emplace("worm0", entityFactory->mintWorm(1000.f, 640.f, "worm0"));
+    entities.emplace("worm1", entityFactory->mintWorm(800.f, 800.f, "worm1"));
 
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
@@ -114,22 +114,24 @@ void Game::update() {
     Game::frameCnt++;
 
     RectangleColliderComponent* playerCol = &player->getComponent<RectangleColliderComponent>();
-    CircleColliderComponent* worm0CirCol = &worm0.getComponent<CircleColliderComponent>();
-    CircleColliderComponent* worm1CirCol = &worm1.getComponent<CircleColliderComponent>();
+    CircleColliderComponent* worm0CirCol = &entities["worm0"]->getComponent<CircleColliderComponent>();
+    CircleColliderComponent* worm1CirCol = &entities["worm1"]->getComponent<CircleColliderComponent>();
     Vector2D playerPos = player->getComponent<TransformComponent>().position;
 
     std::stringstream ss;
+
+    std::cout << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame) << std::endl; //Frames/time = fps
 
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
     label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
 
     if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
-        worm0.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
-        worm0.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm0"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
     if (Collision::CircleRectangle(*worm1CirCol, *playerCol)) {
-        worm1.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
-        worm1.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm1"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
 
     // update entities
