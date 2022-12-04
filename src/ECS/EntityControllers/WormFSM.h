@@ -2,6 +2,12 @@
 #include <iostream>
 #include "../Components.h"
 
+/**
+ * @brief Finite State Automata for Worm Enemy.
+ *
+ * @author sawyercoletang
+ *
+ */
 class WormFSM : public Component {
 private:
     enum WormState : std::size_t {
