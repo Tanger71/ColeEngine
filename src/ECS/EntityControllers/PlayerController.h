@@ -64,6 +64,29 @@ public:
                 case SDLK_UP:
                     Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(0, -1), 200, 4, "projectile", "playerBolt");
                     break;
+                case SDLK_DOWN:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(0, 1), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_RIGHT:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(1, 0), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_LEFT:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(-1, 0), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_o:
+                    if(transform->velocity.Equals(Vector2D(0,0))){ //TODO: fix cause scuffed
+                        if(sprite->spriteFlip == SDL_FLIP_HORIZONTAL){
+                            std::cout << "flip" << std::endl;
+                            Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(-1, 0), 200, 4, "projectile", "playerBolt");
+                        }else if(sprite->spriteFlip == SDL_FLIP_NONE){
+                            std::cout << "noflip" << std::endl;
+                            Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(1, 0), 200, 4, "projectile", "playerBolt");
+                        }
+                    }else{
+                        Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), transform->velocity, 200, 4, "projectile", "playerBolt");
+
+                    }
+                    break;
                 default:
                     break;
             }

@@ -70,6 +70,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     assets->addTexture("player", "assets/rogue.png");
     assets->addTexture("projectile", "assets/proj.png");
     assets->addTexture("worm", "assets/worm.png");
+//    assets->addTexture("stone", "assets/stone_proj.png");
 
     assets->addFont("arial", "assets/Arial.ttf", 24);
     assets->addFont("entity-arial", "assets/Arial.ttf", 10);

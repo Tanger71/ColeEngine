@@ -10,12 +10,12 @@
  */
 class EntityFactory {
 private:
-    Manager* manager;
+    Manager *manager;
     SDL_Color white;
 
 public:
 
-    EntityFactory(Manager* man);
+    EntityFactory(Manager *man);
 
     /**
      *
@@ -23,7 +23,7 @@ public:
      * @param label entity debugging label
      * @return ptr to player Entity
      */
-    Entity* mintPlayer(Vector2D pos, std::string label); //change name
+    Entity *mintPlayer(Vector2D pos, std::string label); //change name
 
     /**
      *
@@ -31,7 +31,7 @@ public:
      * @param label entity debugging label
      * @return ptr to Worm Entity
      */
-    Entity* mintWorm(Vector2D pos, std::string label);
+    Entity *mintWorm(Vector2D pos, std::string label);
 
     /**
      *
@@ -43,6 +43,11 @@ public:
      * @param label entity debugging label
      * @return ptr to Projectile Entity
      */
-    Entity* mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
+    Entity *mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
+
+//    Entity *mintStoneProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string label);
+
+
+    void forgeProjectile(Entity *e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
 
 };

@@ -41,6 +41,11 @@ Vector2D& Vector2D::Divide(const Vector2D& vec){
     return *this;
 }
 
+bool Vector2D::Equals(const Vector2D& vec){
+    return this->x == vec.x && this->y == vec.y; ///// todo: make float equals rather than ==
+}
+
+
 Vector2D& Vector2D::AddToCopy(const Vector2D& vec){
     Vector2D newVec = Vector2D(this->x, this->y);
     return newVec.Add(vec);
@@ -66,15 +71,15 @@ Vector2D& operator+(Vector2D& v1, const Vector2D& v2){
 }
 
 Vector2D& operator-(Vector2D& v1, const Vector2D& v2){
-    return v1.Subtract(v2);
+    return v1.SubtractToCopy(v2);
 }
 
 Vector2D& operator*(Vector2D& v1, const Vector2D& v2){
-    return v1.Multiply(v2);
+    return v1.MultiplyToCopy(v2);
 }
 
 Vector2D& operator/(Vector2D& v1, const Vector2D& v2){
-    return v1.Divide(v2);
+    return v1.DivideToCopy(v2);
 }
 
 Vector2D& Vector2D::operator+=(const Vector2D& vec){
@@ -110,6 +115,11 @@ Vector2D& Vector2D::Unit() {
     if (this->x != 0) this->x /= mag;
     if (this->y != 0) this->y /= mag;
     return *this;
+}
+
+Vector2D Vector2D::Clone() const{
+    Vector2D vec = Vector2D(this->x, this->y);
+    return vec;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Vector2D& vec){
