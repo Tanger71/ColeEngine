@@ -70,6 +70,7 @@ public:
         }
         AbsColliderComponent::draw();
 
+        if(!entity->hasGroup(Game::groupDebug) && !Game::debugGame) return;
         Circle::drawCircle(&destC);
 
         SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);

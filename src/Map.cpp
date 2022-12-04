@@ -45,6 +45,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
                 tcol.addComponent<TransformComponent>(x * scaledSize, y * scaledSize, tileSize, mapScale, 0);
                 tcol.addComponent<RectangleColliderComponent>("terrain", 0, 0, scaledSize, scaledSize);
                 tcol.addGroup(Game::groupWall);
+                tcol.addGroup(Game::groupDebug);
             }
             mapFile.ignore();
         }

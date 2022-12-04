@@ -90,7 +90,7 @@ public:
             if(curFrame >= frames) curFrame = 0;
         }
 
-        flashing = (Game::frameCnt % flashInterval) < flashDuration && (Game::frameCnt < flashBegin + (flashInterval*flashReps));
+        flashing = ((Game::frameCnt - flashOffset) % flashInterval) < flashDuration && ((Game::frameCnt) < flashBegin + (flashInterval*flashReps));
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
@@ -106,7 +106,6 @@ public:
             TextureManager::AddFlash(texture, srcRect, destRect, spriteFlip);
         } else {
             TextureManager::Draw(texture, srcRect, destRect, spriteFlip);
-
         }
     }
 
@@ -131,12 +130,12 @@ public:
         curFrame = 0;
     }
 
-    void Flash(int duration, int interval, int reps){
+    void Flash(int duration, int interval, int reps){ //line up start times
         flashDuration = duration;
         flashInterval = interval;
         flashReps = reps;
         flashBegin = Game::frameCnt;
-
+        flashOffset = Game::frameCnt % flashInterval;
     }
 
 private:
@@ -152,6 +151,7 @@ private:
     int flashInterval = 10;
     int flashReps = 1;
     int flashBegin = 0;
+    int flashOffset = 0;
 
     bool flashing = false;
 };

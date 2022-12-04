@@ -8,6 +8,11 @@
 - [x] comment code for readability (Doxygen)
 - [x] make env more robust
 	- [x] add .ddl injection for SDL2 bins
+- [x] imporove sprites and animation
+	- [x] add damage indicator
+	- [x] overhall animation (timing and shit)
+- [x] Entity State System
+- [x] Make EntityFactory
 - [ ] fix keyboard input and ripple effects:
 	- [x] animation misfires
 	- [x] movement direction misfires
@@ -30,14 +35,10 @@
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
 	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
-- [ ] imporove sprites and animation
-	- [ ] add damage indicator
-	- [x] overhall animation (timing and shit)
-- [x] Entity State System
-- [ ] add multiple colldiers in entity
+- [ ] add multiple colldiers in entity (non mutex)
 - [ ] figure out that 'forward declaration bug'
-- [ ] Make EntityFactory
-- [ ] robustisize UILabel Component
+- [ ] add draw render depth (based on ypos)
+- [x] robustisize UILabel Component
 
 ### current features:
 - ECS component manager
