@@ -10,12 +10,15 @@
  *		 implement the sum method for direction determination.
  *
  * @author sawyercoletang
+ * 
+ * @notes requires TransformComponent, SpriteComponent, RectangleColliderComponent
  *
  */
 class PlayerController : public Component {
 public:
 	TransformComponent *transform;
 	SpriteComponent* sprite;
+    //RectangleColliderComponent* rectCollider;
 
     /**
      * @brief initialize the component: link to TransformComponent and SpriteComponent.
@@ -23,9 +26,11 @@ public:
 	void init() override {
 		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
 		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
+        //if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
 		
 		transform = &entity->getComponent<TransformComponent>();
 		sprite = &entity->getComponent<SpriteComponent>();
+        //rectCollider = &entity->getComponent<RectangleColliderComponent>();
 	}
 
     /**
@@ -33,8 +38,29 @@ public:
      */
 	void update() override {
 		manageMovement();
-
+        manageCollisions();
 	}
+
+    void shootProjectile() {
+        if (transform->velocity.Equals(Vector2D(0, 0))) { //TODO: fix cause scuffed
+            if (sprite->spriteFlip == SDL_FLIP_HORIZONTAL) {
+                std::cout << "flip" << std::endl;
+                Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 3, "playerStone");
+            }
+            else if (sprite->spriteFlip == SDL_FLIP_NONE) {
+                std::cout << "noflip" << std::endl;
+                Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 3, "playerStone");
+            }
+        }
+        else {
+            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), transform->velocity, 200, 3, "playerStone");
+
+        }
+    }
+
+    void manageCollisions() {
+        //if (rectCollider->isColliding(Game::groupProjectiles)) {}
+    }
 
     void manageMovement(){
         if (Game::event.type == SDL_KEYDOWN) {
@@ -74,34 +100,7 @@ public:
                     Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(-1, 0), 200, 4, "projectile", "playerBolt");
                     break;
                 case SDLK_o:
-                    if(transform->velocity.Equals(Vector2D(0,0))){ //TODO: fix cause scuffed
-                        if(sprite->spriteFlip == SDL_FLIP_HORIZONTAL){
-                            std::cout << "flip" << std::endl;
-                            Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(-1, 0), 200, 4, "projectile", "playerBolt");
-                        }else if(sprite->spriteFlip == SDL_FLIP_NONE){
-                            std::cout << "noflip" << std::endl;
-                            Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(1, 0), 200, 4, "projectile", "playerBolt");
-                        }
-                    }else{
-                        Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), transform->velocity, 200, 4, "projectile", "playerBolt");
-
-                    }
-                    break;
-                case SDLK_i:
-                    if (transform->velocity.Equals(Vector2D(0, 0))) { //TODO: fix cause scuffed
-                        if (sprite->spriteFlip == SDL_FLIP_HORIZONTAL) {
-                            std::cout << "flip" << std::endl;
-                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 3, "playerStone");
-                        }
-                        else if (sprite->spriteFlip == SDL_FLIP_NONE) {
-                            std::cout << "noflip" << std::endl;
-                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 3, "playerStone");
-                        }
-                    }
-                    else {
-                        Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), transform->velocity, 200, 3, "playerStone");
-
-                    }
+                    shootProjectile();
                     break;
                 default:
                     break;

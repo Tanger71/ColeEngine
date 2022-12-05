@@ -21,6 +21,7 @@
 	- [x] add playonce feature (param for next anim)
 	- [ ] normalize move vectors
 - [ ] fix collison
+	- [ ] passing through collision flags to Entityy
 	- [ ] self-collision checks
 	- [ ] stuck on wall
 - [ ] UI containers... hold diff types of UI elements.

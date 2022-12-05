@@ -37,18 +37,11 @@ Entity* EntityFactory::mintWorm(Vector2D pos, std::string label){
     return &e;
 }
 
-
-
 Entity* EntityFactory::mintStoneProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string label) {
     auto& e(manager->addEntity());
 
-    //e.addComponent<SpriteComponent>("stone", "spin", Animation(0, 4, 8));
-
-    //std::cout << "herrererer" << std::endl;
-
-
     forgeProjectile(&e, pos, vel, range, speed, "stone", "rolling", Animation(0, 4, 8), std::move(label));
-    //e.getComponent<SpriteComponent>().Play("rolling");
+
 
     return &e;
 }

@@ -116,7 +116,9 @@ void Game::update() {
 
     RectangleColliderComponent* playerCol = &player->getComponent<RectangleColliderComponent>();
     CircleColliderComponent* worm0CirCol = &entities["worm0"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm0RecCol = &entities["worm0"]->getComponent<RectangleColliderComponent>();
     CircleColliderComponent* worm1CirCol = &entities["worm1"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm1RecCol = &entities["worm1"]->getComponent<RectangleColliderComponent>();
     Vector2D playerPos = player->getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -127,12 +129,29 @@ void Game::update() {
     label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
 
     if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
-        entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        //entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
         entities["worm0"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
     if (Collision::CircleRectangle(*worm1CirCol, *playerCol)) {
-        entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        //entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
         entities["worm1"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+    }
+
+    for (auto& p : projectiles) {
+        CircleColliderComponent cc = p->getComponent<CircleColliderComponent>();
+        if ((cc.tag != "playerBolt" && cc.tag != "playerStone") && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
+            std::cout << "hit player" << std::endl;
+            player->getComponent<SpriteComponent>().Flash(2, 10, 3);
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm0RecCol)) {
+            entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm1RecCol)) {
+            entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            p->destroy();
+        }
     }
 
     // update entities
@@ -146,13 +165,7 @@ void Game::update() {
             player->getComponent<TransformComponent>().position = playerPos;
         }
     }
-    for (auto& p : projectiles) {
-        CircleColliderComponent cc = p->getComponent<CircleColliderComponent>();
-        if ((cc.tag != "playerBolt" && cc.tag != "playerStone") && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
-            std::cout << "hit player" << std::endl;
-            p->destroy();
-        }
-    }
+    
 
     // update camera to player
     camera.x = player->getComponent<TransformComponent>().position.x - 400.0f;
