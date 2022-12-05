@@ -47,7 +47,8 @@ Entity* EntityFactory::mintStoneProjectile(Vector2D pos, Vector2D vel, int range
     //std::cout << "herrererer" << std::endl;
 
 
-    forgeProjectile(&e, pos, vel, range, speed, "stone", std::move(label));
+    forgeProjectile(&e, pos, vel, range, speed, "stone", "rolling", Animation(0, 4, 8), std::move(label));
+    //e.getComponent<SpriteComponent>().Play("rolling");
 
     return &e;
 }
@@ -55,17 +56,18 @@ Entity* EntityFactory::mintStoneProjectile(Vector2D pos, Vector2D vel, int range
 Entity* EntityFactory::mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label) {
     auto& e(manager->addEntity());
 
-//    e.addComponent<SpriteComponent>(texid);
-
-    forgeProjectile(&e, pos, vel, range, speed, std::move(texid), std::move(label));
+    forgeProjectile(&e, pos, vel, range, speed, std::move(texid), "", Animation(0,0,0), std::move(label));
 
     return &e;
 }
 
-void EntityFactory::forgeProjectile(Entity* e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label){
+void EntityFactory::forgeProjectile(Entity* e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string initId, Animation anim, std::string label){
     e->addGroup(Game::groupProjectiles);
     e->addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1);
-    e->addComponent<SpriteComponent>(texid);
+    if(anim.isNull()) 
+        e->addComponent<SpriteComponent>(texid);
+    else
+        e->addComponent<SpriteComponent>(texid, initId, anim);
     e->addComponent<ProjectileComponent>(range, speed, vel);
     e->addComponent<CircleColliderComponent>(label, 16, 16, 16);
     e->addComponent<LabelComponent>(0, -20, label, "entity-arial", white);

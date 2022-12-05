@@ -91,15 +91,15 @@ public:
                     if (transform->velocity.Equals(Vector2D(0, 0))) { //TODO: fix cause scuffed
                         if (sprite->spriteFlip == SDL_FLIP_HORIZONTAL) {
                             std::cout << "flip" << std::endl;
-                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 1, "playerStone");
+                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 3, "playerStone");
                         }
                         else if (sprite->spriteFlip == SDL_FLIP_NONE) {
                             std::cout << "noflip" << std::endl;
-                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 1, "playerStone");
+                            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 3, "playerStone");
                         }
                     }
                     else {
-                        Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), transform->velocity, 200, 1, "playerStone");
+                        Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), transform->velocity, 200, 3, "playerStone");
 
                     }
                     break;

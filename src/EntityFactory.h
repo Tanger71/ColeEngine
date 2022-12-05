@@ -2,6 +2,7 @@
 #include <SDL_pixels.h>
 #include "ECS/ECS.h"
 #include "Vector2D.h"
+#include "Animation.h"
 
 /**
  * @brief manager class for minting Entities
@@ -48,6 +49,6 @@ public:
     Entity *mintStoneProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string label);
 
 
-    void forgeProjectile(Entity *e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
+    void forgeProjectile(Entity *e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string initId, Animation anim, std::string label);
 
 };
