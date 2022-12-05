@@ -45,7 +45,7 @@ public:
      */
     Entity *mintProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);
 
-//    Entity *mintStoneProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string label);
+    Entity *mintStoneProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string label);
 
 
     void forgeProjectile(Entity *e, Vector2D pos, Vector2D vel, int range, int speed, std::string texid, std::string label);

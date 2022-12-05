@@ -42,7 +42,7 @@ public:
         switch(curState){
             case WORM_OUT:
                 if(collider->isColliding(Game::groupPlayers)) {
-                    std::cout << "Hiding" << std::endl;
+                    //std::cout << "Hiding" << std::endl;
                     sprite->PlayStart("Hiding");
                     curState = WORM_HIDING_T;
                     animCount = 0;
@@ -50,7 +50,7 @@ public:
                 break;
             case WORM_IN:
                 if(!collider->isColliding(Game::groupPlayers)){
-                    std::cout << "Emerging" << std::endl;
+                    //std::cout << "Emerging" << std::endl;
                     sprite->PlayStart("Emerging");
                     curState = WORM_EMERGING_T;
                     animCount = 0;
@@ -58,7 +58,7 @@ public:
                 break;
             case WORM_HIDING_T:
                 if(animCount > sprite->animations["Hiding"].getDuration()-1){
-                    std::cout << "In" << std::endl;
+                    //std::cout << "In" << std::endl;
                     sprite->PlayStart("In");
                     curState = WORM_IN;
                     animCount = 0;
@@ -66,7 +66,7 @@ public:
                 break;
             case WORM_EMERGING_T:
                 if(animCount > sprite->animations["Emerging"].getDuration()-1){
-                    std::cout << "Out" << std::endl;
+                    //std::cout << "Out" << std::endl;
                     sprite->PlayStart("Out");
                     curState = WORM_OUT;
                 }
