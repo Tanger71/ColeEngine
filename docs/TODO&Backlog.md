@@ -40,6 +40,7 @@
 - [ ] figure out that 'forward declaration bug'
 - [ ] add draw render depth (based on ypos)
 - [x] robustisize UILabel Component
+- [ ] add health bar component
 
 ### current features:
 - ECS component manager
@@ -68,10 +69,3 @@
 - [game design patterns](https://gameprogrammingpatterns.com/contents.html)
 - [collison](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
 - [circle-box collision](https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection#:~:text=There%20are%20only%20two%20cases,a%20point%20in%20the%20circle.)
-
-
-
-
-
-
-https://opengameart.org/content/rock-0
