@@ -42,8 +42,11 @@ public:
     void update() override {
         managerCollisions();
         manageFSM();
-        
 
+    }
+
+    bool isImmune() {
+        return curState == WORM_IN;
     }
 
     void managerCollisions() {

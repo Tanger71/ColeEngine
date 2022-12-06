@@ -142,14 +142,19 @@ void Game::update() {
         if ((cc.tag != "playerBolt" && cc.tag != "playerStone") && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
             std::cout << "hit player" << std::endl;
             player->getComponent<SpriteComponent>().Flash(2, 10, 3);
+            player->getComponent<HealthComponent>().hit(10);
             p->destroy();
         }
-        if (Collision::CircleRectangle(cc, *worm0RecCol)) {
+        if (Collision::CircleRectangle(cc, *worm0RecCol) && !entities["worm0"]->getComponent<WormFSM>().isImmune()) {
             entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm0"]->getComponent<HealthComponent>().hit(10);
+
             p->destroy();
         }
-        if (Collision::CircleRectangle(cc, *worm1RecCol)) {
+        if (Collision::CircleRectangle(cc, *worm1RecCol) && !entities["worm1"]->getComponent<WormFSM>().isImmune()) {
             entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm1"]->getComponent<HealthComponent>().hit(10);
+
             p->destroy();
         }
     }

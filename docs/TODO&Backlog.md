@@ -40,7 +40,8 @@
 - [ ] figure out that 'forward declaration bug'
 - [ ] add draw render depth (based on ypos)
 - [x] robustisize UILabel Component
-- [ ] add health bar component
+- [x] add health bar component
+- [ ] add polymorphism to entitycontroller components for general functions (eg. death(), etc.)
 
 ### current features:
 - ECS component manager
