@@ -51,9 +51,9 @@ public:
 
     void managerCollisions() {
         
-        std::cout << recCollider->colliding.empty() << std::endl;
+        //std::cout << recCollider->colliding.empty() << std::endl;
         if (recCollider->isColliding(Game::groupProjectiles)) {
-            std::cout << "HERE" << std::endl;
+            //std::cout << "HERE" << std::endl;
             sprite->Flash(2, 10, 3);
         }
     }
