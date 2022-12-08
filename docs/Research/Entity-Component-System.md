@@ -7,9 +7,7 @@ Entity Component System
 ## Implementation
 - State System
 	- Animation
-		- Animation Lag
 	- Controls
-
 
 ## State System FSM
 
@@ -21,4 +19,3 @@ Entity Component System
 
 ### Research
 - https://gameprogrammingpatterns.com/state.html
-- 

@@ -1,7 +1,7 @@
 # Enviromental
 
 ## Worm
----
+
 #### Behaviour
 Simple FSM
 - Idle: chilling above ground
@@ -12,14 +12,10 @@ Simple FSM
 
 
 ## Rat
----
-
 
 [Sprite](https://opengameart.org/content/animated-rat-and-bat)
 
 
 ## Slime
----
-
 
 [Sprite](https://opengameart.org/content/animated-slime)

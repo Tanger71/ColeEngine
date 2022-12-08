@@ -1,5 +1,5 @@
 # Brainstorm
----
+
 ### Assets
 - https://opengameart.org/content/deer
 
@@ -8,7 +8,7 @@
 - initial volume level lmao
 
 ## Brainstorm
----
+
 #### Vibe
 - samurai-ronin
 - monsters
@@ -25,10 +25,8 @@
 ![concept](docs/images/mocklevel_crop.png)
 
 ## Pinboard
----
+
 ![ronin](https://the8bitpimp.files.wordpress.com/2015/10/ronin_topdown_21.gif)
 
-
----
 
 collision.... when entity collides with other, sends signal thorugh to collider component ... a list of colliders currently colliding with entity.
