@@ -1,6 +1,7 @@
 # ColeEngine
 
 ![banner](docs/images/mocklevel_banner.png)
+
 A fun project to help me learn C++
 
 ---
