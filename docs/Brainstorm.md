@@ -22,7 +22,7 @@
 #### Mechanics
 - wooden sword
 - throw rocks
-![[docs/images/mocklevel_crop.png]]
+![concept](docs/images/mocklevel_crop.png)
 
 ## Pinboard
 ---
