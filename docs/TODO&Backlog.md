@@ -35,6 +35,7 @@
 	- [ ] improve memory cleanup
 - [ ] set up PISKEL for map making workflow [here](https://www.piskelapp.com)
 	- [ ] or Tiled preferribly acc
+		- [ ] parsing: https://github.com/KaseyJenkins/tinytmx
 	- [ ] [https://youtu.be/1Ojoz24IWt0](https://www.youtube.com/watch?v=1Ojoz24IWt0&t=0s)
 - [ ] add multiple colldiers in entity (non mutex)
 - [ ] figure out that 'forward declaration bug'
@@ -42,17 +43,6 @@
 - [x] robustisize UILabel Component
 - [x] add health bar component
 - [ ] add polymorphism to entitycontroller components for general functions (eg. death(), etc.)
-
-### current features:
-- ECS component manager
-- Collision
-	- AABB Collision (no rotation)
-	- Circle-Rectangle Collision (axis-alligned rects)
-- Animated Sprites
-- Finite State Machines for simple AI
-
-### Issues
-- [x] Camera Bounds are wrong
 
 ### possible issues with current implementation:
 1. I was doing a bit of fiddling around and it turns out that the stringstream used for the UI is eating up memory and removing it stops it from using up excess memory, so maybe in future you could find a way to display text onscreen without using excess memory! Nice videos as usual!
@@ -70,3 +60,6 @@
 - [game design patterns](https://gameprogrammingpatterns.com/contents.html)
 - [collison](https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection)
 - [circle-box collision](https://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection#:~:text=There%20are%20only%20two%20cases,a%20point%20in%20the%20circle.)
+- https://www.youtube.com/watch?v=pjXz-0l9gYc
+- [tiling](https://gamefromscratch.com/tiled-map-editor-tutorial-series/)
+- https://www.youtube.com/watch?v=abuCXC3t6eQ

@@ -1,5 +1,5 @@
-# Note Dump
-
+# Brainstorm
+---
 ### Assets
 - https://opengameart.org/content/deer
 
@@ -8,7 +8,7 @@
 - initial volume level lmao
 
 ## Brainstorm
-
+---
 #### Vibe
 - samurai-ronin
 - monsters
@@ -16,11 +16,17 @@
 - ash falling from sky
 - be the strongest 
 - rarely see other humans (are they even real humans?)
+- wooden sword
+- postwar
 
 #### Mechanics
-- rogue-like
-- sword
+- wooden sword
 - throw rocks
+
+
+## Pinboard
+---
+![ronin](https://the8bitpimp.files.wordpress.com/2015/10/ronin_topdown_21.gif)
 
 
 ---
