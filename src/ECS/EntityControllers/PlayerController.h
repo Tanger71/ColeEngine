@@ -14,16 +14,24 @@
  * @notes requires TransformComponent, SpriteComponent, RectangleColliderComponent
  *
  */
-class PlayerController : public Component {
+class PlayerController : public Controller {
 public:
 	TransformComponent *transform;
 	SpriteComponent* sprite;
     //RectangleColliderComponent* rectCollider;
 
+    bool bbbb;
+
+    PlayerController() : Controller(){
+        std::cout << "HERECONSDT" << std::endl;
+        bbbb = true;
+    }
+
     /**
      * @brief initialize the component: link to TransformComponent and SpriteComponent.
      */
 	void init() override {
+        std::cout << "HERERIGHT" << std::endl;
 		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
 		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
         //if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
@@ -37,6 +45,7 @@ public:
      * @brief update the component: handle key input.
      */
 	void update() override {
+        std::cout << "HERE" << std::endl;
 		manageMovement();
         manageCollisions();
 	}
