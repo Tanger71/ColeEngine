@@ -22,6 +22,8 @@
 #### Mechanics
 - wooden sword
 - throw rocks
+- clunky mechanics (requires timing and planning on the fly)
+
 ![concept](docs/images/mocklevel_crop.png)
 
 ## Pinboard

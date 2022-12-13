@@ -23,3 +23,6 @@ See enviroment setup:
 Project backlog here: [TODO](docs/TODO&Backlog.md)
 Generate docs: [Doxygen how-to](docs/How-to-use-doxygen.md)
 Current sprite art by this guy: [calciumtrice](https://opengameart.org/users/calciumtrice)
+
+
+![](docs/images/ronin_idle.gif)
