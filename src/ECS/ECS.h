@@ -41,7 +41,7 @@ public:
         //std::cout << "HERECONSDTOG" << std::endl;
 }
 
-    virtual void init() { std::cout << "HEREWRONG" << std::endl; }
+    virtual void init() {}
     virtual void update() {}
 
     virtual void onDeath() {}
@@ -85,6 +85,10 @@ public:
      */
     Entity(Manager& mManager) : manager(mManager) {}
 
+    /**
+     *
+     * @param cont Controller pointer to be set
+     */
     void setController(Controller* cont);
 
     /**

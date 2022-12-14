@@ -20,7 +20,7 @@ SDL_Event Game::event;
 
 SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
-AssetManager* Game::assets = new AssetManager(&manager);
+AssetManager* Game::assets = new AssetManager();
 
 EntityFactory* Game::entityFactory = new EntityFactory(&manager);
 

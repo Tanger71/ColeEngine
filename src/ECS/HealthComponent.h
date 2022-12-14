@@ -6,12 +6,23 @@
 #include "../Game.h"
 #include "TransformComponent.h"
 
+/**
+ * @brief Component to handle the HealthComponent of an Entity.
+ *
+ * @author sawyercoletang
+ *
+ * @todo:doxygen
+ *
+ */
 class HealthComponent : public Component {
 public:
     HealthComponent(int tot, int size) : totalHP(tot), currentHP(tot), lengthHealthBar(size) {}
 
     ~HealthComponent() = default;
 
+    /**
+     * @brief init the component.
+     */
     void init() override {
         if (!entity->hasComponent<TransformComponent>()) {
             entity->addComponent<TransformComponent>();
@@ -31,6 +42,9 @@ public:
         fullBar.h = heightHealthBar;
     }
 
+    /**
+     * @brief update the component.
+     */
     void update() override {
         emptyBar.x = static_cast<int>(transform->position.x) - Game::camera.x;
         emptyBar.y = static_cast<int>(transform->position.y) - 10 - Game::camera.y;
@@ -42,6 +56,9 @@ public:
         fullBar.h = heightHealthBar;
     }
 
+    /**
+     * @brief draw the component.
+     */
     void draw () override {
         SDL_SetRenderDrawColor(Game::renderer, colorEmpty.r, colorEmpty.g, colorEmpty.b, colorEmpty.a);
         SDL_RenderFillRect(Game::renderer, &(emptyBar));

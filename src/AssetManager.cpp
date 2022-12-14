@@ -1,6 +1,6 @@
 #include "AssetManager.h"
 
-AssetManager::AssetManager(Manager* man) : manager(man) {
+AssetManager::AssetManager() {
 }
 
 AssetManager::~AssetManager() = default;

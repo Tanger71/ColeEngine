@@ -6,7 +6,6 @@ void Entity::addGroup(Group mGroup) {
 }
 
 void Entity::setController(Controller *cont) {
-    std::cout << "HERESET" << std::endl;
     controller = cont;
     controller->entity = this;
     controller->init();

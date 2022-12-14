@@ -43,6 +43,9 @@ public:
         manageCollisions();
 	}
 
+    /**
+     * @brief to be called then the entity dies
+     */
     void onDeath() override {
 
     }

@@ -8,6 +8,8 @@
  * @brief manager class for minting Entities
  *
  * @author sawyercoletang
+ *
+ * @todo doxygen
  */
 class EntityFactory {
 private:

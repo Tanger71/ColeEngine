@@ -19,7 +19,7 @@ public:
      *
      * @param man Manager
      */
-	AssetManager(Manager* man);
+	AssetManager();
 	~AssetManager();
     
     /**
@@ -40,7 +40,6 @@ public:
     TTF_Font* getFont(std::string id);
 
 private:
-	Manager* manager;
 	std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;
 };

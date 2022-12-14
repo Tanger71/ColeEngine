@@ -39,6 +39,9 @@ public:
     }
     ~LabelComponent(){}
 
+    /**
+     * @brief init the component.
+     */
     void init() override {
         if (!entity->hasComponent<TransformComponent>()) {
             entity->addComponent<TransformComponent>();
@@ -50,6 +53,9 @@ public:
         dest.y = transform->position.y + local.y;
     }
 
+    /**
+     * @brief update the component.
+     */
     void update() override {
         dest.x = transform->position.x + local.x + dest.w/2 - Game::camera.x;
         dest.y = transform->position.y + local.y + dest.h/2 - Game::camera.y;
