@@ -34,8 +34,8 @@ Entity* EntityFactory::mintWorm(Vector2D pos, std::string label){
     e.addComponent<RectangleColliderComponent>(label, 0, 0, 64, 64);
     e.addComponent<CircleColliderComponent>(label, 32, 32, 200);
     e.addComponent<HealthComponent>(100, 64);
-//    e.addComponent<WormFSM>();
-    Controller* cont = new WormFSM();
+//    e.addComponent<WormController>();
+    Controller* cont = new WormController();
     e.setController(cont);
     e.addComponent<LabelComponent>(0, -30, label, "entity-arial", white);
 

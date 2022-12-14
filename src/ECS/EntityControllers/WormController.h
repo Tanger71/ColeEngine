@@ -8,7 +8,7 @@
  * @author sawyercoletang
  *
  */
-class WormFSM : public Controller {
+class WormController : public Controller {
 private:
     enum WormState : std::size_t {
         WORM_OUT,
@@ -26,8 +26,8 @@ private:
 
 public:
 
-    WormFSM() : curState(WORM_OUT) {}
-    ~WormFSM(){}
+    WormController() : curState(WORM_OUT) {}
+    ~WormController(){}
 
     void init() override {
         if (!entity->hasComponent<CircleColliderComponent>()) Game::throwErr("missing CircleColliderComponent!");

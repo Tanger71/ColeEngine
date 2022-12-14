@@ -145,13 +145,13 @@ void Game::update() {
             player->getComponent<HealthComponent>().hit(10);
             p->destroy();
         }
-        if (Collision::CircleRectangle(cc, *worm0RecCol) && !dynamic_cast<WormFSM*>(entities["worm0"]->controller)->isImmune()) {
+        if (Collision::CircleRectangle(cc, *worm0RecCol) && !dynamic_cast<WormController*>(entities["worm0"]->controller)->isImmune()) {
             entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
             entities["worm0"]->getComponent<HealthComponent>().hit(10);
 
             p->destroy();
         }
-        if (Collision::CircleRectangle(cc, *worm1RecCol) && !dynamic_cast<WormFSM*>(entities["worm1"]->controller)->isImmune()) {
+        if (Collision::CircleRectangle(cc, *worm1RecCol) && !dynamic_cast<WormController*>(entities["worm1"]->controller)->isImmune()) {
             entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
             entities["worm1"]->getComponent<HealthComponent>().hit(10);
 
