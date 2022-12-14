@@ -11,12 +11,16 @@
             "id": "e5cc85437ae46c52",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "docs/Documentation/EntityComponents.md",
+                "mode": "source",
+                "source": false
+              }
             }
           },
           {
-            "id": "8a29476de8fde51c",
+            "id": "276e6ca5075d78ce",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -27,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -146,17 +149,8 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "8a29476de8fde51c",
+  "active": "e5cc85437ae46c52",
   "lastOpenFiles": [
-    "docs/Note-dump.md",
-    "docs/AI/Enviromental.md",
-    "docs/AI/Enemies.md",
-    "doxygen-awesome-css/docs/tricks.md",
-    "docs/Research/Entity-Component-System.md",
-    "docs/Research/Enemy AI.md",
-    "docs/Research/Animations.md",
-    "docs/TODO&Backlog.md",
-    "docs/Research/Keyboard-input.md",
-    "docs/Research/Tilemapping.md"
+
   ]
 }

@@ -19,23 +19,9 @@ public:
      *
      * @param man Manager
      */
-	AssetManager(Manager* man);
+	AssetManager();
 	~AssetManager();
-
-    /**
-     *
-     * @note move to future EntityFactory
-     *
-     * @param pos starting position
-     * @param vel for direction
-     * @param range distance till destroyed
-     * @param speed movement speed
-     * @param texid ID of texture
-     *
-     * @note Probably shouldn't be chillin in this class... ill move later
-     */
-	void CreateProjectile(Vector2D pos, Vector2D vel, int range, int speed, std::string texid); //TODO: shouldnt be done here
-
+    
     /**
      *
      * @param id texture ID
@@ -54,7 +40,6 @@ public:
     TTF_Font* getFont(std::string id);
 
 private:
-	Manager* manager;
 	std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;
 };

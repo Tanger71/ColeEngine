@@ -26,9 +26,9 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
     for (int y = 0; y < sizeY; y++) { // ONLY WORKS WITH TILE SHEETS OF 10 WIDTH
         for (int x = 0; x < sizeX; x++) {
             mapFile.get(c);
-            srcY = atoi(&c) * tileSize;
+            srcY = /*atoi(&c)*/0 * tileSize;
             mapFile.get(c);
-            srcX = atoi(&c) * tileSize;
+            srcX = /*atoi(&c)*/8 * tileSize;
             AddTile(srcX, srcY, x * scaledSize, y * scaledSize);
             mapFile.ignore();
         }
@@ -45,6 +45,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
                 tcol.addComponent<TransformComponent>(x * scaledSize, y * scaledSize, tileSize, mapScale, 0);
                 tcol.addComponent<RectangleColliderComponent>("terrain", 0, 0, scaledSize, scaledSize);
                 tcol.addGroup(Game::groupWall);
+                tcol.addGroup(Game::groupDebug);
             }
             mapFile.ignore();
         }

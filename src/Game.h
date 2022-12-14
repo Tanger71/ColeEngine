@@ -4,6 +4,7 @@
 #include <string>
 #include "SDL.h"
 #include "SDL_image.h"
+#include "EntityFactory.h"
 
 class AssetManager; // TODO: Why tho... https://stackoverflow.com/questions/23283080/compiler-error-c4430-missing-type-specifier-int-assumed
 
@@ -68,13 +69,18 @@ public:
     static bool isRunning;
     static SDL_Rect camera;
     static AssetManager* assets;
+    static EntityFactory* entityFactory;
+
+    static bool debugGame;
 
     enum groupLabels : std::size_t {
         groupMap,
         groupPlayers,
         groupEnemies,
         groupWall,
-        groupProjectiles
+        groupProjectiles,
+        groupPlayerProjectiles,
+        groupDebug
     };
 
 private:

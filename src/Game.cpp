@@ -5,10 +5,10 @@
 #include "Vector2D.h"
 #include "Collision.h"
 #include "AssetManager.h"
-#include "Animation.h"
-#include "ECS/EntityControllers/FSMs.h"
+#include "EntityFactory.h"
 #include <sstream>
 
+bool Game::debugGame = true;
 int Game::frameCnt = 0;
 Uint32 lastFrame = 0;
 
@@ -20,13 +20,16 @@ SDL_Event Game::event;
 
 SDL_Rect Game::camera = { 0, 0, 800, 640 };
 
-AssetManager* Game::assets = new AssetManager(&manager);
+AssetManager* Game::assets = new AssetManager();
+
+EntityFactory* Game::entityFactory = new EntityFactory(&manager);
 
 bool Game::isRunning = false;
 
-auto& player(manager.addEntity()); //TODO: learn this IMP... what is this syntax?
+Entity* player;
 auto& label(manager.addEntity());
-auto& worm(manager.addEntity());
+
+std::map<std::string, Entity*> entities; //mby make for all entities ...
 
 Game::Game() = default;
 Game::~Game() = default;
@@ -67,38 +70,26 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     assets->addTexture("player", "assets/rogue.png");
     assets->addTexture("projectile", "assets/proj.png");
     assets->addTexture("worm", "assets/worm.png");
+    assets->addTexture("stone", "assets/stone_proj.png");
 
     assets->addFont("arial", "assets/Arial.ttf", 24);
+    assets->addFont("entity-arial", "assets/Arial.ttf", 10);
 
     map = new Map("terrain", 3, 32);
 
     map->LoadMap("assets/map.gmap", 25, 20);
 
-    //ecs implementation
-    player.addComponent<TransformComponent>(800.0f, 640.0f, 32, 32, 2.0f);
-    player.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
-    player.addComponent<RectangleColliderComponent>("player", 16, 0, 32, 64);
-    player.addGroup(groupPlayers);
-    player.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
-    player.addComponent<PlayerController>();
-
-    worm.addComponent<TransformComponent>(1000.f, 640.f, 32, 32, 2.0f);
-    worm.addComponent<SpriteComponent>("worm", "Out", Animation(2, 1, 10));
-    worm.addComponent<RectangleColliderComponent>("worm", 0, 0, 64, 64);
-    worm.addComponent<CircleColliderComponent>("worm", 32, 32, 200);
-    worm.getComponent<SpriteComponent>().addAnimation("Hiding", Animation(2, 8, 5));
-    worm.getComponent<SpriteComponent>().addAnimation("In", Animation(1, 1, 30));
-    worm.getComponent<SpriteComponent>().addAnimation("Emerging", Animation(1, 8, 5));
-    worm.addGroup(groupEnemies);
-    worm.addComponent<WormFSM>();
+    player = entityFactory->mintPlayer(Vector2D(800.0f, 640.0f), "player");
+    entities.emplace("worm0", entityFactory->mintWorm(Vector2D(1000.f, 640.f), "worm0"));
+    entities.emplace("worm1", entityFactory->mintWorm(Vector2D(800.f, 800.f), "worm1"));
 
     SDL_Color white = {255, 255, 255, 255};
-    label.addComponent<UILabel>(10, 10, "Test_String", "arial", white);
+    label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
-    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile");
-    assets->CreateProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(1, 0), 200, 2, "projectile", "proj0");
+    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(1, 0), 200, 1, "projectile", "proj1");
+    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(6, 1), 200, 2, "projectile", "proj2");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile", "proj3");
 
     std::cout << "Game: Ready!" << std::endl;
 }
@@ -110,13 +101,11 @@ auto& walls(manager.getGroup(Game::groupWall));
 auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::handleEvents() {
-    
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:
             isRunning = false;
             break;
-
         default:
             break;
     }
@@ -125,47 +114,67 @@ void Game::handleEvents() {
 void Game::update() {
     Game::frameCnt++;
 
-    RectangleColliderComponent* playerCol = &player.getComponent<RectangleColliderComponent>();
-    RectangleColliderComponent* wormCol = &worm.getComponent<RectangleColliderComponent>();
-    CircleColliderComponent* wormCirCol = &worm.getComponent<CircleColliderComponent>();
-    Vector2D playerPos = player.getComponent<TransformComponent>().position;
+    RectangleColliderComponent* playerCol = &player->getComponent<RectangleColliderComponent>();
+    CircleColliderComponent* worm0CirCol = &entities["worm0"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm0RecCol = &entities["worm0"]->getComponent<RectangleColliderComponent>();
+    CircleColliderComponent* worm1CirCol = &entities["worm1"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm1RecCol = &entities["worm1"]->getComponent<RectangleColliderComponent>();
+    Vector2D playerPos = player->getComponent<TransformComponent>().position;
 
     std::stringstream ss;
 
+//    std::cout << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame) << std::endl; //Frames/time = fps
+
     ss << "FPS: " << 1000*1.0f/static_cast<float>(SDL_GetTicks() - lastFrame); //Frames/time = fps
-    label.getComponent<UILabel>().setLabelText(ss.str(), "arial");
+    label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
 
-
-    if (Collision::AABB(*wormCol, *playerCol)) {
-        //worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+    if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
+        //entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm0"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
-    if (Collision::CircleRectangle(*wormCirCol, *playerCol)) {
-        worm.getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
-        worm.getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+    if (Collision::CircleRectangle(*worm1CirCol, *playerCol)) {
+        //entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        entities["worm1"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+    }
+
+    for (auto& p : projectiles) {
+        CircleColliderComponent cc = p->getComponent<CircleColliderComponent>();
+        if ((cc.tag != "playerBolt" && cc.tag != "playerStone") && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
+            std::cout << "hit player" << std::endl;
+            player->getComponent<SpriteComponent>().Flash(2, 10, 3);
+            player->getComponent<HealthComponent>().hit(10);
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm0RecCol) && !dynamic_cast<WormController*>(entities["worm0"]->controller)->isImmune()) {
+            entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm0"]->getComponent<HealthComponent>().hit(10);
+
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm1RecCol) && !dynamic_cast<WormController*>(entities["worm1"]->controller)->isImmune()) {
+            entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm1"]->getComponent<HealthComponent>().hit(10);
+
+            p->destroy();
+        }
     }
 
     // update entities
     manager.refresh();
     manager.update();
 
-   
     // resolve collisions
     for (auto& c : walls) {
         RectangleColliderComponent cCol = c->getComponent<RectangleColliderComponent>();
         if (Collision::AABB(cCol, *playerCol)) {
-            player.getComponent<TransformComponent>().position = playerPos;
+            player->getComponent<TransformComponent>().position = playerPos;
         }
     }
-    for (auto& p : projectiles) {
-        if (Collision::AABB(player.getComponent<RectangleColliderComponent>(), p->getComponent<RectangleColliderComponent>())) {
-            std::cout << "hit player" << std::endl;
-            p->destroy();
-        }
-    }
+    
 
     // update camera to player
-    camera.x = player.getComponent<TransformComponent>().position.x - 400.0f;
-    camera.y = player.getComponent<TransformComponent>().position.y - 320.0f;
+    camera.x = player->getComponent<TransformComponent>().position.x - 400.0f;
+    camera.y = player->getComponent<TransformComponent>().position.y - 320.0f;
 
     //for camera bounds
     //if (camera.x < 0) camera.x = 0;

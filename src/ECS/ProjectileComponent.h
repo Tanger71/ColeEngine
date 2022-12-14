@@ -26,7 +26,7 @@ public:
      */
 	void init() override {
 		transform = &entity->getComponent<TransformComponent>();
-		transform->velocity = velocity;
+		transform->velocity = velocity.Unit()*speed;
 	}
 
     /**
@@ -35,15 +35,15 @@ public:
 	void update() override {
 		distance += speed;
 
-		if (distance > range) { //POPE
-			std::cout << "out of range" << std::endl;
+		if (distance > range) {
+//			std::cout << "out of range" << std::endl;
 			entity->destroy();
 		} else if (transform->position.x > Game::camera.x + Game::camera.w || // todo: only good for if proj is faster than camera
 			transform->position.x < Game::camera.x ||
 			transform->position.y > Game::camera.y + Game::camera.h ||
 			transform->position.y < Game::camera.y)
 		{
-			std::cout << "out of bounds" << std::endl;
+//			std::cout << "out of bounds" << std::endl;
 			entity->destroy();
 		}
 	}

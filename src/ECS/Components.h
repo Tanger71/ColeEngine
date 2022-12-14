@@ -7,5 +7,6 @@
 #include "CircleColliderComponent.h"
 #include "TileComponent.h"
 #include "ProjectileComponent.h"
-#include "UILabel.h"
+#include "HealthComponent.h"
+#include "LabelComponent.h"
 #include "EntityControllers//FSMs.h"
