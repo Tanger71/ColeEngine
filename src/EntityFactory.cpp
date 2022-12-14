@@ -15,7 +15,10 @@ Entity* EntityFactory::mintPlayer(Vector2D pos, std::string label){
     e.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     e.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
     e.addComponent<RectangleColliderComponent>(label, 16, 0, 32, 64);
-    e.addComponent<PlayerController>();
+    //e.addComponent<PlayerController>();
+    PlayerController* pcont = new PlayerController();
+    Controller* cont = pcont;
+    e.setController(cont);
     e.addComponent<HealthComponent>(100, 64);
     e.addComponent<LabelComponent>(0, -30, label, "entity-arial", white);
 

@@ -37,7 +37,11 @@ class Controller {
 public:
     Entity* entity;
 
-    virtual void init() {}
+    Controller(){
+        //std::cout << "HERECONSDTOG" << std::endl;
+}
+
+    virtual void init() { std::cout << "HEREWRONG" << std::endl; }
     virtual void update() {}
 
     virtual void onDeath() {}
@@ -72,7 +76,8 @@ public:
 class Entity{
 public:
 
-    Controller controller; // TODO: do error check for initialized before update
+    bool hasController = false;
+    Controller* controller; // TODO: do error check for initialized before update
 
     /**
      *
@@ -80,16 +85,15 @@ public:
      */
     Entity(Manager& mManager) : manager(mManager) {}
 
-    void setController(Controller cont) {
-        controller = cont;
-        controller.entity = this;
-    }
+    void setController(Controller* cont);
 
     /**
      * @brief update all components in Entity
      */
     void update(){
         for(auto& c : components) c->update();
+        if(hasController) 
+            controller->update();
     }
 
     /**
@@ -201,7 +205,9 @@ public:
      * @brief update all Entities in Game
      */
     void update(){
-        for (auto& e : entities) e->update();
+        for (auto& e : entities) e->update(); 
+
+        
     }
 
     /**
