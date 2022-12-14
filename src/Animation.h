@@ -28,4 +28,8 @@ struct Animation {
     int getDuration(){
         return speed * frames;
     }
+
+	bool isNull() {
+		return index == 0 && frames == 0 && speed == 0;
+	}
 };

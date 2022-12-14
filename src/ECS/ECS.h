@@ -33,6 +33,23 @@ using ComponentBitSet = std::bitset<maxComponents>;
 using GroupBitSet = std::bitset<maxGroups>;
 using ComponentArray = std::array<Component*, maxComponents>;
 
+class Controller {
+public:
+    Entity* entity;
+
+    Controller(){
+        //std::cout << "HERECONSDTOG" << std::endl;
+}
+
+    virtual void init() { std::cout << "HEREWRONG" << std::endl; }
+    virtual void update() {}
+
+    virtual void onDeath() {}
+
+    virtual ~Controller() = default;
+
+};
+
 /**
  * @brief Class *interface* for Entity Component
  *
@@ -59,17 +76,24 @@ public:
 class Entity{
 public:
 
+    bool hasController = false;
+    Controller* controller; // TODO: do error check for initialized before update
+
     /**
      *
      * @param mManager game instance manager
      */
     Entity(Manager& mManager) : manager(mManager) {}
 
+    void setController(Controller* cont);
+
     /**
      * @brief update all components in Entity
      */
     void update(){
         for(auto& c : components) c->update();
+        if(hasController) 
+            controller->update();
     }
 
     /**
@@ -181,7 +205,9 @@ public:
      * @brief update all Entities in Game
      */
     void update(){
-        for (auto& e : entities) e->update();
+        for (auto& e : entities) e->update(); 
+
+        
     }
 
     /**

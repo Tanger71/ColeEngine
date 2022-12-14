@@ -70,6 +70,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     assets->addTexture("player", "assets/rogue.png");
     assets->addTexture("projectile", "assets/proj.png");
     assets->addTexture("worm", "assets/worm.png");
+    assets->addTexture("stone", "assets/stone_proj.png");
 
     assets->addFont("arial", "assets/Arial.ttf", 24);
     assets->addFont("entity-arial", "assets/Arial.ttf", 10);
@@ -85,9 +86,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
     SDL_Color white = {255, 255, 255, 255};
     label.addComponent<LabelComponent>(10, 10, "Test_String", "arial", white);
 
-    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, 0), 200, 2, "projectile", "proj0");
-    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(2, 0), 200, 2, "projectile", "proj1");
-    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(2, 1), 200, 2, "projectile", "proj2");
+    entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(1, 0), 200, 2, "projectile", "proj0");
+    entityFactory->mintProjectile(Vector2D(600, 620), Vector2D(1, 0), 200, 1, "projectile", "proj1");
+    entityFactory->mintProjectile(Vector2D(400, 600), Vector2D(6, 1), 200, 2, "projectile", "proj2");
     entityFactory->mintProjectile(Vector2D(600, 600), Vector2D(2, -1), 200, 2, "projectile", "proj3");
 
     std::cout << "Game: Ready!" << std::endl;
@@ -115,7 +116,9 @@ void Game::update() {
 
     RectangleColliderComponent* playerCol = &player->getComponent<RectangleColliderComponent>();
     CircleColliderComponent* worm0CirCol = &entities["worm0"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm0RecCol = &entities["worm0"]->getComponent<RectangleColliderComponent>();
     CircleColliderComponent* worm1CirCol = &entities["worm1"]->getComponent<CircleColliderComponent>();
+    RectangleColliderComponent* worm1RecCol = &entities["worm1"]->getComponent<RectangleColliderComponent>();
     Vector2D playerPos = player->getComponent<TransformComponent>().position;
 
     std::stringstream ss;
@@ -126,12 +129,34 @@ void Game::update() {
     label.getComponent<LabelComponent>().setLabelText(ss.str(), "arial");
 
     if (Collision::CircleRectangle(*worm0CirCol, *playerCol)) {
-        entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        //entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
         entities["worm0"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
     }
     if (Collision::CircleRectangle(*worm1CirCol, *playerCol)) {
-        entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
+        //entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupPlayers);
         entities["worm1"]->getComponent<CircleColliderComponent>().addCollision(Game::groupPlayers);
+    }
+
+    for (auto& p : projectiles) {
+        CircleColliderComponent cc = p->getComponent<CircleColliderComponent>();
+        if ((cc.tag != "playerBolt" && cc.tag != "playerStone") && Collision::CircleRectangle(cc, player->getComponent<RectangleColliderComponent>())) {
+            std::cout << "hit player" << std::endl;
+            player->getComponent<SpriteComponent>().Flash(2, 10, 3);
+            player->getComponent<HealthComponent>().hit(10);
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm0RecCol) && !dynamic_cast<WormController*>(entities["worm0"]->controller)->isImmune()) {
+            entities["worm0"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm0"]->getComponent<HealthComponent>().hit(10);
+
+            p->destroy();
+        }
+        if (Collision::CircleRectangle(cc, *worm1RecCol) && !dynamic_cast<WormController*>(entities["worm1"]->controller)->isImmune()) {
+            entities["worm1"]->getComponent<RectangleColliderComponent>().addCollision(Game::groupProjectiles);
+            entities["worm1"]->getComponent<HealthComponent>().hit(10);
+
+            p->destroy();
+        }
     }
 
     // update entities
@@ -145,12 +170,7 @@ void Game::update() {
             player->getComponent<TransformComponent>().position = playerPos;
         }
     }
-    for (auto& p : projectiles) {
-        if (Collision::CircleRectangle(p->getComponent<CircleColliderComponent>(), player->getComponent<RectangleColliderComponent>())) {
-            std::cout << "hit player" << std::endl;
-            p->destroy();
-        }
-    }
+    
 
     // update camera to player
     camera.x = player->getComponent<TransformComponent>().position.x - 400.0f;

@@ -10,12 +10,17 @@
  *		 implement the sum method for direction determination.
  *
  * @author sawyercoletang
+ * 
+ * @notes requires TransformComponent, SpriteComponent, RectangleColliderComponent
  *
  */
-class PlayerController : public Component {
+class PlayerController : public Controller {
 public:
 	TransformComponent *transform;
 	SpriteComponent* sprite;
+    //RectangleColliderComponent* rectCollider;
+
+    PlayerController() : Controller(){}
 
     /**
      * @brief initialize the component: link to TransformComponent and SpriteComponent.
@@ -23,9 +28,11 @@ public:
 	void init() override {
 		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
 		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
+        //if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
 		
 		transform = &entity->getComponent<TransformComponent>();
 		sprite = &entity->getComponent<SpriteComponent>();
+        //rectCollider = &entity->getComponent<RectangleColliderComponent>();
 	}
 
     /**
@@ -33,8 +40,31 @@ public:
      */
 	void update() override {
 		manageMovement();
-
+        manageCollisions();
 	}
+
+    void onDeath() override {
+
+    }
+
+    void shootProjectile() {
+        if (transform->velocity.Equals(Vector2D(0, 0))) { //TODO: fix cause scuffed
+            if (sprite->spriteFlip == SDL_FLIP_HORIZONTAL) {
+                Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 3, "playerStone");
+            }
+            else if (sprite->spriteFlip == SDL_FLIP_NONE) {
+                Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 3, "playerStone");
+            }
+        }
+        else {
+            Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), transform->velocity, 200, 3, "playerStone");
+
+        }
+    }
+
+    void manageCollisions() {
+        //if (rectCollider->isColliding(Game::groupProjectiles)) {}
+    }
 
     void manageMovement(){
         if (Game::event.type == SDL_KEYDOWN) {
@@ -60,6 +90,21 @@ public:
                     break;
                 case SDLK_SLASH:
                     Game::debugGame = !Game::debugGame;
+                    break;
+                case SDLK_UP:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(0, -1), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_DOWN:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(0, 1), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_RIGHT:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(1, 0), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_LEFT:
+                    Game::entityFactory->mintProjectile( transform->position + Vector2D(16, 32), Vector2D(-1, 0), 200, 4, "projectile", "playerBolt");
+                    break;
+                case SDLK_o:
+                    shootProjectile();
                     break;
                 default:
                     break;
@@ -95,6 +140,8 @@ public:
                     break;
             }
         }
+
+        //transform->velocity.Unit();
 
         if (transform->velocity.x == 0 && transform->velocity.y == 0) {
             sprite->Play("Idle");
