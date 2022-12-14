@@ -8,7 +8,7 @@
  * @author sawyercoletang
  *
  */
-class WormFSM : public Component {
+class WormFSM : public Controller {
 private:
     enum WormState : std::size_t {
         WORM_OUT,

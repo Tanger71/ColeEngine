@@ -15,9 +15,7 @@ Entity* EntityFactory::mintPlayer(Vector2D pos, std::string label){
     e.addComponent<SpriteComponent>("player", "Idle", Animation(5, 10, 10));
     e.getComponent<SpriteComponent>().addAnimation("Walk", Animation(7, 10, 10));
     e.addComponent<RectangleColliderComponent>(label, 16, 0, 32, 64);
-    //e.addComponent<PlayerController>();
-    PlayerController* pcont = new PlayerController();
-    Controller* cont = pcont;
+    Controller* cont = new PlayerController();
     e.setController(cont);
     e.addComponent<HealthComponent>(100, 64);
     e.addComponent<LabelComponent>(0, -30, label, "entity-arial", white);
@@ -36,7 +34,9 @@ Entity* EntityFactory::mintWorm(Vector2D pos, std::string label){
     e.addComponent<RectangleColliderComponent>(label, 0, 0, 64, 64);
     e.addComponent<CircleColliderComponent>(label, 32, 32, 200);
     e.addComponent<HealthComponent>(100, 64);
-    e.addComponent<WormFSM>();
+//    e.addComponent<WormFSM>();
+    Controller* cont = new WormFSM();
+    e.setController(cont);
     e.addComponent<LabelComponent>(0, -30, label, "entity-arial", white);
 
     return &e;
