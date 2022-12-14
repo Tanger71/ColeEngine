@@ -20,18 +20,12 @@ public:
 	SpriteComponent* sprite;
     //RectangleColliderComponent* rectCollider;
 
-    bool bbbb;
-
-    PlayerController() : Controller(){
-        std::cout << "HERECONSDT" << std::endl;
-        bbbb = true;
-    }
+    PlayerController() : Controller(){}
 
     /**
      * @brief initialize the component: link to TransformComponent and SpriteComponent.
      */
 	void init() override {
-        std::cout << "HERERIGHT" << std::endl;
 		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
 		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
         //if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
@@ -45,19 +39,20 @@ public:
      * @brief update the component: handle key input.
      */
 	void update() override {
-        std::cout << "HERE" << std::endl;
 		manageMovement();
         manageCollisions();
 	}
 
+    void onDeath() override {
+
+    }
+
     void shootProjectile() {
         if (transform->velocity.Equals(Vector2D(0, 0))) { //TODO: fix cause scuffed
             if (sprite->spriteFlip == SDL_FLIP_HORIZONTAL) {
-                //std::cout << "flip" << std::endl;
                 Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(-1, 0), 200, 3, "playerStone");
             }
             else if (sprite->spriteFlip == SDL_FLIP_NONE) {
-                //std::cout << "noflip" << std::endl;
                 Game::entityFactory->mintStoneProjectile(transform->position + Vector2D(16, 16), Vector2D(1, 0), 200, 3, "playerStone");
             }
         }
