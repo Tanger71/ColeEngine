@@ -44,6 +44,10 @@
 - [x] add health bar component
 - [ ] add polymorphism to entitycontroller components for general functions (eg. death(), etc.)
 
+### Issues 
+- https://stackoverflow.com/questions/7192069/polymorphic-c-references
+- https://stackoverflow.com/questions/6582580/pointers-polymorphism-and-segmentation-fault-in-c
+
 ### possible issues with current implementation:
 1. I was doing a bit of fiddling around and it turns out that the stringstream used for the UI is eating up memory and removing it stops it from using up excess memory, so maybe in future you could find a way to display text onscreen without using excess memory! Nice videos as usual!
    

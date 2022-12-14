@@ -85,13 +85,7 @@ public:
      */
     Entity(Manager& mManager) : manager(mManager) {}
 
-    void setController(Controller& cont) {
-        std::cout << "HERESET" << std::endl;
-        controller = &cont;
-        controller->entity = this;
-        controller->init();
-        hasController = true;
-    }
+    void setController(Controller* cont);
 
     /**
      * @brief update all components in Entity
