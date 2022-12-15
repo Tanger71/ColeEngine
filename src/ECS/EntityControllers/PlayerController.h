@@ -19,6 +19,9 @@ public:
 	TransformComponent *transform;
 	SpriteComponent* sprite;
     //RectangleColliderComponent* rectCollider;
+    HealthComponent* healthComponent;
+
+    bool deadFlag = false;
 
     PlayerController() : Controller(){}
 
@@ -29,17 +32,20 @@ public:
 		if (!entity->hasComponent<TransformComponent>()) Game::throwErr("missing TransformComponent!");
 		if (!entity->hasComponent<SpriteComponent>()) Game::throwErr("missing SpriteComponent!");
         //if (!entity->hasComponent<RectangleColliderComponent>()) Game::throwErr("missing RectangleColliderComponent!");
-		
-		transform = &entity->getComponent<TransformComponent>();
+        if (!entity->hasComponent<HealthComponent>()) Game::throwErr("missing HealthComponent!");
+
+
+        transform = &entity->getComponent<TransformComponent>();
 		sprite = &entity->getComponent<SpriteComponent>();
         //rectCollider = &entity->getComponent<RectangleColliderComponent>();
+        healthComponent = &entity->getComponent<HealthComponent>();
 	}
 
     /**
      * @brief update the component: handle key input.
      */
 	void update() override {
-		manageMovement();
+        manageMovement();
         manageCollisions();
 	}
 
@@ -47,7 +53,9 @@ public:
      * @brief to be called then the entity dies
      */
     void onDeath() override {
-
+        deadFlag = true;
+        std::cout << "deathhhhhhh" << std::endl;
+        sprite->PlayStart("Death");
     }
 
     void shootProjectile() {
@@ -90,6 +98,7 @@ public:
                     Game::isRunning = false;
                 case SDLK_p:
                     sprite->Flash(2, 10, 3);
+                    healthComponent->hit(50);
                     break;
                 case SDLK_SLASH:
                     Game::debugGame = !Game::debugGame;
@@ -145,7 +154,7 @@ public:
         }
 
         //transform->velocity.Unit();
-
+        if (!deadFlag)
         if (transform->velocity.x == 0 && transform->velocity.y == 0) {
             sprite->Play("Idle");
         } else {

@@ -87,7 +87,7 @@ public:
     }
 
     void death(){
-
+        entity->controller->onDeath();
     }
 
 private:
@@ -102,7 +102,7 @@ private:
     SDL_Rect emptyBar;
     SDL_Rect fullBar;
 
-    SDL_Color colorEmpty = {255, 0, 0, 255};
-    SDL_Color colorFull = {0, 255, 0, 255};
+    SDL_Color colorEmpty = TextureManager::hexToColor("e63946");
+    SDL_Color colorFull = TextureManager::hexToColor("1d3557");
 
 };

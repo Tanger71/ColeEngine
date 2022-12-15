@@ -27,4 +27,7 @@ public:
     static void Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip);
 
     static void AddFlash(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip);
+
+    static SDL_Color hexToColor(std::string hex);
+
 };

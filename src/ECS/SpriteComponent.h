@@ -118,6 +118,7 @@ public:
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
+        std::cout << animIndex << std::endl;
     }
 
     /**
