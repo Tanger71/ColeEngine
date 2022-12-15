@@ -43,6 +43,7 @@
 - [x] robustisize UILabel Component
 - [x] add health bar component
 - [ ] add polymorphism to entitycontroller components for general functions (eg. death(), etc.)
+- [ ] fix animation freezing and PlayThen()
 
 ### Issues 
 - https://stackoverflow.com/questions/7192069/polymorphic-c-references
