@@ -54,8 +54,7 @@ public:
      */
     void onDeath() override {
         deadFlag = true;
-        std::cout << "deathhhhhhh" << std::endl;
-        sprite->PlayStart("Death");
+        sprite->PlayStartThen("Death", "Freeze");
     }
 
     void shootProjectile() {
@@ -154,11 +153,16 @@ public:
         }
 
         //transform->velocity.Unit();
-        if (!deadFlag)
-        if (transform->velocity.x == 0 && transform->velocity.y == 0) {
-            sprite->Play("Idle");
-        } else {
-            sprite->Play("Walk");
+        if (!deadFlag){
+            if (transform->velocity.x == 0 && transform->velocity.y == 0) {
+                sprite->Play("Idle");
+            } else {
+                sprite->Play("Walk");
+            }
+        }else{
+            transform->velocity.x = 0;
+            transform->velocity.y = 0;
         }
+
     }
 };

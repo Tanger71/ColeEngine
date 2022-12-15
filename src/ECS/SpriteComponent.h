@@ -84,13 +84,24 @@ public:
      * @brief update the component: handle animation
      */
     void update() override {
-        if(animated && (Game::frameCnt % speed) == 0){
+
+        if(!freeze && animated && (Game::frameCnt % speed) == 0){
+
             srcRect.x = srcRect.w * curFrame++;
             srcRect.y = animIndex * transform->height;
-            if(curFrame >= frames) curFrame = 0;
+            if(curFrame >= frames){
+                if(!nextAnim.empty()){
+                    Play(nextAnim);
+                    nextAnim = "";
+                }
+                curFrame = 0;
+            }
+            freeze = frames == -1;
         }
 
         flashing = ((Game::frameCnt - flashOffset) % flashInterval) < flashDuration && ((Game::frameCnt) < flashBegin + (flashInterval*flashReps));
+
+
 
         destRect.x = static_cast<int>(transform->position.x) - Game::camera.x; //TODO: learn: -> or .
         destRect.y = static_cast<int>(transform->position.y) - Game::camera.y;
@@ -118,7 +129,6 @@ public:
         frames = animations[animName].frames;
         animIndex = animations[animName].index;
         speed = animations[animName].speed;
-        std::cout << animIndex << std::endl;
     }
 
     /**
@@ -129,6 +139,12 @@ public:
     void PlayStart(std::string animName) {
         Play(animName);
         curFrame = 0;
+    }
+
+    void PlayStartThen(std::string animName, std::string nextAnimName) {
+        PlayStart(animName);
+        curFrame = 0;
+        nextAnim = nextAnimName;
     }
 
     void Flash(int duration, int interval, int reps){ //line up start times
@@ -148,6 +164,8 @@ private:
     int speed = 10; // game frames per animation frame
     int curFrame = 0;
 
+    std::string nextAnim;
+
     int flashDuration = 0;
     int flashInterval = 10;
     int flashReps = 1;
@@ -155,5 +173,6 @@ private:
     int flashOffset = 0;
 
     bool flashing = false;
+    bool freeze = false;
 };
 
